@@ -10,11 +10,11 @@ namespace game_framework
 {
 	Card::Card() {
 	}
-	// ¥d¤ùªºªì©l¤Æ
+	// å¡ç‰‡çš„åˆå§‹åŒ–
 	Card::Card(int a) {
 		ID = a;
 		availible = true;
-		// ³]©w¥d¤ùªºµ¥«Ý®É¶¡©M»ù¿ú
+		// è¨­å®šå¡ç‰‡çš„ç­‰å¾…æ™‚é–“å’Œåƒ¹éŒ¢
 		switch (ID) {
 		case 1:delay = 33 * 5;	price = 50;	 break; // SunFlower
 		case 2:delay = 33 * 5;	price = 100; break; // PeaShoot
@@ -27,13 +27,13 @@ namespace game_framework
 		counting = false;
 		counter = delay;
 	}
-	//¨C¦¸­«·s¶}©l¹CÀ¸ªº­«³]¥d¤ùªì©lª¬ºA
+	//æ¯æ¬¡é‡æ–°é–‹å§‹éŠæˆ²çš„é‡è¨­å¡ç‰‡åˆå§‹ç‹€æ…‹
 	void Card::Reset() {
 		availible = true;
 		counter = delay;
 		counting = false;
 	}
-	// Åª¨ú¥d¤ù©Ò»Ýªº©Ò¦³¹Ï¤ù
+	// è®€å–å¡ç‰‡æ‰€éœ€çš„æ‰€æœ‰åœ–ç‰‡
 	void Card::LoadBitmap() {
 		//bmp.LoadBitmap("./RES/interface/SeedPacket_Larger.bmp");
 		//bmp2.LoadBitmap("./RES/interface/SeedPacketCantSelect.bmp",RGB(255,255,255));
@@ -48,17 +48,17 @@ namespace game_framework
 				number[i][j].LoadBitmap(FILENAME, RGB(255, 255, 255));
 			}
 		}
-		
+
 	}
 	void Card::LoadPlant() {
 		switch (ID) {
-		case 1:	plant.LoadBitmap(".\\BMP_RES\\image\\interface\\meun\\handbook\\Cardd\\plants\\SunFlower.bmp", RGB(0, 0, 0));  	break;
-		case 2: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\meun\\handbook\\Cardd\\plants\\Peashooter.bmp", RGB(0, 0, 0));  break;
-		case 3: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\meun\\handbook\\Cardd\\plants\\WallNut.bmp", RGB(0, 0, 0));	    	break;
-		//case 4: plant.LoadBitmap("./RES/Plants/Squash/Squash_00.bmp", RGB(0, 0, 0));	      	break;
-		//case 5: plant.LoadBitmap("./RES/Plants/CherryBomb/CherryBomb_00.bmp", RGB(0, 0, 0));  break;
-		//case 6: plant.LoadBitmap("./RES/Plants/SnowPea/SnowPea_00.bmp", RGB(0, 0, 0));	    	break;
-		//case 7: plant.LoadBitmap("./RES/Plants/Repeater/Repeater_00.bmp", RGB(0, 0, 0));    	break;
+		case 1:	plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\SunFlower.bmp", RGB(0, 0, 0));  	break;
+		case 2: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\Peashooter.bmp", RGB(0, 0, 0));  break;
+		case 3: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\WallNut.bmp", RGB(0, 0, 0));	    	break;
+			//case 4: plant.LoadBitmap("./RES/Plants/Squash/Squash_00.bmp", RGB(0, 0, 0));	      	break;
+			//case 5: plant.LoadBitmap("./RES/Plants/CherryBomb/CherryBomb_00.bmp", RGB(0, 0, 0));  break;
+			//case 6: plant.LoadBitmap("./RES/Plants/SnowPea/SnowPea_00.bmp", RGB(0, 0, 0));	    	break;
+			//case 7: plant.LoadBitmap("./RES/Plants/Repeater/Repeater_00.bmp", RGB(0, 0, 0));    	break;
 		}
 	}
 	int Card::GetPrice() {
@@ -80,24 +80,24 @@ namespace game_framework
 		return ID;
 	}
 	void Card::SetXY(int num) {
-		x = 77 + num * 50;
-		y = 8;
+		x = 0;
+		y = 50 + num * 60;
 	}
-	// ³]©w¥d¤ù¬O¥i³Q¿ï¨ú
+	// è¨­å®šå¡ç‰‡æ˜¯å¯è¢«é¸å–
 	void Card::SetAvailible(bool a) {
 		availible = a;
 	}
-	// ¦^¶Ç¥d¤ù¬O§_¥i³Q¿ï¨ú
+	// å›žå‚³å¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
 	bool Card::isAvailible() {
 		return availible && CounterFinished();
 	}
-	// ­p®É¥d¤ùªº§N«o®É¶¡
+	// è¨ˆæ™‚å¡ç‰‡çš„å†·å»æ™‚é–“
 	void Card::DelayCounter() {
 		if (!CounterFinished()) {
 			counting = true;
 			counter++;
 		}
-		else if(CounterFinished()){
+		else if (CounterFinished()) {
 			counting = false;
 		}
 	}
@@ -124,7 +124,7 @@ namespace game_framework
 			//bmp.SetTopLeft(x, y);
 			//bmp.ShowBitmap(0.5);
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
-			plant.ShowBitmap(0.5);
+			plant.ShowBitmap(1);
 			int y3 = int(y2);
 			//bmp2.SetTopLeft(x, y3);
 			//bmp2.ShowBitmap();
@@ -133,7 +133,7 @@ namespace game_framework
 			//bmp.SetTopLeft(x, y);
 			//bmp.ShowBitmap(0.5);
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
-			plant.ShowBitmap(0.5);
+			plant.ShowBitmap(1);
 			//bmp2.SetTopLeft(x, y);
 			//bmp2.ShowBitmap();
 		}
@@ -141,17 +141,17 @@ namespace game_framework
 			//bmp.SetTopLeft(x, y);
 			//bmp.ShowBitmap(0.5);
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
-			plant.ShowBitmap(0.5);
+			plant.ShowBitmap(1);
 		}
 		if (GetPrice() > 0 && GetPrice() < 100) {
 			for (int i = 0, num = GetPrice(); i < 2; i++, num /= 10) {
-				number[i][num % 10].SetTopLeft(x + 20 - i * 10, y + 52);
+				number[i][num % 10].SetTopLeft(x + 90 - i * 10, y + 47);
 				number[i][num % 10].ShowBitmap();
 			}
 		}
 		else if (GetPrice() >= 100 && GetPrice() < 1000) {
 			for (int i = 0, num = GetPrice(); i < 3; i++, num /= 10) {
-				number[i][num % 10].SetTopLeft(x + 23 - i * 11, y + 50);
+				number[i][num % 10].SetTopLeft(x + 95 - i * 11, y + 47);
 				number[i][num % 10].ShowBitmap();
 			}
 		}

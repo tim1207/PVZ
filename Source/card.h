@@ -4,32 +4,32 @@ namespace game_framework {
 	public:
 		Card();
 		Card(int);
-		void OnMove();            //³B²z¥d¤ùªº°Ê§@
-		void OnShow();            //Åã¥Ü¥d¤ù
-		void LoadBitmap();        //Åª¨ú©Ò»İªº¹ÏÀÉ
-		void LoadPlant();         //Åª¨ú´Óª«ªº¹Ï¤ù
-		void LoadPrice();         //Åª¨ú»ù¿úªº¹Ï¤ù
-		void SetXY(int);          //³]©w¥d¤ùªº¦ì¸m
+		void OnMove();            //è™•ç†å¡ç‰‡çš„å‹•ä½œ
+		void OnShow();            //é¡¯ç¤ºå¡ç‰‡
+		void LoadBitmap();        //è®€å–æ‰€éœ€çš„åœ–æª”
+		void LoadPlant();         //è®€å–æ¤ç‰©çš„åœ–ç‰‡
+		void LoadPrice();         //è®€å–åƒ¹éŒ¢çš„åœ–ç‰‡
+		void SetXY(int);          //è¨­å®šå¡ç‰‡çš„ä½ç½®
 		int GetPrice();
 		int GetWidth();
 		int GetHeight();
 		int GetX();
 		int GetY();
 		int GetID();
-		void SetAvailible(bool);  //³]©w¥d¤ù¬O§_¥i³Q¿ï¨ú
-		bool isAvailible();       //¦^¶Ç¥d¤ù¬O§_¥i³Q¿ï¨ú
+		void SetAvailible(bool);  //è¨­å®šå¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
+		bool isAvailible();       //å›å‚³å¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
 		void DelayCounter(); 
 		void ResetCounter();
 		bool CounterFinished();
 		bool counting;
-		void Reset();             //­«³]¥d¤ùªºªì©lª¬ºA
+		void Reset();             //é‡è¨­å¡ç‰‡çš„åˆå§‹ç‹€æ…‹
 	private:
 		int x, y;
-		double y2;                //¥d¤ùµ¥«İ®É¶¡¶Â¹õªº¦ì¸m
-		int ID;                   //¥d¤ù¥Nªíªº´Óª«ºØÃş
-		int price;                //»ù¿ú
-		int delay;                //µ¥«İ©Ò»İ®É¶¡
-		int counter;              //­p®É¾¹
+		double y2;                //å¡ç‰‡ç­‰å¾…æ™‚é–“é»‘å¹•çš„ä½ç½®
+		int ID;                   //å¡ç‰‡ä»£è¡¨çš„æ¤ç‰©ç¨®é¡
+		int price;                //åƒ¹éŒ¢
+		int delay;                //ç­‰å¾…æ‰€éœ€æ™‚é–“
+		int counter;              //è¨ˆæ™‚å™¨
 		bool availible;
 		CMovingBitmap	bmp;
 		CMovingBitmap	bmp2;
