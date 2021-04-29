@@ -5,7 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "Plants.h"
-//#include "zombies.h"
+#include "zombies.h"
 #include "Pea.h"
 bool LoadPeaAlready = false; //檢查是否已經讀取過圖檔
 namespace game_framework {

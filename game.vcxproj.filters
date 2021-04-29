@@ -135,9 +135,6 @@
     <ClCompile Include="Source\Sun.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source參考版\card.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Seed.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -151,6 +148,12 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Pea.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\card.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\zombies.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,9 +200,6 @@
     <ClInclude Include="Source - 複製\maps.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source參考版\card.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Seed.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -213,6 +213,12 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Pea.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\card.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\zombies.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

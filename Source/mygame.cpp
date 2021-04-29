@@ -213,7 +213,7 @@ namespace game_framework {
 		 flow = 0;
 		//確保所有的vector清空
 
-		// zombies.clear();
+		monster.clear();
 		// plants.clear();
 		peas.clear();
 		suns.clear();
@@ -247,7 +247,7 @@ namespace game_framework {
 		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		for (int i = 0; i < 5; i++)						//載入殭屍
-			zombiesone[i].LoadBitmap(zombies, RGB(0, 0, 0));
+			zombiesone[i].LoadBitmap(".\\BMP_RES\\image\\zombies\\cutscene1_11.bmp", RGB(0, 0, 0));
 
 		
 		//plants.push_back(Plants(1, 3, 2));
@@ -272,10 +272,10 @@ namespace game_framework {
 		//  開始的移動畫面
 		if (background.Left() < -80)
 			background.SetTopLeft(background.Left() + 10, 0);
-		if (sunback.Left() <100)
-			sunback.SetTopLeft(sunback.Left()+ 10, 10);
+		if (sunback.Left() < 100)
+			sunback.SetTopLeft(sunback.Left() + 10, 10);
 		// TODO: 放置殭屍 (right)
-	
+
 
 		//
 
@@ -290,11 +290,18 @@ namespace game_framework {
 			SunCounter = 0;
 			suns.push_back(Sun(rand() % 400 + 100, rand() % 300 + 100, false));
 		}
+		/*
+		for (int i = 0; i <= (5 - 1) / 3; i++) {
+			int id = i + 1;
+			int r = (rand() % 5);
+			monster.push_back(Zombies(1,3,400));
+		}
+		*/
 		//處理所有植物的動作
 		vector<Plants>::iterator itpp;
 		bool ErasePlant = false;
 
-		for (int i = 0; i < 5;i++) {
+		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
 				if (testp[i][j].isAlive() == false) {                               //如果植物的生命為零，設定植物的死亡
 					ErasePlant = true;
@@ -313,7 +320,7 @@ namespace game_framework {
 				//處理一般豌豆的動作
 				if (testp[i][j].GetID() == 2) {
 					bool FoundZombie = false;
-					//for (vector<Zombies>::iterator itz = zombies.begin(); itz != zombies.end(); itz++) {
+					for (vector<Zombies>::iterator itz = monster.begin(); itz != monster.end(); itz++) {
 						if (testp[i][j].GetRow() == testp[i][j].GetRow() && testp[i][j].GetX() + 50 >= testp[i][j].GetX()) {
 							FoundZombie = true;
 							if (testp[i][j].GetX() + 50 > testp[i][j].GetX()) {
@@ -323,49 +330,50 @@ namespace game_framework {
 								testp[i][j].SetCounterOn(false);
 							}
 						}
-					//}
-					if (testp[i][j].isAction() == true) {
-						//CAudio::Instance()->Play(AUDIO_SHOOT, false);
-						peas.push_back(Pea(testp[i][j].GetX() + 50, testp[i][j].GetRow(), 0)); //如果攻擊冷卻時間到了就射出一顆豆子
-					}
-					if (FoundZombie == false) {
-						testp[i][j].SetCounterOn(false);
+						//}
+						if (testp[i][j].isAction() == true) {
+							//CAudio::Instance()->Play(AUDIO_SHOOT, false);
+							peas.push_back(Pea(testp[i][j].GetX() + 50, testp[i][j].GetRow(), 0)); //如果攻擊冷卻時間到了就射出一顆豆子
+						}
+						if (FoundZombie == false) {
+							testp[i][j].SetCounterOn(false);
+						}
 					}
 				}
-			}
-			
-		}
-		for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++) 
-			itpea->OnMove();
-		// maybe now don't need it  
-		vector<Sun>::iterator itss;
-		bool EraseSun = false;
 
-		//處理所有太陽的動作
-		for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
-			if (its == suns.begin()) {
-				its->MoveAnime();
 			}
-			its->OnMove();
-			if (its->isFinished()) {
-				itss = its;
-				EraseSun = true;
-			}
-		}
-		if (EraseSun == true) {
-			suns.erase(itss);
-			EraseSun = false;
-		}
-		seed.OnMove();
+			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++)
+				itpea->OnMove();
+			// maybe now don't need it  
+			vector<Sun>::iterator itss;
+			bool EraseSun = false;
 
+			//處理所有太陽的動作
+			for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
+				if (its == suns.begin()) {
+					its->MoveAnime();
+				}
+				its->OnMove();
+				if (its->isFinished()) {
+					itss = its;
+					EraseSun = true;
+				}
+			}
+			if (EraseSun == true) {
+				suns.erase(itss);
+				EraseSun = false;
+			}
+			seed.OnMove();
+
+		}
 	}
 
 
 
 	//進入GameStateOver，並將vector清空，否則第二次完會產生錯誤
-	void CGameStateRun::GameOver() {
-		// zombies.swap(vector<Zombies>());
-		// plants.swap(vector<Plants>());
+	void CGameStateRun::GameOver()
+	{	//monster.swap(vector<Zombies>());
+		//plants.swap(vector<Plants>());
 		suns.swap(vector<Sun>());
 		peas.swap(vector<Pea>());
 		// CAudio::Instance()->Stop(AUDIO_MAIN_MUSIC);
@@ -519,11 +527,12 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point) // 處理滑鼠的動作
 	{
-		// for (int i = 0; i < 5; i++) {
-		// zombies.push_back(Zombies(1, i, 590));
-		// for (int j = 0; j < 10; j++) {
-		// 	zombies.back().Faster();
-		// }
+		for (int i = 0; i < 5; i++) {
+			monster.push_back(Zombies(1, i, 590));
+			for (int j = 0; j < 10; j++) {
+				monster.back().Faster();
+			}
+		}
 	}
 
 
@@ -554,10 +563,20 @@ void CGameStateRun::OnShow()
 			peas.erase(itpea);
 			ErasePea = false;
 		}
+		// Show plants
 		for (int j = 0; j < 9; j++) {
 			testp[i][j].OnShow();
-			
-		}	
+		}
+		vector<Zombies>::iterator itz;
+		bool EraseZombie = false;
+		for (vector<Zombies>::iterator it = monster.begin(); it != monster.end(); it++) {
+			if (it->GetRow() == i)	it->OnShow();
+			if (it->isFinished() == true) {             // 讓殭屍在死亡動畫顯示完畢後才會被解構
+				itz = it;
+				EraseZombie = true;
+				continue;
+			}
+		}
 
 	}
 	
@@ -601,6 +620,7 @@ void CGameStateRun::OnShow()
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	*/
 	///sun drop
+	
 	for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
 		its->OnShow();
 	}

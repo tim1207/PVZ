@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to¡K
+
+Pull requests
+Issues
+Marketplace
+Explore
+
+@tim1207
+tim1207
+/
+PVZ
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+PVZ / Source / card.cpp
+@tim1207
+tim1207 first commit
+Latest commit 89881df 1 minute ago
+History
+1 contributor
+159 lines(158 sloc)  4.33 KB
+
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -10,11 +41,11 @@ namespace game_framework
 {
 	Card::Card() {
 	}
-	// å¡ç‰‡çš„åˆå§‹åŒ–
+	// ¥d¤ùªºªì©l¤Æ
 	Card::Card(int a) {
 		ID = a;
 		availible = true;
-		// è¨­å®šå¡ç‰‡çš„ç­‰å¾…æ™‚é–“å’Œåƒ¹éŒ¢
+		// ³]©w¥d¤ùªºµ¥«İ®É¶¡©M»ù¿ú
 		switch (ID) {
 		case 1:delay = 33 * 5;	price = 50;	 break; // SunFlower
 		case 2:delay = 33 * 5;	price = 100; break; // PeaShoot
@@ -27,13 +58,13 @@ namespace game_framework
 		counting = false;
 		counter = delay;
 	}
-	//æ¯æ¬¡é‡æ–°é–‹å§‹éŠæˆ²çš„é‡è¨­å¡ç‰‡åˆå§‹ç‹€æ…‹
+	//¨C¦¸­«·s¶}©l¹CÀ¸ªº­«³]¥d¤ùªì©lª¬ºA
 	void Card::Reset() {
 		availible = true;
 		counter = delay;
 		counting = false;
 	}
-	// è®€å–å¡ç‰‡æ‰€éœ€çš„æ‰€æœ‰åœ–ç‰‡
+	// Åª¨ú¥d¤ù©Ò»İªº©Ò¦³¹Ï¤ù
 	void Card::LoadBitmap() {
 		//bmp.LoadBitmap("./RES/interface/SeedPacket_Larger.bmp");
 		//bmp2.LoadBitmap("./RES/interface/SeedPacketCantSelect.bmp",RGB(255,255,255));
@@ -83,15 +114,15 @@ namespace game_framework
 		x = 0;
 		y = 50 + num * 60;
 	}
-	// è¨­å®šå¡ç‰‡æ˜¯å¯è¢«é¸å–
+	// ³]©w¥d¤ù¬O¥i³Q¿ï¨ú
 	void Card::SetAvailible(bool a) {
 		availible = a;
 	}
-	// å›å‚³å¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
+	// ¦^¶Ç¥d¤ù¬O§_¥i³Q¿ï¨ú
 	bool Card::isAvailible() {
 		return availible && CounterFinished();
 	}
-	// è¨ˆæ™‚å¡ç‰‡çš„å†·å»æ™‚é–“
+	// ­p®É¥d¤ùªº§N«o®É¶¡
 	void Card::DelayCounter() {
 		if (!CounterFinished()) {
 			counting = true;

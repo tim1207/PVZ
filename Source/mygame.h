@@ -1,7 +1,7 @@
 #include "maps.h"
 #include "Plants.h"
 #include "Sun.h"
-//#include "zombies.h"
+#include "zombies.h"
 #include "Seed.h"
 #include "Pea.h"
 #include "cursor.h"
@@ -91,7 +91,7 @@ namespace game_framework {
 		Cursor		    	cursor;						            	// 用來顯示目前選取的東西
 		Shovel		    	shovel;						            	// 鏟子
 		// LawnMower	     	LawnMower[5];			         	  		// 除草機
-		// vector<Zombies>		zombies;			    	      			// 儲存所有殭屍的vector
+		vector<Zombies>		monster;			    	      			// 儲存所有殭屍的vector
 		//vector<Plants>		plants;					          	  		// 儲存所有植物的vector
 		
 		Plants testp[5][9] ;

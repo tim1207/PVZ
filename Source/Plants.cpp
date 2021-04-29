@@ -35,7 +35,7 @@ namespace game_framework {
 		TargetX = 1000;
 		MovingCounter = 0;
 		status = 1;
-		switch (ID) {							                // ï¿½Ú¾Ú´Óªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½wï¿½Óªï¿½ï¿½ï¿½ï¿½Nï¿½oï¿½É¶ï¿½
+		switch (ID) {							                // ®Ú¾Ú´Óª«ªººØÃþ¨M©w´Óª«ªº§N«o®É¶¡
 		case 1:	ActionCounter = 30 * 10;  break;
 		case 2: ActionCounter = 30 * 1;   break;
 		//case 6: ActionCounter = 30 * 1;   break;
@@ -51,13 +51,13 @@ namespace game_framework {
 	void Plants::SetID(int a) {
 		ID = a;
 	}
-	int Plants::GetID() {						        // ï¿½^ï¿½Ç´Óªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int Plants::GetID() {						        // ¦^¶Ç´Óª«ªººØÃþ
 		return ID;
 	}
-	void Plants::ResetCounter() {				    // ï¿½ï¿½ï¿½]ï¿½Óªï¿½ï¿½ï¿½ï¿½Nï¿½oï¿½É¶ï¿½
+	void Plants::ResetCounter() {				    // ­«³]´Óª«ªº§N«o®É¶¡
 		Counter = 0;
 	}
-	void Plants::SetLife() {					      // ï¿½Ú¾Ú´Óªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½wï¿½Óªï¿½ï¿½ï¿½ï¿½Í©R
+	void Plants::SetLife() {					      // ®Ú¾Ú´Óª«ªººØÃþ³]©w´Óª«ªº¥Í©R
 		switch (ID) {
 		case 1:life = 5;  break;
 		case 2:life = 5;  break;
@@ -68,17 +68,17 @@ namespace game_framework {
 		case 7:life = 5;  break;
 		}
 	}
-	int Plants::GetLife() {						      // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ø«eï¿½Ñ¤Uï¿½hï¿½Ö¥Í©R
+	int Plants::GetLife() {						      // ¦^¶Ç´Óª«¥Ø«e³Ñ¤U¦h¤Ö¥Í©R
 		return life;
 	}
-	bool Plants::isAlive() {					      // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ø«eï¿½Oï¿½_ï¿½wï¿½gï¿½ï¿½ï¿½`
+	bool Plants::isAlive() {					      // ¦^¶Ç´Óª«¥Ø«e¬O§_¤w¸g¦º¤`
 		if (GetLife() > 0)	return true;
 		return false;
 	}
-	void Plants::BeingAttacked() {			    // ï¿½Óªï¿½ï¿½Qï¿½Lï¿½Í§ï¿½ï¿½ï¿½
+	void Plants::BeingAttacked() {			    // ´Óª«³QíL«Í§ðÀ»
 		life--;
 	}
-	void Plants::SetFrames()					      // ï¿½Ú¾Ú´Óªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½wï¿½ï¿½ï¿½Éªï¿½ï¿½Æ¶q
+	void Plants::SetFrames()					      // ®Ú¾Ú´Óª«ªººØÃþ¨M©w¹ÏÀÉªº¼Æ¶q
 	{
 		switch (ID) {
 		case 1:	frames = 17;	break;
@@ -95,33 +95,33 @@ namespace game_framework {
 		default:	break;
 		}
 	}
-	int Plants::GetRow()						        // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ò¦bï¿½ï¿½ï¿½Æ¼ï¿½
+	int Plants::GetRow()						        // ¦^¶Ç´Óª«©Ò¦bªº±Æ¼Æ
 	{
 		return row;
 	} 
-	int Plants::GetColumn() {					      // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ò¦bï¿½ï¿½ï¿½ï¿½ï¿½
+	int Plants::GetColumn() {					      // ¦^¶Ç´Óª«©Ò¦bªº¦æ¼Æ
 		return column;
 	}
-	int Plants::GetX()							        // ï¿½^ï¿½Ç´Óªï¿½ï¿½ï¿½Xï¿½yï¿½ï¿½
+	int Plants::GetX()							        // ¦^¶Ç´Óª«ªºX®y¼Ð
 	{
 		return x;
 	}
-	int Plants::GetY() {						        // ï¿½^ï¿½Ç´Óªï¿½ï¿½ï¿½Yï¿½yï¿½ï¿½
+	int Plants::GetY() {						        // ¦^¶Ç´Óª«ªºY®y¼Ð
 		return y;
 	}
-	int Plants::GetWidth()						      // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½
+	int Plants::GetWidth()						      // ¦^¶Ç´Óª«¹Ï¤ùªº¼e«×
 	{
 		return anime.Width();
 	}
-	void Plants::SetX(int a) {				    	// ï¿½]ï¿½wXï¿½yï¿½ï¿½
+	void Plants::SetX(int a) {				    	// ³]©wX®y¼Ð
 		x = a;
 	}
-	void Plants::SetY(int a) {				    	// ï¿½]ï¿½wYï¿½yï¿½ï¿½
+	void Plants::SetY(int a) {				    	// ³]©wY®y¼Ð
 		y = a;
 	}
-	void Plants::LoadBitmap() {					    // Åªï¿½ï¿½ï¿½Ò»Ý¹ï¿½ï¿½ï¿½
-		SetFrames();							            // ï¿½Ë¬dï¿½ï¿½ï¿½É¦@ï¿½ï¿½ï¿½Xï¿½i
-		for (int i = 0; i <= frames; i++) {		// ï¿½Ì§ï¿½Åªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	void Plants::LoadBitmap() {					    // Åª¨ú©Ò»Ý¹ÏÀÉ
+		SetFrames();							            // ÀË¬d¹ÏÀÉ¦@¦³´X±i
+		for (int i = 0; i <= frames; i++) {		// ¨Ì§ÇÅª¨ú¹ÏÀÉ
 			char FILENAME[100];
 			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
 			
@@ -162,32 +162,32 @@ namespace game_framework {
 		}
 		*/
 	}
-	void Plants::SetCounterOn(bool a) {			// ï¿½ï¿½ï¿½Óªï¿½ï¿½}ï¿½lï¿½Ê§@
+	void Plants::SetCounterOn(bool a) {			// Åý´Óª«¶}©l°Ê§@
 		CounterOn = a;
 		if (a == false) {
 			Counter = 1;
 		}
 	}
-	bool Plants::isCounterOn() {				    // ï¿½^ï¿½Ç¥Ø«eï¿½Oï¿½_ï¿½}ï¿½lï¿½Ê§@
+	bool Plants::isCounterOn() {				    // ¦^¶Ç¥Ø«e¬O§_¶}©l°Ê§@
 		return CounterOn;
 	}
-	int Plants::CounterLeft() {					    // ï¿½^ï¿½ï¿½ï¿½Ù­nï¿½hï¿½[ï¿½~ï¿½|ï¿½}ï¿½lï¿½Ê§@
+	int Plants::CounterLeft() {					    // ¦^¶ÇÁÙ­n¦h¤[¤~·|¶}©l°Ê§@
 		return ActionCounter - (Counter%ActionCounter);
 	}
-	bool Plants::isAction() {					      // ï¿½^ï¿½Ç´Óªï¿½ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½Ê§@
+	bool Plants::isAction() {					      // ¦^¶Ç´Óª«¬O§_¥¿¦b°Ê§@
 		return Action && CounterOn;
 	}
-	void Plants::StartAction() {				    // ï¿½ï¿½ï¿½Óªï¿½ï¿½}ï¿½lï¿½Ê§@
+	void Plants::StartAction() {				    // Åý´Óª«¶}©l°Ê§@
 		status = 2;
 	}
-	int Plants::WhichAction() {					    // ï¿½^ï¿½Ç´Óªï¿½ï¿½Ø«eï¿½ï¿½ï¿½ï¿½ï¿½A
+	int Plants::WhichAction() {					    // ¦^¶Ç´Óª«¥Ø«eªºª¬ºA
 		return status;
 	}
-	void Plants::SetTargetX(int a) {			  // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½Ø¼Ðªï¿½ï¿½yï¿½ï¿½(ï¿½ï¿½Äªï¿½ï¿½)
+	void Plants::SetTargetX(int a) {			  // ³]©w§ðÀ»¥Ø¼Ðªº®y¼Ð(¸¬Äª¥Î)
 		TargetX = a;
 		velocity = (TargetX - x) / 10;
 	}
-	bool Plants::isFinished() {					    // ï¿½Ë¬dï¿½Êµeï¿½Oï¿½_ï¿½ï¿½ï¿½ï¿½
+	bool Plants::isFinished() {					    // ÀË¬d°Êµe¬O§_µ²§ô
 		if (ID == 4 && anime2.IsFinalBitmap() == true) {
 			return true;
 		}
@@ -196,7 +196,7 @@ namespace game_framework {
 		}
 		return false;
 	}
-	void Plants::OnMove() {						      // ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½Ê§@
+	void Plants::OnMove() {						      // ±±¨î´Óª«ªº°Ê§@
 		if (status == 1) {
 			anime.OnMove();
 		}
@@ -239,7 +239,7 @@ namespace game_framework {
 			}
 		}
 	}
-	void Plants::OnShow() {						      // ï¿½Nï¿½Óªï¿½ï¿½ï¿½Ü¦bï¿½Ã¹ï¿½ï¿½W
+	void Plants::OnShow() {						      // ±N´Óª«Åã¥Ü¦b¿Ã¹õ¤W
 		if (ID == 4) {
 			if (WhichAction() == 1) {
 				anime.SetTopLeft(x, y);
@@ -275,7 +275,7 @@ namespace game_framework {
 			anime.OnShow();
 		}
 	}
-	string Plants::GetPath() {						  // ï¿½ï¿½ï¿½Í´Óªï¿½ï¿½ï¿½ï¿½Éªï¿½ï¿½ï¿½ï¿½|
+	string Plants::GetPath() {						  // ²£¥Í´Óª«¹ÏÀÉªº¸ô®|
 		stringstream ss;
 		switch (ID) {
 		case 0: ss << ".\\BMP_RES\\image\\plants\\bitmap9";		  break;

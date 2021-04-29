@@ -126,8 +126,6 @@ Background1             BITMAP                  "..\\BMP_RES\\image\\interface\\
 
 Background1row          BITMAP                  "..\\BMP_RES\\image\\interface\\background1unsodded_1.bmp"
 
-zombies                 BITMAP                  "..\\BMP_RES\\image\\zombies\\cutscene1_11.bmp"
-
 IDB_BITMAP7             BITMAP                  "..\\res\\bitmap7.bmp"
 
 pea                     BITMAP                  "..\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\Peashooter.bmp"

@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
+    <ClCompile Include="Source\card.cpp" />
     <ClCompile Include="Source\CBall.cpp" />
     <ClCompile Include="Source\CBouncingBall.cpp" />
     <ClCompile Include="Source\CEraser.cpp" />
@@ -308,11 +309,12 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Source\Sun.cpp" />
-    <ClCompile Include="Source參考版\card.cpp" />
+    <ClCompile Include="Source\zombies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source - 複製\maps.h" />
     <ClInclude Include="Source\audio.h" />
+    <ClInclude Include="Source\card.h" />
     <ClInclude Include="Source\CBall.h" />
     <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CEraser.h" />
@@ -330,7 +332,7 @@
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\mygame.h" />
     <ClInclude Include="Source\Sun.h" />
-    <ClInclude Include="Source參考版\card.h" />
+    <ClInclude Include="Source\zombies.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc">
