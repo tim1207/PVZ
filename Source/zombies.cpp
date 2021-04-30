@@ -15,7 +15,7 @@ namespace game_framework {
 	Zombies::Zombies(int a, int b, int c) :status(1) {
 		ID = a;
 		x = c;
-		y = b * 75;
+		y =  45 + (b-1) * 98;
 		row = b;
 		LastMove = 0;
 		AttackCounter = 0;
@@ -48,8 +48,8 @@ namespace game_framework {
 	void Zombies::GiveLife() {
 		switch (ID) {
 		case 1:life = 10; break;
-		case 2:life = 20; break;
-		case 3:life = 30; break;
+		//case 2:life = 20; break;
+		//case 3:life = 30; break;
 		default:	        break;
 		}
 	}
@@ -99,40 +99,49 @@ namespace game_framework {
 			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
 			AnimeWalking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
-		/*
+		
 		SetStatus(2);
 		for (int i = 0; i <= AttackingFrames; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%s%02d.bmp", GetPath().c_str(), GetPathWithStatus().c_str(), i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, "%s%s%02d.bmp", GetPath().c_str(), GetPathWithStatus().c_str(), i);
 			AnimeAttacking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 17; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\Zombie_%02d.bmp", i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\Zombie_%02d.bmp", i);
 			NormalWalking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 20; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\ZombieAttack_%02d.bmp", i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\ZombieAttack_%02d.bmp", i);
 			NormalAttacking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
+		
+		
 		SetStatus(1);
 		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieDie_", i);
+			//sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieDie_", i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 11; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieHead_", i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieHead_", i);
 			Head.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 19; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, ".\\RES\\Zombies\\BoomDie\\BoomDie_%02d.bmp", i);
+			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, ".\\RES\\Zombies\\BoomDie\\BoomDie_%02d.bmp", i);
 			BoomDie.AddBitmap(FILENAME, RGB(0, 0, 255));
 		}
-		*/
+		
+		
 	}
 	//	回傳殭屍所在的列數
 	int Zombies::GetRow()
@@ -158,7 +167,7 @@ namespace game_framework {
 	// 讓殭屍向前移動
 	void Zombies::MoveX() {
 		if (SnowCounter == 0) {
-			x -= velocity;
+			x -= 1;
 		}
 		else if (SnowCounter != 0) {
 			//	如果殭屍處於冷凍狀態則移動速度減半
@@ -174,6 +183,7 @@ namespace game_framework {
 	}
 	//	處理殭屍的動作
 	void Zombies::OnMove() {
+		
 		if (SnowCounter == 1) {
 			AttackClock = 30;
 		}
@@ -194,9 +204,15 @@ namespace game_framework {
 			AnimeAttacking.OnMove();
 			NormalAttacking.OnMove();
 		}
+		
+		/*
+		MoveX();
+		NormalWalking.OnMove();
+		*/
 	}
 	// 處理殭屍的動畫
 	void Zombies::OnShow() {
+		
 		if (isAlive() == false) {
 			if (Boom == false) {
 				if (DieFinished == false) {
@@ -244,21 +260,30 @@ namespace game_framework {
 				NormalAttacking.OnShow();
 			}
 		}
+		
+
+		/*
+		NormalWalking.SetTopLeft(x, y);
+		NormalWalking.OnShow();
+		*/
 	}
 	//	產生圖檔路徑
+	/*
 	string Zombies::GetPathWithStatus() {
-
+		
 		if (status == 2)	return "Attack_";
 		return "_";
+		
 	}
+	*/
 	//	產生圖檔路徑
 	string Zombies::GetPath() {
 		stringstream ss;
 		switch (ID) {
-		case 1: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11";						          break;
-		case 2: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11";		  break;
-		case 3: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11";	break;
-		default:ss << "";                                                     break;
+		case 1: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
+		case 2: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
+		case 3: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
+		default:ss << "";  break;
 		}
 		return ss.str();
 	}

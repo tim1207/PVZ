@@ -127,6 +127,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <HeapCommitSize>1024mb</HeapCommitSize>
+      <StackCommitSize>1024MB</StackCommitSize>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>

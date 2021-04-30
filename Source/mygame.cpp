@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include <memory>
 
 
 
@@ -199,6 +200,7 @@ namespace game_framework {
 
 		//設定和滑鼠相關的變數
 		SunCounter = 0;                                   //從空中掉落太陽的計時器
+		ZombieCounter = 0;
 		selected = false;
 		ChoosedCard = -1;
 		ChoosedPlant = -1;
@@ -223,7 +225,7 @@ namespace game_framework {
 		// for (int i = 0; i < 5; i++) {
 		// 	LawnMower[i].Reset();
 		// }
-		// wave = 0;
+		wave = 0;
 
 		//CAudio::Instance()->Play(AUDIO_LAKE, true);   // 撥放 WAVE
 		//CAudio::Instance()->Play(AUDIO_DING, false);  // 撥放 WAVE
@@ -274,11 +276,7 @@ namespace game_framework {
 			background.SetTopLeft(background.Left() + 10, 0);
 		if (sunback.Left() < 100)
 			sunback.SetTopLeft(sunback.Left() + 10, 10);
-		// TODO: 放置殭屍 (right)
-
-
-		//
-
+		// 放置殭屍 (right)
 		for (int i = 0; i < 5; i++) {
 			if (zombiesone[i].Left() < 1040)
 				zombiesone[i].SetTopLeft(zombiesone[i].Left() + 10, 150 + i * 50);
@@ -289,16 +287,120 @@ namespace game_framework {
 		if (SunCounter == 210) {
 			SunCounter = 0;
 			suns.push_back(Sun(rand() % 400 + 100, rand() % 300 + 100, false));
+			//monster.push_back(make_shared<Zombies>(1, 3, 800));
 		}
 		/*
-		for (int i = 0; i <= (5 - 1) / 3; i++) {
-			int id = i + 1;
-			int r = (rand() % 5);
-			monster.push_back(Zombies(1,3,400));
+		if (wave == 0) {
+			monster.push_back(make_shared<Zombies>(1, 3, 400));
 		}
 		*/
+
+		ZombieCounter++;
+		if (wave < 9 && wave>=0) {
+			///每隔10秒產生1~3隻隨機種類的殭屍
+			if (ZombieCounter == 450) {
+				wave++;
+				if (awooga == false) {
+					//CAudio::Instance()->Play(AUDIO_AWOOGA, false);
+					awooga = true;
+				}
+				ZombieCounter = 0;
+				//int groan = rand() % 6;
+				//CAudio::Instance()->Play(AUDIO_GROAN_1 + groan, false);
+				for (int i = 0; i <1; i++) {
+					//int id = i + 1;
+					//int r = (rand() % 5);
+
+					//monster.push_back(make_shared<Zombies>(1, 1, 800));
+					//monster.push_back(make_shared<Zombies>(1, 2, 800));
+					monster.push_back(make_shared<Zombies>(1, 3, 800) );
+					//monster.push_back(make_shared<Zombies>(1, 4, 800));
+					//monster.push_back(make_shared<Zombies>(1, 5, 800));
+				}
+			}
+		}
+		// no work
+		else if (wave == 9 && ZombieCounter >= 450) {
+			if (ZombieCounter == 450) {
+				//CAudio::Instance()->Play(AUDIO_FINALWAVE, false);
+			}
+			if (ZombieCounter >= 450 && ZombieCounter <= 500) {
+				if ((ZombieCounter - 450) % 10 == 0) {
+					for (int i = 0; i < 5; i++) {
+						//int id = (rand() % 3) + 1;
+						//monster.push_back(Zombies(id, i, 590));
+						monster.push_back(make_shared<Zombies>(1, 3, 800));
+					}
+				}
+			}
+		}		
+		if (monster.size() == 0 && ZombieCounter > 450) {
+			YouWin = true;
+			isGameOver = true;
+		}
+		
+		//shared_ptr<A> sharedptr(new A);
+		//std::vector<shared_ptr<A> > test;
+
+
+		// TODO ::SET X AMD Y
+		for (auto &itz :monster) {
+			//處理所有殭屍的動作			
+				itz->OnMove();
+				if (itz->GetX() < -150) {
+					YouWin = false;
+					isGameOver = true;                                         //如果殭屍跑進家裡，遊戲結束
+				}
+				//尋找殭屍可攻擊的第一隻植物
+				int closest = 10;
+				for (int i = (itz->GetX() + 80) / 75; i >= 0; i--) {
+					if (PlantManager[itz->GetRow()][i] > 0) {
+						closest = i;
+						break;
+					}
+				}
+				if (itz->isAlive() == true) {
+					//如果殭屍被除草機撞到就馬上死亡
+					/*
+					if (LawnMower[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnMower[itz->GetRow()].GetX() < itz->GetX() + 100) {
+						LawnMower[itz->GetRow()].StartMove();
+						CAudio::Instance()->Play(AUDIO_LAWN_MOWER, false);
+						itz->GoToDie();
+					}
+					*/
+					bool found = false;
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 9; j++) {
+							if (testp[i][j].GetRow() == itz->GetRow()-1 && testp[i][j].GetColumn() == closest) {
+								if (testp[i][j].GetX() <= itz->GetX() + 80 && testp[i][j].GetX() >= itz->GetX() + 30) {
+									itz->SetStatus(2);                                   //如果離殭屍最近的植物進入攻擊範圍就進入攻擊狀態
+									found = true;
+								}
+								else {
+									itz->SetStatus(1);
+								}
+								//如果殭屍正在攻擊狀態且攻擊冷卻時間結束，植物就受到攻擊
+								if (itz->GetStatus() == 2 && itz->Attack() == true) {
+									int chomp = rand() % 3;
+									//CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
+									testp[i][j].BeingAttacked();
+									if (testp[i][j].isAlive() == false) {
+										itz->SetStatus(1);                                 //如果植物被殭屍吃掉了，殭屍馬上恢復普通狀態
+									}
+								}
+							
+							}
+						}
+					}
+					
+					if (found == false) {
+						itz->SetStatus(1);
+					}
+				}
+			
+		}
 		//處理所有植物的動作
-		vector<Plants>::iterator itpp;
+		//vector<Plants>::iterator itpp;
 		bool ErasePlant = false;
 
 		for (int i = 0; i < 5; i++) {
@@ -320,7 +422,7 @@ namespace game_framework {
 				//處理一般豌豆的動作
 				if (testp[i][j].GetID() == 2) {
 					bool FoundZombie = false;
-					for (vector<Zombies>::iterator itz = monster.begin(); itz != monster.end(); itz++) {
+					for (auto &itz : monster){
 						if (testp[i][j].GetRow() == testp[i][j].GetRow() && testp[i][j].GetX() + 50 >= testp[i][j].GetX()) {
 							FoundZombie = true;
 							if (testp[i][j].GetX() + 50 > testp[i][j].GetX()) {
@@ -342,8 +444,51 @@ namespace game_framework {
 				}
 
 			}
-			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++)
+			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++) {
 				itpea->OnMove();
+				//vector<Zombies>::auto itzz;
+				//vector< shared_ptr<Zombies> >::iterator itzz;
+				bool HitZombie = false; 
+				int mi = 1000;
+				for (auto &itz :monster) {
+					
+					if (itpea->GetRow() == itz->GetRow() && itpea->GetX() > itz->GetX() + 75 && itpea->GetX() < itz->GetX() + 110) {
+						if (mi > itz->GetX()) {
+							mi = itz->GetX();
+							//itzz = itz;
+							HitZombie = true;
+							itpea->SetHitZombie(true);
+							if (itz->GetID() == 3 && itz->GetLife() > 10) {
+								int sound = rand() % 2;
+								//CAudio::Instance()->Play(AUDIO_HIT_BUCKET_1 + sound, false);
+							}
+							else {
+								int sound = rand() % 3;
+								//CAudio::Instance()->Play(AUDIO_SPLAT_1 + sound, false);
+							}
+							itz->Hitted(itpea->MyType());
+						}
+					}
+					if (itpea->GetX() > 640) {
+						itpea->SetHitZombie(true);
+					}
+				}
+				/*
+				//處理擊中殭屍後的動作
+				if (HitZombie == true) {
+					itpea->SetHitZombie(true);
+					if (itzz->GetID() == 3 && itzz->GetLife() > 10) {
+						int sound = rand() % 2;
+						//CAudio::Instance()->Play(AUDIO_HIT_BUCKET_1 + sound, false);
+					}
+					else {
+						int sound = rand() % 3;
+						//CAudio::Instance()->Play(AUDIO_SPLAT_1 + sound, false);
+					}
+					itzz->Hitted(itpea->MyType());
+				}
+				*/
+			}
 			// maybe now don't need it  
 			vector<Sun>::iterator itss;
 			bool EraseSun = false;
@@ -527,11 +672,18 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point) // 處理滑鼠的動作
 	{
+		/*
 		for (int i = 0; i < 5; i++) {
 			monster.push_back(Zombies(1, i, 590));
 			for (int j = 0; j < 10; j++) {
 				monster.back().Faster();
 			}
+		}
+		*/
+
+		for (auto &itz : monster) {
+			//itz->OnMove();
+			itz->Faster();
 		}
 	}
 
@@ -567,18 +719,24 @@ void CGameStateRun::OnShow()
 		for (int j = 0; j < 9; j++) {
 			testp[i][j].OnShow();
 		}
-		vector<Zombies>::iterator itz;
-		bool EraseZombie = false;
-		for (vector<Zombies>::iterator it = monster.begin(); it != monster.end(); it++) {
-			if (it->GetRow() == i)	it->OnShow();
-			if (it->isFinished() == true) {             // 讓殭屍在死亡動畫顯示完畢後才會被解構
-				itz = it;
-				EraseZombie = true;
-				continue;
-			}
-		}
-
 	}
+
+	/*
+	vector<Zombies>::iterator itz;
+	bool EraseZombie = false;
+	for (vector<Zombies>::iterator it = monster.begin(); it != monster.end(); it++) {
+		if (it->GetRow() == 3)	it->OnShow();
+		if (it->isFinished() == true) {             // 讓殭屍在死亡動畫顯示完畢後才會被解構
+			itz = it;
+			EraseZombie = true;
+			continue;
+		}
+	}
+	*/
+	for (auto &itz : monster) {
+		itz->OnShow();
+	}
+	
 	
 	
 	/*
