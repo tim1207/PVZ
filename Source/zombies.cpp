@@ -15,7 +15,7 @@ namespace game_framework {
 	Zombies::Zombies(int a, int b, int c) :status(1) {
 		ID = a;
 		x = c;
-		y =  45 + (b-1) * 98;
+		y =  35 + (b-1) * 98;
 		row = b-1;
 		LastMove = 0;
 		AttackCounter = 0;
@@ -109,14 +109,12 @@ namespace game_framework {
 		}
 		for (int i = 0; i <= 17; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
-			//sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\Zombie_%02d.bmp", i);
+			sprintf(FILENAME, ".\\BMP_RES\\image\\zombies\\Walk\\Zombie_%d.bmp", i);
 			NormalWalking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 20; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
-			//sprintf(FILENAME, ".\\RES\\Zombies\\Zombie\\ZombieAttack_%02d.bmp", i);
+			sprintf(FILENAME, ".\\BMP_RES\\image\\zombies\\Attack\\ZombieAttack_%d.bmp", i);
 			NormalAttacking.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
@@ -124,8 +122,7 @@ namespace game_framework {
 		SetStatus(1);
 		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\ZombieDie_%d.bmp", i);
-			//sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\ZombieDie\\ZombieDie_%d.bmp", i);
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		/*
@@ -191,9 +188,9 @@ namespace game_framework {
 	//	處理殭屍的動作
 	void Zombies::OnMove() {
 		
-		if (SnowCounter == 1) {
-			AttackClock = 30;
-		}
+		//if (SnowCounter == 1) {
+			//AttackClock = 30;
+		//}
 		if (isAlive() == false && Boom == false) {
 			AnimeDie.OnMove();
 			//Head.OnMove();
@@ -202,13 +199,13 @@ namespace game_framework {
 			BoomDie.OnMove();
 		}
 		else if (GetStatus() == 1) {
-			AnimeWalking.OnMove();
+			//AnimeWalking.OnMove();
 			NormalWalking.OnMove();
 			MoveX();
 		}
 		else if (GetStatus() == 2) {
 			AttackCounter++;
-			AnimeAttacking.OnMove();
+			//AnimeAttacking.OnMove();
 			NormalAttacking.OnMove();
 		}
 		
@@ -246,24 +243,24 @@ namespace game_framework {
 			}
 		}
 		else if (GetStatus() == 1) {
-			if (GetLife() > 10) {
-				AnimeWalking.SetTopLeft(x, y);
-				AnimeWalking.OnShow();
-			}
-			else {
+			// if (GetLife() > 10) {
+			// 	AnimeWalking.SetTopLeft(x, y);
+			// 	AnimeWalking.OnShow();
+			// }
+			//else {
 				NormalWalking.SetTopLeft(x, y);
 				NormalWalking.OnShow();
-			}
+			//}
 		}
 		else if (GetStatus() == 2) {
-			if (GetLife() > 10) {
-				AnimeAttacking.SetTopLeft(x, y);
-				AnimeAttacking.OnShow();
-			}
-			else {
+			// if (GetLife() > 10) {
+			// 	AnimeAttacking.SetTopLeft(x, y);
+			// 	AnimeAttacking.OnShow();
+			// }
+			//else {
 				NormalAttacking.SetTopLeft(x, y);
 				NormalAttacking.OnShow();
-			}
+			//}
 		}
 	}
 	//	產生圖檔路徑
@@ -279,9 +276,9 @@ namespace game_framework {
 	string Zombies::GetPath() {
 		stringstream ss;
 		switch (ID) {
-		case 1: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
-		case 2: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
-		case 3: ss << ".\\BMP_RES\\image\\zombies\\cutscene1_11"; break;
+		case 1: ss << ".\\BMP_RES\\image\\zombies\\Walk\\Zombie_0"; break;
+		case 2: ss << ".\\BMP_RES\\image\\zombies\\Walk\\Zombie_0"; break;
+		case 3: ss << ".\\BMP_RES\\image\\zombies\\Walk\\Zombie_0"; break;
 		default:ss << "";  break;
 		}
 		return ss.str();

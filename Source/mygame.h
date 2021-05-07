@@ -4,9 +4,9 @@
 #include "zombies.h"
 #include "Seed.h"
 #include "Pea.h"
-#include "cursor.h"
+#include "mouse.h"
 #include "Shovel.h"
-#include "LawnMower.h"
+#include "LawnCleaner.h"
 #include <vector>
 #include <memory>
 // #include "Selector.h"
@@ -59,7 +59,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 
-
+	typedef shared_ptr<Zombies> ZombiesPtr;
 
 	class CGameStateRun : public CGameState {
 	public:
@@ -80,28 +80,21 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		// finish
-		CMovingBitmap	background;	// 背景圖
+		CMovingBitmap background;	// 背景圖
 		CMovingBitmap zombiesone[5];	// 殭屍
-		CMovingBitmap peacard;	// PEA
-		CMovingBitmap sunflowercard;	// sunflower
-		CMovingBitmap wallnutcard;	// wallnut
 		CMovingBitmap sunback;
 		// TODO:
 		// Maps			        map;					            	  	// 背景圖
 		Seed		      	    seed;					             	  	// 視窗上方管理卡片的物件
-		Cursor		    	cursor;						            	// 用來顯示目前選取的東西
+		Mouse		    	mouse;						            	// 用來顯示目前選取的東西
 		Shovel		    	shovel;						            	// 鏟子
-		LawnMower	     	LawnMower[5];			         	  		// 除草機
+		LawnCleaner	     	LawnCleaner[5];			         	  		// 除草機
 		std::vector< shared_ptr<Zombies> >	monster;			    	      			// 儲存所有殭屍的vector
-		//vector<Plants>		plants;					          	  		// 儲存所有植物的vector
-		
-		//shared_ptr<A> sharedptr(new A);
-		//std::vector<shared_ptr<A> > test;
 
-		Plants testp[5][9] ;
+		Plants PlantClass[5][9] ;
 		vector<Pea>		  	peas;						              	// 儲存所有豆子的vector
 		vector<Sun>	  		suns;						              	// 儲存所有太陽的vector
-		bool		      		selected;						            // 判斷目前是否有選取東西
+		bool		      	selected;						            // 判斷目前是否有選取東西
 		int			      	ChoosedCard;					          	// 目前選取的卡片
 		int			      	ChoosedPlant;					          	// 目前選取的植物
 		int			      	SunCounter;						          	// 從空中掉落太陽的計時器
@@ -112,10 +105,6 @@ namespace game_framework {
 		//void		      		GameOver();			        	      		// 讓遊戲進入CGameStateOver
 		bool		      		isGameOver;				              		// 檢查遊戲使否結束
 		bool		      		awooga;					                	// 第一批殭屍出現時撥放音樂的flag
-		CMovingBitmap	  	FinalWave;			    		    	  	// 最後一波殭屍的預告圖
-		CMovingBitmap	  	Wave;					        	    	// 顯示wave
-		CMovingBitmap	  	numbers[10];	    			    	 	// 顯示數字
-		CMovingBitmap	  	slash;					      	    	  	// 顯示斜線
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

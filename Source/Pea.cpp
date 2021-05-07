@@ -17,7 +17,7 @@ namespace game_framework {
 	Pea::Pea(int xx,int rows,int id){
 		finished = false;
 		x = xx;
-		y = 125 + 75 * rows;
+		y = 80 + 100 * rows;
 		row = rows;
 		type = id;
 		finished = false;

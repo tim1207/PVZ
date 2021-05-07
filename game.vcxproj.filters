@@ -120,15 +120,6 @@
     <ClCompile Include="Source\mygame.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CEraser.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CBouncingBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\maps.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -136,9 +127,6 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Seed.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\cursor.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shovel.cpp">
@@ -156,7 +144,10 @@
     <ClCompile Include="Source\zombies.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LawnMower.cpp">
+    <ClCompile Include="Source\LawnCleaner.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mouse.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,15 +179,6 @@
     <ClInclude Include="Source\mygame.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CEraser.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CBouncingBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Sun.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -204,9 +186,6 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Seed.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\cursor.h">
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Shovel.h">
@@ -224,7 +203,10 @@
     <ClInclude Include="Source\zombies.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LawnMower.h">
+    <ClInclude Include="Source\LawnCleaner.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mouse.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
