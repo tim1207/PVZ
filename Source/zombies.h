@@ -11,8 +11,9 @@ namespace game_framework {
 		int GetLife();					      // 回傳目前所剩的生命
 		bool isAlive();					      // 檢查是否已死亡
 		void GiveLife();				      // 設定殭屍的生命
+		void Die();
 		string GetPath();				      // 取得圖檔的路徑
-		//string GetPathWithStatus();		// 取的圖檔的路徑
+		string GetPathWithStatus();		// 取的圖檔的路徑
 		void SetStatus(int);			    // 設定殭屍目前的狀態
 		int GetStatus();				      // 回傳殭屍目前的狀態
 		void SetFrames();				      // 設定殭屍圖檔總量

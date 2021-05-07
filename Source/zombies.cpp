@@ -16,12 +16,12 @@ namespace game_framework {
 		ID = a;
 		x = c;
 		y =  45 + (b-1) * 98;
-		row = b;
+		row = b-1;
 		LastMove = 0;
 		AttackCounter = 0;
 		AttackClock = 30;
 		SnowCounter = 0;
-		HeadFinished = false;
+		//HeadFinished = false;
 		DieFinished = false;
 		BoomFinished = false;
 		Boom = false;
@@ -31,7 +31,7 @@ namespace game_framework {
 		AnimeAttacking.SetDelayCount(3);
 		NormalAttacking.SetDelayCount(3);
 		AnimeDie.SetDelayCount(4);
-		Head.SetDelayCount(4);
+		//Head.SetDelayCount(4);
 		BoomDie.SetDelayCount(4);
 		GiveLife();
 		LoadBitmap();
@@ -47,9 +47,9 @@ namespace game_framework {
 	//	設定殭屍的生命
 	void Zombies::GiveLife() {
 		switch (ID) {
-		case 1:life = 10; break;
-		//case 2:life = 20; break;
-		//case 3:life = 30; break;
+		case 1:life = 50; break;
+		case 2:life = 60; break;
+		case 3:life = 70; break;
 		default:	        break;
 		}
 	}
@@ -86,7 +86,7 @@ namespace game_framework {
 		case 1: WalkingFrames = 17;	AttackingFrames = 20; break;
 		case 2: WalkingFrames = 20; AttackingFrames = 10; break;
 		case 3:	WalkingFrames = 14;	AttackingFrames = 10; break;
-		default:	                                        break;
+		default:	                                      break;
 		}
 	}
 	//	讀取所需的圖檔
@@ -124,16 +124,20 @@ namespace game_framework {
 		SetStatus(1);
 		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
-			//sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieDie_", i);
-			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\ZombieDie_%d.bmp", i);
+			//sprintf(FILENAME, "%s.bmp", GetPath().c_str());
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
-		for (int i = 0; i <= 11; i++) {
+		/*
+		// 可能沒有頭繼續走
+		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
 			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+			//sprintf(FILENAME, "%s%d.bmp", "\BMP_RES\image\zombies\zombiesDie\ZombieDie_", i);
 			//sprintf(FILENAME, "%s%02d.bmp", ".\\RES\\Zombies\\Zombie\\ZombieHead_", i);
 			Head.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
+		*/
 		for (int i = 0; i <= 19; i++) {
 			char FILENAME[100];
 			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
@@ -181,6 +185,9 @@ namespace game_framework {
 			}
 		}
 	}
+	void Zombies::Die() {
+		x = 1000;
+	}
 	//	處理殭屍的動作
 	void Zombies::OnMove() {
 		
@@ -189,7 +196,7 @@ namespace game_framework {
 		}
 		if (isAlive() == false && Boom == false) {
 			AnimeDie.OnMove();
-			Head.OnMove();
+			//Head.OnMove();
 		}
 		else if (isAlive() == false && Boom == true) {
 			BoomDie.OnMove();
@@ -205,10 +212,6 @@ namespace game_framework {
 			NormalAttacking.OnMove();
 		}
 		
-		/*
-		MoveX();
-		NormalWalking.OnMove();
-		*/
 	}
 	// 處理殭屍的動畫
 	void Zombies::OnShow() {
@@ -222,6 +225,7 @@ namespace game_framework {
 						DieFinished = true;
 					}
 				}
+				/*
 				if (HeadFinished == false) {
 					Head.SetTopLeft(x, y);
 					Head.OnShow();
@@ -229,6 +233,7 @@ namespace game_framework {
 						HeadFinished = true;
 					}
 				}
+				*/
 			}
 			else if (Boom == true) {
 				if (BoomFinished == false) {
@@ -260,22 +265,16 @@ namespace game_framework {
 				NormalAttacking.OnShow();
 			}
 		}
-		
-
-		/*
-		NormalWalking.SetTopLeft(x, y);
-		NormalWalking.OnShow();
-		*/
 	}
 	//	產生圖檔路徑
-	/*
+	
 	string Zombies::GetPathWithStatus() {
 		
 		if (status == 2)	return "Attack_";
 		return "_";
 		
 	}
-	*/
+	
 	//	產生圖檔路徑
 	string Zombies::GetPath() {
 		stringstream ss;
@@ -306,7 +305,8 @@ namespace game_framework {
 	}
 	//	檢查死亡的動畫是否已經結束
 	bool Zombies::isFinished() {
-		if (DieFinished == true && HeadFinished == true || BoomFinished == true) {
+		//if (DieFinished == true && HeadFinished == true || BoomFinished == true) {
+		if (DieFinished == true || BoomFinished == true) {
 			return true;
 		}
 		return false;

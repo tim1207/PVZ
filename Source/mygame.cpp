@@ -111,10 +111,10 @@ namespace game_framework {
 	//讀取結果的圖檔
 	void CGameStateOver::LoadBitmap() {
 		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon.bmp");
-		//TODO:	need to be set 
+
 		ZombiesWon.SetTopLeft(0, 0);
 		ZombieNote.LoadBitmap(".\\BMP_RES\\image\\interface\\trophy.bmp");
-		//TODO:	need to be set 
+
 		ZombieNote.SetTopLeft(0, 0);
 	}
 
@@ -190,7 +190,7 @@ namespace game_framework {
 	{
 		background.SetTopLeft(-500, 0);    				// 設定背景的起始座標
 		//help.SetTopLeft(0, SIZE_Y - help.Height());   // 設定說明圖的起始座標
-		
+
 		sunback.SetTopLeft(-400, 10);
 		zombiesone[0].SetTopLeft(640, 150);
 		zombiesone[1].SetTopLeft(660, 200);
@@ -206,13 +206,13 @@ namespace game_framework {
 		ChoosedPlant = -1;
 		//重設場上的植物
 		// plants init
-		 for (int i = 0; i < 5; i++) {
-		 	for (int j = 0; j < 9; j++) {
-		 		PlantManager[i][j] = 0;
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 9; j++) {
+				PlantManager[i][j] = 0;
 				testp[i][j] = Plants(0, j, i);
-		 	}
-		 }
-		 flow = 0;
+			}
+		}
+		flow = 0;
 		//確保所有的vector清空
 
 		monster.clear();
@@ -222,9 +222,9 @@ namespace game_framework {
 		seed.Reset();
 
 		//重設除草機
-		// for (int i = 0; i < 5; i++) {
-		// 	LawnMower[i].Reset();
-		// }
+		//for (int i = 0; i < 5; i++) {
+		 //	LawnMower[i].Reset();
+		//}
 		wave = 0;
 
 		//CAudio::Instance()->Play(AUDIO_LAKE, true);   // 撥放 WAVE
@@ -233,7 +233,7 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnInit()          // 遊戲的初值及圖形設定
-	{	
+	{
 		int temp[] = { 1,2,3 };
 		seed.Load(3, temp);//可能錯
 		//
@@ -248,16 +248,18 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
-		for (int i = 0; i < 5; i++)						//載入殭屍
+		for (int i = 0; i < 5; i++) {					//載入殭屍
 			zombiesone[i].LoadBitmap(".\\BMP_RES\\image\\zombies\\cutscene1_11.bmp", RGB(0, 0, 0));
+			LawnMower[i].LoadBitmap();
+		}
 
-		
 		//plants.push_back(Plants(1, 3, 2));
 		//testp[0]= Plants(1, 3, 1);
 		cursor.LoadBitmap();
 		sunback.LoadBitmap("BMP_RES/image/interface/SunBack.bmp", RGB(0, 0, 0));
 		shovel.LoadBitmap();
 		
+
 		// 繼續載入其他資料
 
 		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav"); // 載入編號0的聲音ding.wav
@@ -274,8 +276,18 @@ namespace game_framework {
 		//  開始的移動畫面
 		if (background.Left() < -80)
 			background.SetTopLeft(background.Left() + 10, 0);
+		if (background.Left() >= -80){
+			for (int i = 0; i < 5; i++) {
+				LawnMower[i].Reset();
+				LawnMower[i].SetY(i);
+			}
+		
+		}
+			
+
 		if (sunback.Left() < 100)
 			sunback.SetTopLeft(sunback.Left() + 10, 10);
+		
 		// 放置殭屍 (right)
 		for (int i = 0; i < 5; i++) {
 			if (zombiesone[i].Left() < 1040)
@@ -296,7 +308,7 @@ namespace game_framework {
 		*/
 
 		ZombieCounter++;
-		if (wave < 9 && wave>=0) {
+		if (wave < 9 && wave >= 0) {
 			///每隔10秒產生1~3隻隨機種類的殭屍
 			if (ZombieCounter == 450) {
 				wave++;
@@ -307,19 +319,18 @@ namespace game_framework {
 				ZombieCounter = 0;
 				//int groan = rand() % 6;
 				//CAudio::Instance()->Play(AUDIO_GROAN_1 + groan, false);
-				for (int i = 0; i <1; i++) {
+				for (int i = 0; i < 1; i++) {
 					//int id = i + 1;
 					//int r = (rand() % 5);
 
 					//monster.push_back(make_shared<Zombies>(1, 1, 800));
 					//monster.push_back(make_shared<Zombies>(1, 2, 800));
-					monster.push_back(make_shared<Zombies>(1, 3, 800) );
+					monster.push_back(make_shared<Zombies>(1, 3, 800));
 					//monster.push_back(make_shared<Zombies>(1, 4, 800));
 					//monster.push_back(make_shared<Zombies>(1, 5, 800));
 				}
 			}
 		}
-		// no work
 		else if (wave == 9 && ZombieCounter >= 450) {
 			if (ZombieCounter == 450) {
 				//CAudio::Instance()->Play(AUDIO_FINALWAVE, false);
@@ -333,71 +344,71 @@ namespace game_framework {
 					}
 				}
 			}
-		}		
+		}
 		if (monster.size() == 0 && ZombieCounter > 450) {
 			YouWin = true;
 			isGameOver = true;
 		}
-		
-		//shared_ptr<A> sharedptr(new A);
-		//std::vector<shared_ptr<A> > test;
 
-
-		// TODO ::SET X AMD Y
-		for (auto &itz :monster) {
+		for (auto &itz : monster) {
 			//處理所有殭屍的動作			
-				itz->OnMove();
-				if (itz->GetX() < -150) {
-					YouWin = false;
-					isGameOver = true;                                         //如果殭屍跑進家裡，遊戲結束
+			itz->OnMove();
+			if (itz->GetX() < -150) {
+				YouWin = false;
+				isGameOver = true;                                         //如果殭屍跑進家裡，遊戲結束
+			}
+			//尋找殭屍可攻擊的第一隻植物
+			int closest = 10;
+			for (int i = (itz->GetX() + 80) / 75; i >= 0; i--) {
+				if (PlantManager[itz->GetRow()][i] > 0) {
+					closest = i;
+					break;
 				}
-				//尋找殭屍可攻擊的第一隻植物
-				int closest = 10;
-				for (int i = (itz->GetX() + 80) / 75; i >= 0; i--) {
-					if (PlantManager[itz->GetRow()][i] > 0) {
-						closest = i;
-						break;
-					}
+			}
+			if (itz->isAlive() == true) {
+				//如果殭屍被除草機撞到就馬上死亡
+				
+				if (LawnMower[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnMower[itz->GetRow()].GetX() < itz->GetX() + 100) {
+					LawnMower[itz->GetRow()].StartMove();
+					//CAudio::Instance()->Play(AUDIO_LAWN_MOWER, false);
+					itz->GoToDie();
 				}
-				if (itz->isAlive() == true) {
-					//如果殭屍被除草機撞到就馬上死亡
-					/*
-					if (LawnMower[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnMower[itz->GetRow()].GetX() < itz->GetX() + 100) {
-						LawnMower[itz->GetRow()].StartMove();
-						CAudio::Instance()->Play(AUDIO_LAWN_MOWER, false);
-						itz->GoToDie();
-					}
-					*/
-					bool found = false;
-					for (int i = 0; i < 5; i++) {
-						for (int j = 0; j < 9; j++) {
-							if (testp[i][j].GetRow() == itz->GetRow()-1 && testp[i][j].GetColumn() == closest) {
-								if (testp[i][j].GetX() <= itz->GetX() + 80 && testp[i][j].GetX() >= itz->GetX() + 30) {
-									itz->SetStatus(2);                                   //如果離殭屍最近的植物進入攻擊範圍就進入攻擊狀態
-									found = true;
-								}
-								else {
-									itz->SetStatus(1);
-								}
-								//如果殭屍正在攻擊狀態且攻擊冷卻時間結束，植物就受到攻擊
-								if (itz->GetStatus() == 2 && itz->Attack() == true) {
-									int chomp = rand() % 3;
-									//CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
-									testp[i][j].BeingAttacked();
-									if (testp[i][j].isAlive() == false) {
-										itz->SetStatus(1);                                 //如果植物被殭屍吃掉了，殭屍馬上恢復普通狀態
-									}
-								}
-							
+				
+				bool found = false;
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 9; j++) {
+						if (testp[i][j].GetRow() == itz->GetRow() && testp[i][j].GetColumn() == closest) {
+							if (testp[i][j].GetX() <= itz->GetX() + 80 && testp[i][j].GetX() >= itz->GetX() + 30) {
+								itz->SetStatus(2);                                   //如果離殭屍最近的植物進入攻擊範圍就進入攻擊狀態
+								found = true;
 							}
+							else {
+								itz->SetStatus(1);
+							}
+							//如果殭屍正在攻擊狀態且攻擊冷卻時間結束，植物就受到攻擊
+							if (itz->GetStatus() == 2 && itz->Attack() == true) {
+								int chomp = rand() % 3;
+								//CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
+								testp[i][j].BeingAttacked();
+								if (testp[i][j].isAlive() == false) {
+									itz->SetStatus(1);                                 //如果植物被殭屍吃掉了，殭屍馬上恢復普通狀態
+								}
+							}
+
 						}
 					}
-					
-					if (found == false) {
-						itz->SetStatus(1);
-					}
 				}
-			
+
+				if (found == false) {
+					itz->SetStatus(1);
+				}
+			}
+
+			//殭屍死亡
+			if (itz->isFinished() == true) {
+					itz->Die();
+			}
+
 		}
 		//處理所有植物的動作
 		//vector<Plants>::iterator itpp;
@@ -422,7 +433,7 @@ namespace game_framework {
 				//處理一般豌豆的動作
 				if (testp[i][j].GetID() == 2) {
 					bool FoundZombie = false;
-					for (auto &itz : monster){
+					for (auto &itz : monster) {
 						if (testp[i][j].GetRow() == testp[i][j].GetRow() && testp[i][j].GetX() + 50 >= testp[i][j].GetX()) {
 							FoundZombie = true;
 							if (testp[i][j].GetX() + 50 > testp[i][j].GetX()) {
@@ -432,7 +443,7 @@ namespace game_framework {
 								testp[i][j].SetCounterOn(false);
 							}
 						}
-						//}
+
 						if (testp[i][j].isAction() == true) {
 							//CAudio::Instance()->Play(AUDIO_SHOOT, false);
 							peas.push_back(Pea(testp[i][j].GetX() + 50, testp[i][j].GetRow(), 0)); //如果攻擊冷卻時間到了就射出一顆豆子
@@ -448,16 +459,17 @@ namespace game_framework {
 				itpea->OnMove();
 				//vector<Zombies>::auto itzz;
 				//vector< shared_ptr<Zombies> >::iterator itzz;
-				bool HitZombie = false; 
+				bool HitZombie = false;
 				int mi = 1000;
-				for (auto &itz :monster) {
-					
+				for (auto &itz : monster) {
+
 					if (itpea->GetRow() == itz->GetRow() && itpea->GetX() > itz->GetX() + 75 && itpea->GetX() < itz->GetX() + 110) {
 						if (mi > itz->GetX()) {
 							mi = itz->GetX();
 							//itzz = itz;
 							HitZombie = true;
 							itpea->SetHitZombie(true);
+							//處理擊中殭屍後的動作
 							if (itz->GetID() == 3 && itz->GetLife() > 10) {
 								int sound = rand() % 2;
 								//CAudio::Instance()->Play(AUDIO_HIT_BUCKET_1 + sound, false);
@@ -469,27 +481,11 @@ namespace game_framework {
 							itz->Hitted(itpea->MyType());
 						}
 					}
-					if (itpea->GetX() > 640) {
+					if (itpea->GetX() > 880) {
 						itpea->SetHitZombie(true);
 					}
 				}
-				/*
-				//處理擊中殭屍後的動作
-				if (HitZombie == true) {
-					itpea->SetHitZombie(true);
-					if (itzz->GetID() == 3 && itzz->GetLife() > 10) {
-						int sound = rand() % 2;
-						//CAudio::Instance()->Play(AUDIO_HIT_BUCKET_1 + sound, false);
-					}
-					else {
-						int sound = rand() % 3;
-						//CAudio::Instance()->Play(AUDIO_SPLAT_1 + sound, false);
-					}
-					itzz->Hitted(itpea->MyType());
-				}
-				*/
 			}
-			// maybe now don't need it  
 			vector<Sun>::iterator itss;
 			bool EraseSun = false;
 
@@ -517,7 +513,8 @@ namespace game_framework {
 
 	//進入GameStateOver，並將vector清空，否則第二次完會產生錯誤
 	void CGameStateRun::GameOver()
-	{	//monster.swap(vector<Zombies>());
+	{
+		monster.clear();
 		//plants.swap(vector<Plants>());
 		suns.swap(vector<Sun>());
 		peas.swap(vector<Pea>());
@@ -570,7 +567,6 @@ namespace game_framework {
 		// gamemap.OnKeyDown(nChar);
 	}
 
-	// TODO:
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
 		if (!selected) {
@@ -594,7 +590,7 @@ namespace game_framework {
 					selected = true;
 					cursor.SetXY(point.x, point.y);
 					cursor.SetWhich(ChoosedPlant); //讓游標的樣子變成準備種植的植物
-					
+
 				}
 			}
 			//處理點擊產子的動作
@@ -612,13 +608,13 @@ namespace game_framework {
 		else if (selected) {
 			if (point.x >= 172 && point.x <= 900 && point.y >= 80 && point.y <= 580) {
 				//實現用鏟子移除植物的功能
-				
+
 				if (shovel.isChoosed() == true) {
 					PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] = 0;
 					bool ErasePlant = false;
 					//testp[(point.y - 80) / 98][(point.x - 172) / 80].SetID(0);
-					
-					testp[(point.y - 80) / 98][(point.x - 172) / 80]=Plants(0, (point.x - 172) / 80, (point.y - 80) / 98);
+
+					testp[(point.y - 80) / 98][(point.x - 172) / 80] = Plants(0, (point.x - 172) / 80, (point.y - 80) / 98);
 					/*
 					vector<Plants>::iterator itpp;
 					for (vector<Plants>::iterator itp = plants.begin(); itp != plants.end(); itp++) {
@@ -630,27 +626,27 @@ namespace game_framework {
 					*/
 
 				}
-				
+
 				else if (shovel.isChoosed() == false) {
 					//植物功能
 					if (PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] == 0) {
 						PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] = ChoosedPlant;
 						testp[(point.y - 80) / 98][(point.x - 172) / 80] = Plants(ChoosedPlant, (point.x - 172) / 80, (point.y - 80) / 98);
-						
+
 						//plants.push_back(Plants(ChoosedPlant, (point.x - 172) / 80, (point.y - 80) / 98));
 						//CAudio::Instance()->Play(AUDIO_PLANT, false);
 						//seed.ResetCardCounter(ChoosedCard);//冷卻
 						seed.Buy(ChoosedCard);
 
 					}
-				}	
+				}
 			}
 			cursor.SetWhich(0);
 			selected = false;
 			ChoosedCard = -1;
 			shovel.SetChoosed(false);
 		}
-		
+
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point) // 處理滑鼠的動作
@@ -660,9 +656,9 @@ namespace game_framework {
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point) // 處理滑鼠的動作
 	{
-		 if (selected) {
-		 	cursor.SetXY(point.x, point.y);
-		 }
+		if (selected) {
+			cursor.SetXY(point.x, point.y);
+		}
 	}
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -688,104 +684,117 @@ namespace game_framework {
 	}
 
 
-void CGameStateRun::OnShow()
-{
-	//
-	//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
-	//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
-	//        說，Move負責MVC中的Model，Show負責View，而View不應更動Model。
-	//
-	//
-	//
-	
-	background.ShowBitmap();   // 貼上背景圖
-	seed.OnShow();
-	for (int i = 0; i < 5; i++) {
-		vector<Pea>::iterator itpea;
-		bool ErasePea = false;
-		for (vector<Pea>::iterator it = peas.begin(); it != peas.end(); it++) {
-			if (it->isFinished() == true) {             //讓豆子在擊中殭屍的動畫結束後才會被解構
-				itpea = it;
-				ErasePea = true;
-				continue;
-			}
-			it->OnShow();
-		}
-		if (ErasePea == true) {
-			peas.erase(itpea);
-			ErasePea = false;
-		}
-		// Show plants
-		for (int j = 0; j < 9; j++) {
-			testp[i][j].OnShow();
-		}
-	}
+	void CGameStateRun::OnShow()
+	{
+		//
+		//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
+		//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
+		//        說，Move負責MVC中的Model，Show負責View，而View不應更動Model。
+		//
+		//
+		//
 
-	/*
-	vector<Zombies>::iterator itz;
-	bool EraseZombie = false;
-	for (vector<Zombies>::iterator it = monster.begin(); it != monster.end(); it++) {
-		if (it->GetRow() == 3)	it->OnShow();
-		if (it->isFinished() == true) {             // 讓殭屍在死亡動畫顯示完畢後才會被解構
-			itz = it;
-			EraseZombie = true;
-			continue;
+		background.ShowBitmap();   // 貼上背景圖
+		seed.OnShow();
+		for (int  i = 0; i < 5; i++)
+		{
+			LawnMower[i].OnShow();
 		}
-	}
-	*/
-	for (auto &itz : monster) {
-		itz->OnShow();
-	}
-	
-	
-	
-	/*
-	for (int row = 0; row < 5; row++) {
-		vector<Plants>::iterator itp;
-		bool ErasePlant = false;
-		for (vector<Plants>::iterator it = plants.begin(); it != plants.end(); it++) {
-			if (it->GetRow() == row)	
+		for (int i = 0; i < 5; i++) {
+			vector<Pea>::iterator itpea;
+			bool ErasePea = false;
+			for (vector<Pea>::iterator it = peas.begin(); it != peas.end(); it++) {
+				if (it->isFinished() == true) {             //讓豆子在擊中殭屍的動畫結束後才會被解構
+					itpea = it;
+					ErasePea = true;
+					continue;
+				}
 				it->OnShow();
-
-			if (it->isFinished() == true) {             //讓植物在死亡後或是動作結束後(葫蘆和櫻桃)被解構
-				itp = it;
-				ErasePlant = true;
-				PlantManager[itp->GetRow()][itp->GetColumn()] = 0;
-				continue;
 			}
-			if (ErasePlant == true) {
-				plants.erase(itp);
-				ErasePlant = false;
+			if (ErasePea == true) {
+				peas.erase(itpea);
+				ErasePea = false;
+			}
+			// Show plants
+			for (int j = 0; j < 9; j++) {
+				testp[i][j].OnShow();
 			}
 		}
-	}
-	*/
-	///
-	for (int i = 0; i < 5; i++)
-		zombiesone[i].ShowBitmap();
-	// map.OnShow();
-	shovel.OnShow();
-	/*
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-	CFont f, *fp;
-	f.CreatePointFont(100, "Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(238, 230, 170));
-	pDC->SetTextColor(RGB(0, 0, 0));
 
-	pDC->TextOut(165, 18, "50");
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-	*/
-	///sun drop
-	
-	for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
-		its->OnShow();
-	}
-	if (selected) {
+		/*
+		vector<Zombies>::iterator itz;
+		bool EraseZombie = false;
+		for (vector<Zombies>::iterator it = monster.begin(); it != monster.end(); it++) {
+			if (it->GetRow() == 3)	it->OnShow();
+			if (it->isFinished() == true) {             // 讓殭屍在死亡動畫顯示完畢後才會被解構
+				itz = it;
+				EraseZombie = true;
+				continue;
+			}
+		}
+		*/
+		for (auto &itz : monster) {
+			itz->OnShow();
+			//monster.erase(itz);
+			//itz = nullptr;
+		}
 
-		cursor.OnShow();
+		/*
+		std::vector<std::shared_ptr<Zombies>>::iterator It_dest;
+		for (; It_dest != monster.end(); It_dest++) {
+			monster.erase(It_dest);
+		}
+		*/
+
+
+
+		/*
+		for (int row = 0; row < 5; row++) {
+			vector<Plants>::iterator itp;
+			bool ErasePlant = false;
+			for (vector<Plants>::iterator it = plants.begin(); it != plants.end(); it++) {
+				if (it->GetRow() == row)
+					it->OnShow();
+
+				if (it->isFinished() == true) {             //讓植物在死亡後或是動作結束後(葫蘆和櫻桃)被解構
+					itp = it;
+					ErasePlant = true;
+					PlantManager[itp->GetRow()][itp->GetColumn()] = 0;
+					continue;
+				}
+				if (ErasePlant == true) {
+					plants.erase(itp);
+					ErasePlant = false;
+				}
+			}
+		}
+		*/
+		///
+		for (int i = 0; i < 5; i++)
+			zombiesone[i].ShowBitmap();
+		// map.OnShow();
+		shovel.OnShow();
+		/*
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+		CFont f, *fp;
+		f.CreatePointFont(100, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(238, 230, 170));
+		pDC->SetTextColor(RGB(0, 0, 0));
+
+		pDC->TextOut(165, 18, "50");
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		*/
+		///sun drop
+
+		for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
+			its->OnShow();
+		}
+		if (selected) {
+
+			cursor.OnShow();
+		}
 	}
-}
 
 }

@@ -10,10 +10,11 @@
 namespace game_framework {
 	Plants::Plants() {
 	}
-	Plants::Plants(int id, int col, int roww) {
+	Plants::Plants(int id, int col, int roww) { //0-8 0-4
 		ID = id;
 		x = 172 + col* 80;
 		y = 80 + roww * 98;
+		
 		/*
 		if (ID == 4) {
 			x -= 15;
