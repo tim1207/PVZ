@@ -122,12 +122,24 @@ namespace game_framework {
 	}
 	void Plants::LoadBitmap() {					    // 讀取所需圖檔
 		SetFrames();							            // 檢查圖檔共有幾張
-		for (int i = 0; i <= frames; i++) {		// 依序讀取圖檔
-			char FILENAME[100];
-			sprintf(FILENAME, "%s.bmp", GetPath().c_str());
-			
-			anime.AddBitmap(FILENAME, RGB(0, 0, 0));
+		if (ID == 0) {
+			for (int i = 0; i <= frames; i++) {		// 依序讀取圖檔
+				char FILENAME[100];
+				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+
+				anime.AddBitmap(FILENAME, RGB(0, 0, 0));
+			}
 		}
+		else {
+			for (int i = 0; i <= frames; i++) {		// 依序讀取圖檔
+				char FILENAME[100];
+				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
+
+				anime.AddBitmap(FILENAME, RGB(0, 0, 0));
+			}
+		}
+		
+
 		/*
 		if (ID == 3) {
 			SetID(31);
@@ -280,9 +292,9 @@ namespace game_framework {
 		stringstream ss;
 		switch (ID) {
 		case 0: ss << ".\\BMP_RES\\image\\plants\\bitmap9";		  break;
-		case 1: ss << ".\\BMP_RES\\image\\plants\\SunFlower";	  break;
-		case 2: ss << ".\\BMP_RES\\image\\plants\\PeaShooter";	  break;
-		case 3: ss << ".\\BMP_RES\\image\\plants\\WallNut_1";	  break;
+		case 1: ss << ".\\BMP_RES\\image\\plants\\SunFlower\\SunFlower_";	  break;
+		case 2: ss << ".\\BMP_RES\\image\\plants\\PeaShooter\\PeaShooter_";	  break;
+		case 3: ss << ".\\BMP_RES\\image\\plants\\WallNut\\WallNut_";	  break;
 		/*
 		case 31:ss << ".\\RES\\Plants\\WallNut\\WallNut_cracked1_"; break;
 		case 32:ss << ".\\RES\\Plants\\WallNut\\WallNut_cracked2_"; break;

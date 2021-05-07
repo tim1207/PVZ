@@ -371,7 +371,7 @@ namespace game_framework {
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 9; j++) {
 						if (PlantClass[i][j].GetRow() == itz->GetRow() && PlantClass[i][j].GetColumn() == closest) {
-							if (PlantClass[i][j].GetX() <= itz->GetX() + 80 && PlantClass[i][j].GetX() >= itz->GetX() + 30) {
+							if (PlantClass[i][j].GetX() <= itz->GetX()+80 && PlantClass[i][j].GetX() >= itz->GetX() + 30) {
 								itz->SetStatus(2);                                   //如果離殭屍最近的植物進入攻擊範圍就進入攻擊狀態
 								found = true;
 							}
@@ -384,6 +384,8 @@ namespace game_framework {
 								//CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
 								PlantClass[i][j].BeingAttacked();
 								if (PlantClass[i][j].isAlive() == false) {
+									PlantClass[i][j] = Plants(0, i,j);
+									PlantManager[i][j] = 0;
 									itz->SetStatus(1);                                 //如果植物被殭屍吃掉了，殭屍馬上恢復普通狀態
 								}
 							}
