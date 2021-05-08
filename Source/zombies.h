@@ -5,7 +5,7 @@ namespace game_framework {
 	public:
 		Zombies();
 		Zombies(int, int, int);				  // 殭屍的初始化
-		void LoadBitmap();				    // 讀取所需的圖檔
+		void LoadBitmap(int ID=1);				    // 讀取所需的圖檔
 		void OnMove();					      // 處理殭屍的動作
 		void OnShow();					      // 顯示在畫面中
 		int GetLife();					      // 回傳目前所剩的生命
