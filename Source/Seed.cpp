@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -11,31 +11,31 @@ namespace game_framework {
 		//money = 50;
 		money =1000;
 	}
-	void Seed::Reset() {		                        // ­«³]ªì©lª¬ºA
+	void Seed::Reset() {		                        // é‡è¨­åˆå§‹ç‹€æ…‹
 		//money = 50;
 		money = 1000;
 		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {
 			it->Reset();
 		}
 	}
-	void Seed::ResetCD() {		                      // ±j¨î§N«o®É¶¡Âk¹s(±K§Ş¥Î)
+	void Seed::ResetCD() {		                      // å¼·åˆ¶å†·å»æ™‚é–“æ­¸é›¶(å¯†æŠ€ç”¨)
 		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {
 			it->Reset();
 		}
 	}
-	int Seed::GetMoney() {		                      // ¦^¶Ç¥Ø«e¤Ó¶§¼Æ¶q
+	int Seed::GetMoney() {		                      // å›å‚³ç›®å‰å¤ªé™½æ•¸é‡
 		return money;
 	}
-	void Seed::Buy(int a) {		                      // ÁÊ¶R´Óª«
+	void Seed::Buy(int a) {		                      // è³¼è²·æ¤ç‰©
 		money -= cards[a].GetPrice();
 	}
-	void Seed::GotSun() {		                        // ¼W¥[¤Ó¶§
+	void Seed::GotSun() {		                        // å¢åŠ å¤ªé™½
 		money += 25;
-		if (money > 9999) {		                        // ¤W­­9999
+		if (money > 9999) {		                        // ä¸Šé™9999
 			money = 9999;
 		}
 	}
-	void Seed::Load(int sum, int CardIDs[]) {	      //Åª¨ú©Ò»İªº¸ê·½(¥]§t¥d¤ù)
+	void Seed::Load(int sum, int CardIDs[]) {	      //è®€å–æ‰€éœ€çš„è³‡æº(åŒ…å«å¡ç‰‡)
 		LoadBitmap();
 		for (int i = 0; i < sum; i++) {
 			//cards.push_back(Card(CardIDs[i]));
@@ -45,7 +45,7 @@ namespace game_framework {
 			it->LoadBitmap();
 		}
 	}
-	void Seed::LoadBitmap() {					              	//Åª¨ú©Ò»İªº¹ÏÀÉ
+	void Seed::LoadBitmap() {					              	//è®€å–æ‰€éœ€çš„åœ–æª”
 		// sum money
 		bmp.LoadBitmap("./BMP_RES/image/interface/SunBack.bmp", RGB(0, 0, 0));	
 		for (int i = 0; i < 4; i++) {
@@ -56,16 +56,16 @@ namespace game_framework {
 			}
 		}
 	}
-	int Seed::GetCardID(int a) {				            	// ¦^¶Ç¯S©w¥d¤ù©Ò¥Nªíªº´Óª«ºØÃş
+	int Seed::GetCardID(int a) {				            	// å›å‚³ç‰¹å®šå¡ç‰‡æ‰€ä»£è¡¨çš„æ¤ç‰©ç¨®é¡
 		return cards[a].GetID();
 	}
-	void Seed::ResetCardCounter(int a) {		        		// ­«³]¯S©w¥d¤ùªº§N«o®É¶¡
+	void Seed::ResetCardCounter(int a) {		        		// é‡è¨­ç‰¹å®šå¡ç‰‡çš„å†·å»æ™‚é–“
 		cards[a].ResetCounter();
 	}
-	bool Seed::isCardAvailible(int a) {			        		// ¦^¶Ç¯S©w¥d¤ù¬O§_¥i³Q¿ï¨ú
+	bool Seed::isCardAvailible(int a) {			        		// å›å‚³ç‰¹å®šå¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
 		return cards[a].isAvailible();
 	}
-	void Seed::OnMove()							                // ±±¨î°Ó©±ªº°Ê§@
+	void Seed::OnMove()							                // æ§åˆ¶å•†åº—çš„å‹•ä½œ
 	{
 		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {
 			it->OnMove();
@@ -76,15 +76,20 @@ namespace game_framework {
 				it->SetAvailible(true);
 		}
 	}
-	void Seed::OnShow()							                // Åã¥Ü°Ó©±
+	void Seed::OnShow(int num)							                // é¡¯ç¤ºå•†åº—
 	{
 		bmp.SetTopLeft(0, 0);
 		bmp.ShowBitmap();
-		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {
-			it->SetXY(it-cards.begin());
-			it->OnShow();
+
+		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {					
+				it->SetXY(it-cards.begin());
+				it->OnShow();
+				num--;
+			if(num==0)
+				break;	
+			
 		}
-		// Åã¥Ü¤Ó¶§¼Æ¶q
+		// é¡¯ç¤ºå¤ªé™½æ•¸é‡
 		if (GetMoney() == 0) {
 			sun[0][0].SetTopLeft(100, 10);
 			sun[0][0].ShowBitmap();

@@ -1,24 +1,24 @@
-#pragma once
+ï»¿#pragma once
 #include "card.h"
 namespace game_framework {
 	class Seed {
 	public:
-		Seed();							          // ªì©l¤Æ
-		int GetMoney();							  // ¦^¶Ç¥Ø«e¾Ö¦³ªº¤Ó¶§
-		void OnMove();							  // ³B²z°Ê§@
-		void OnShow();							  // Åã¥Ü
-		void Load(int, int[]);	  				  // Åª¨ú©Ò»İªº¸ê·½(¥]§t¥d¤ù)
-		void LoadBitmap();		    			  // Åª¨ú©Ò»İªº¹ÏÀÉ
-		void Buy(int);			      			  // ÁÊ¶R´Óª«
-		void GotSun();			      			  // ¼W¥[¤Ó¶§
-		int GetCardID(int);		    			  // ¦^¶Ç¯S©w¥d¤ù¥Nªíªº´Óª«ºØÃş
-		void ResetCardCounter(int);				  // ­«³]¯S©w¥d¤ùªº§N«o®É¶¡
-		bool isCardAvailible(int);				  // ¦^¶Ç¯S©w¥d¤ù¬O§_¥i³Q¿ï¨ú
-		void Reset();					  		  // ­«³]¬°ªì©lª¬ºA
-		void ResetCD();			      			  // ­«³]©Ò¦³¥d¤ùªº§N«o®É¶¡(±K§Ş¥Î)
+		Seed();							          // åˆå§‹åŒ–
+		int GetMoney();					      // å›å‚³ç›®å‰æ“æœ‰çš„å¤ªé™½
+		void OnMove();					      // è™•ç†å‹•ä½œ
+		void OnShow(int);					      // é¡¯ç¤º
+		void Load(int, int[]);	  		// è®€å–æ‰€éœ€çš„è³‡æº(åŒ…å«å¡ç‰‡)
+		void LoadBitmap();		    		// è®€å–æ‰€éœ€çš„åœ–æª”
+		void Buy(int);			      		// è³¼è²·æ¤ç‰©
+		void GotSun();			      		// å¢åŠ å¤ªé™½
+		int GetCardID(int);		    		// å›å‚³ç‰¹å®šå¡ç‰‡ä»£è¡¨çš„æ¤ç‰©ç¨®é¡
+		void ResetCardCounter(int);		// é‡è¨­ç‰¹å®šå¡ç‰‡çš„å†·å»æ™‚é–“
+		bool isCardAvailible(int);		// å›å‚³ç‰¹å®šå¡ç‰‡æ˜¯å¦å¯è¢«é¸å–
+		void Reset();				        	// é‡è¨­ç‚ºåˆå§‹ç‹€æ…‹
+		void ResetCD();			      		// é‡è¨­æ‰€æœ‰å¡ç‰‡çš„å†·å»æ™‚é–“(å¯†æŠ€ç”¨)
 	private:
-		unsigned int money;			    		  // ¥Ø«e¾Ö¦³ªº¤Ó¶§
-		vector<Card> cards;			    		  // Àx¦s¾Ö¦³ªº¥d¤ù
+		unsigned int money;			    	// ç›®å‰æ“æœ‰çš„å¤ªé™½
+		vector<Card> cards;			    	// å„²å­˜æ“æœ‰çš„å¡ç‰‡
 		CMovingBitmap bmp;			
 		CMovingBitmap	sun[4][10];
 	};

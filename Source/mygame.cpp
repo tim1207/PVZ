@@ -11,7 +11,7 @@
 
 namespace game_framework {
 	bool YouWin = false;
-	int gamelevel=0;
+	int gamelevel=1;
 	bool isGameOver;
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -130,9 +130,8 @@ namespace game_framework {
 
 	void CGameStateOver::OnBeginState()
 	{	
-		if(gamelevel==0){
+		if(gamelevel==1){
 			LoadBitmap();
-			gamelevel++;
 		}
 			
 		counter = 30 * 5; // 5 seconds
@@ -246,10 +245,10 @@ namespace game_framework {
 		//
 		ShowInitProgress(50);
 		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		if(gamelevel==0){
+		if(gamelevel==1){
 			background.LoadBitmap(Background1row);     // 載入背景的圖形
-			int temp[] = {1,2};
-			seed.Load(2, temp);
+			int temp[] = {1,2,3,4,5,6,7};
+			seed.Load(7, temp);
 
 			for (int i = 0; i < 5; i++) {					//載入殭屍
 				zombiesone[i].LoadBitmap(".\\BMP_RES\\image\\zombies\\cutscene1_11.bmp", RGB(0, 0, 0));
@@ -307,7 +306,7 @@ namespace game_framework {
 
 
 		ZombieCounter++;
-		if (wave < 2 && wave >= 0) {
+		if (wave < 1 && wave >= 0) {
 			///每隔10秒產生1~3隻隨機種類的殭屍
 			if (ZombieCounter == 200) {
 				wave++;
@@ -583,14 +582,17 @@ namespace game_framework {
 			//處理選擇卡片的動作
 			if (point.x >= 0 && point.x <= 95 && point.y >= 50 && point.y <= 230 && GotSun == false) {
 				ChoosedCard = (point.y - 50) / 60;
-				ChoosedPlant = seed.GetCardID(ChoosedCard);
-				if (seed.isCardAvailible(ChoosedCard)) {
-					//CAudio::Instance()->Play(AUDIO_CHOOSE_CARD, false);
-					selected = true;
-					mouse.SetXY(point.x, point.y);
-					mouse.SetWhich(ChoosedPlant); //讓游標的樣子變成準備種植的植物
+				if(ChoosedCard<=gamelevel+1){
+					ChoosedPlant = seed.GetCardID(ChoosedCard);
+					if (seed.isCardAvailible(ChoosedCard)) {
+						//CAudio::Instance()->Play(AUDIO_CHOOSE_CARD, false);
+						selected = true;
+						mouse.SetXY(point.x, point.y);
+						mouse.SetWhich(ChoosedPlant); //讓游標的樣子變成準備種植的植物
 
+					}
 				}
+				
 			}
 			//處理點擊產子的動作
 			if (point.x >= 135 && point.x <= 211 && point.y >= 10 && point.y <= 44 && GotSun == false) {
@@ -673,7 +675,9 @@ namespace game_framework {
 		//
 
 		background.ShowBitmap();   // 貼上背景圖
-		seed.OnShow();
+
+		seed.OnShow(gamelevel+1);
+		
 		for (int  i = 0; i < 5; i++)
 		{
 			LawnCleaner[i].OnShow();
