@@ -124,14 +124,14 @@ namespace game_framework {
 		SetStatus(1);
 		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,"%s%s%d.bmp", GetPath().c_str(),"\\ZombieDie_",i);
+			sprintf(FILENAME,"%s%d.bmp",".\\BMP_RES\\image\\zombies\\Normal Zombie\\ZombieDie_",i);
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
 		// 可能沒有頭繼續走
 		for (int i = 0; i <= 11; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%s%d.bmp" ,GetPath().c_str(),"\\Head_",i);
+			sprintf(FILENAME, "%s%d.bmp" ,".\\BMP_RES\\image\\zombies\\Normal Zombie\\Head_",i);
 			Head.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
@@ -177,7 +177,8 @@ namespace game_framework {
 	// 讓殭屍向前移動
 	void Zombies::MoveX() {
 		if (SnowCounter == 0) {
-			x -= 1;
+			x -= 5;
+			// x-=1;
 		}
 		else if (SnowCounter != 0) {
 			//	如果殭屍處於冷凍狀態則移動速度減半

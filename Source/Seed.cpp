@@ -45,7 +45,7 @@ namespace game_framework {
 			it->LoadBitmap();
 		}
 	}
-	void Seed::LoadBitmap() {					              //讀取所需的圖檔
+	void Seed::LoadBitmap() {					              	//讀取所需的圖檔
 		// sum money
 		bmp.LoadBitmap("./BMP_RES/image/interface/SunBack.bmp", RGB(0, 0, 0));	
 		for (int i = 0; i < 4; i++) {
@@ -56,13 +56,13 @@ namespace game_framework {
 			}
 		}
 	}
-	int Seed::GetCardID(int a) {				            // 回傳特定卡片所代表的植物種類
+	int Seed::GetCardID(int a) {				            	// 回傳特定卡片所代表的植物種類
 		return cards[a].GetID();
 	}
-	void Seed::ResetCardCounter(int a) {		        // 重設特定卡片的冷卻時間
+	void Seed::ResetCardCounter(int a) {		        		// 重設特定卡片的冷卻時間
 		cards[a].ResetCounter();
 	}
-	bool Seed::isCardAvailible(int a) {			        // 回傳特定卡片是否可被選取
+	bool Seed::isCardAvailible(int a) {			        		// 回傳特定卡片是否可被選取
 		return cards[a].isAvailible();
 	}
 	void Seed::OnMove()							                // 控制商店的動作

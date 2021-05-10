@@ -31,8 +31,8 @@ namespace game_framework {
 		int delay;                //等待所需時間
 		int counter;              //計時器
 		bool availible;
-		CMovingBitmap	bmp;
-		CMovingBitmap	bmp2;
+		// CMovingBitmap	bmp;
+		// CMovingBitmap	bmp2;
 		CMovingBitmap	plant;
 		CMovingBitmap	number[3][10]; // price picture
 	};

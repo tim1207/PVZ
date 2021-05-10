@@ -15,15 +15,15 @@ namespace game_framework {
 		x = 172 + col* 80;
 		y = 80 + roww * 98;
 		
-		/*
-		if (ID == 4) {
-			x -= 15;
-			y -= 150;
-		}
-		else if (ID == 5) {
-			x -= 20;
-		}
-		*/
+		
+		// if (ID == 4) {
+		// 	x -= 15;
+		// 	y -= 150;
+		// }
+		// else if (ID == 5) {
+		// 	x -= 20;
+		// }
+		
 		row = roww;
 		column = col;
 		SetLife();
@@ -36,11 +36,11 @@ namespace game_framework {
 		TargetX = 1000;
 		MovingCounter = 0;
 		status = 1;
-		switch (ID) {							                // 根據植物的種類決定植物的冷卻時間
+		switch (ID) {							                
 		case 1:	ActionCounter = 30 * 10;  break;
 		case 2: ActionCounter = 30 * 1;   break;
-		//case 6: ActionCounter = 30 * 1;   break;
-		//case 7: ActionCounter = 30 * 1;   break;
+		case 6: ActionCounter = 30 * 1;   break;
+		case 7: ActionCounter = 30 * 1;   break;
 		default:ActionCounter = -1;		    break;
 		}
 		Counter = ActionCounter - 1;
@@ -52,13 +52,13 @@ namespace game_framework {
 	void Plants::SetID(int a) {
 		ID = a;
 	}
-	int Plants::GetID() {						        // 回傳植物的種類
+	int Plants::GetID() {						      
 		return ID;
 	}
-	void Plants::ResetCounter() {				    // 重設植物的冷卻時間
+	void Plants::ResetCounter() {				    
 		Counter = 0;
 	}
-	void Plants::SetLife() {					      // 根據植物的種類設定植物的生命
+	void Plants::SetLife() {					      
 		switch (ID) {
 		case 1:life = 5;  break;
 		case 2:life = 5;  break;
@@ -69,17 +69,17 @@ namespace game_framework {
 		case 7:life = 5;  break;
 		}
 	}
-	int Plants::GetLife() {						      // 回傳植物目前剩下多少生命
+	int Plants::GetLife() {						      
 		return life;
 	}
-	bool Plants::isAlive() {					      // 回傳植物目前是否已經死亡
+	bool Plants::isAlive() {					  
 		if (GetLife() > 0)	return true;
 		return false;
 	}
-	void Plants::BeingAttacked() {			    // 植物被殭屍攻擊
+	void Plants::BeingAttacked() {			    	
 		life--;
 	}
-	void Plants::SetFrames()					      // 根據植物的種類決定圖檔的數量
+	void Plants::SetFrames()					    
 	{
 		switch (ID) {
 		case 1:	frames = 17;	break;
@@ -92,38 +92,38 @@ namespace game_framework {
 		case 5: frames = 6;		break;
 		case 6: frames = 14;	break;
 		case 7: frames = 14;	break;
-		case 0: frames = 18;		break;
+		case 0: frames = 18;	break;
 		default:	break;
 		}
 	}
-	int Plants::GetRow()						        // 回傳植物所在的排數
+	int Plants::GetRow()						       
 	{
 		return row;
 	} 
-	int Plants::GetColumn() {					      // 回傳植物所在的行數
+	int Plants::GetColumn() {					     
 		return column;
 	}
-	int Plants::GetX()							        // 回傳植物的X座標
+	int Plants::GetX()							       
 	{
 		return x;
 	}
-	int Plants::GetY() {						        // 回傳植物的Y座標
+	int Plants::GetY() {						        
 		return y;
 	}
-	int Plants::GetWidth()						      // 回傳植物圖片的寬度
+	int Plants::GetWidth()						      
 	{
 		return anime.Width();
 	}
-	void Plants::SetX(int a) {				    	// 設定X座標
+	void Plants::SetX(int a) {				    	
 		x = a;
 	}
-	void Plants::SetY(int a) {				    	// 設定Y座標
+	void Plants::SetY(int a) {				    	
 		y = a;
 	}
-	void Plants::LoadBitmap() {					    // 讀取所需圖檔
-		SetFrames();							            // 檢查圖檔共有幾張
+	void Plants::LoadBitmap() {					    
+		SetFrames();							            
 		if (ID == 0) {
-			for (int i = 0; i <= frames; i++) {		// 依序讀取圖檔
+			for (int i = 0; i <= frames; i++) {		
 				char FILENAME[100];
 				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
 
@@ -131,76 +131,72 @@ namespace game_framework {
 			}
 		}
 		else {
-			for (int i = 0; i <= frames; i++) {		// 依序讀取圖檔
+			for (int i = 0; i <= frames; i++) {		
 				char FILENAME[100];
 				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
 
 				anime.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
 		}
-		
-
-		/*
+				
 		if (ID == 3) {
 			SetID(31);
 			SetFrames();
 			for (int i = 0; i <= frames; i++) {
 				char FILENAME[100];
-				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
 				anime2.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
 			SetID(32);
 			SetFrames();
 			for (int i = 0; i <= frames; i++) {
 				char FILENAME[100];
-				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
 				anime3.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
 			SetID(3);
-		}
-		*/
-		/*
+		}		
 		else if (ID == 4) {
 			SetID(41);
 			SetFrames();
 			for (int i = 0; i <= frames; i++) {
 				char FILENAME[100];
-				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
 				anime2.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
 			SetID(4);
 		}
 		else if (ID == 5) {
-			Boom.LoadBitmap("./RES/Plants/CherryBomb/ExplosionCloud.bmp", (0, 0, 0));
+			Boom.LoadBitmap(".\\BMP_RES\\image\\plants\\CherryBomb\\ExplosionCloud.bmp", (0, 0, 0));
 		}
-		*/
+		
 	}
-	void Plants::SetCounterOn(bool a) {			// 讓植物開始動作
+	void Plants::SetCounterOn(bool a) {				
 		CounterOn = a;
 		if (a == false) {
 			Counter = 1;
 		}
 	}
-	bool Plants::isCounterOn() {				    // 回傳目前是否開始動作
+	bool Plants::isCounterOn() {				    
 		return CounterOn;
 	}
-	int Plants::CounterLeft() {					    // 回傳還要多久才會開始動作
+	int Plants::CounterLeft() {					    
 		return ActionCounter - (Counter%ActionCounter);
 	}
-	bool Plants::isAction() {					      // 回傳植物是否正在動作
+	bool Plants::isAction() {					    
 		return Action && CounterOn;
 	}
-	void Plants::StartAction() {				    // 讓植物開始動作
+	void Plants::StartAction() {				    
 		status = 2;
 	}
-	int Plants::WhichAction() {					    // 回傳植物目前的狀態
+	int Plants::WhichAction() {					    
 		return status;
 	}
-	void Plants::SetTargetX(int a) {			  // 設定攻擊目標的座標(葫蘆用)
+	void Plants::SetTargetX(int a) {			    
 		TargetX = a;
 		velocity = (TargetX - x) / 10;
 	}
-	bool Plants::isFinished() {					    // 檢查動畫是否結束
+	bool Plants::isFinished() {					    
 		if (ID == 4 && anime2.IsFinalBitmap() == true) {
 			return true;
 		}
@@ -209,7 +205,7 @@ namespace game_framework {
 		}
 		return false;
 	}
-	void Plants::OnMove() {						      // 控制植物的動作
+	void Plants::OnMove() {						      
 		if (status == 1) {
 			anime.OnMove();
 		}
@@ -252,7 +248,7 @@ namespace game_framework {
 			}
 		}
 	}
-	void Plants::OnShow() {						      // 將植物顯示在螢幕上
+	void Plants::OnShow() {						      
 		if (ID == 4) {
 			if (WhichAction() == 1) {
 				anime.SetTopLeft(x, y);
@@ -288,22 +284,23 @@ namespace game_framework {
 			anime.OnShow();
 		}
 	}
-	string Plants::GetPath() {						  // 產生植物圖檔的路徑
+	string Plants::GetPath() {						  
 		stringstream ss;
 		switch (ID) {
-		case 0: ss << ".\\BMP_RES\\image\\plants\\bitmap9";		  break;
-		case 1: ss << ".\\BMP_RES\\image\\plants\\SunFlower\\SunFlower_";	  break;
-		case 2: ss << ".\\BMP_RES\\image\\plants\\PeaShooter\\PeaShooter_";	  break;
-		case 3: ss << ".\\BMP_RES\\image\\plants\\WallNut\\WallNut_";	  break;
-		/*
-		case 31:ss << ".\\RES\\Plants\\WallNut\\WallNut_cracked1_"; break;
-		case 32:ss << ".\\RES\\Plants\\WallNut\\WallNut_cracked2_"; break;
-		case 4: ss << ".\\RES\\Plants\\Squash\\Squash_";			      break;
-		case 41:ss << ".\\RES\\Plants\\Squash\\SquashAttack_";	  	break;
-		case 5: ss << ".\\RES\\Plants\\CherryBomb\\CherryBomb_";  	break;
-		case 6: ss << ".\\RES\\Plants\\SnowPea\\SnowPea_";			    break;
-		case 7: ss << ".\\RES\\Plants\\Repeater\\Repeater_";	    	break;*/
-		default:ss << "";                                           break;
+		case 0: ss << ".\\BMP_RES\\image\\plants\\void";		  			  	break;
+		case 1: ss << ".\\BMP_RES\\image\\plants\\SunFlower\\SunFlower_";	  	break;
+		case 2: ss << ".\\BMP_RES\\image\\plants\\PeaShooter\\PeaShooter_";	  	break;
+
+		case 3: ss << ".\\BMP_RES\\image\\plants\\WallNut\\WallNut_";	  	    break;
+		case 31:ss << ".\\BMP_RES\\image\\plants\\WallNut\\WallNut_cracked1_";  break;
+		case 32:ss << ".\\BMP_RES\\image\\plants\\WallNut\\WallNut_cracked2_";  break;
+
+		case 4: ss << ".\\BMP_RES\\image\\plants\\Squash\\Squash_";			    break;
+		case 41:ss << ".\\BMP_RES\\image\\plants\\Squash\\SquashAttack_";	  	break;
+		case 5: ss << ".\\BMP_RES\\image\\plants\\CherryBomb\\CherryBomb_";  	break;
+		case 6: ss << ".\\BMP_RES\\image\\plants\\SnowPea_";			    	break;
+		case 7: ss << ".\\BMP_RES\\image\\plants\\Repeater_";	    			break;
+		default:ss << "";                                           			break;
 		}
 		return ss.str();
 	}

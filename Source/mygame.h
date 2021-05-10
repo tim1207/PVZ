@@ -1,4 +1,4 @@
-#include "maps.h"
+ï»¿#include "maps.h"
 #include "Plants.h"
 #include "Sun.h"
 #include "zombies.h"
@@ -16,46 +16,47 @@ namespace game_framework {
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
 
-	enum AUDIO_ID {				// ©w¸q¦UºØ­µ®Äªº½s¸¹
+	enum AUDIO_ID {				// å®šç¾©å„ç¨®éŸ³æ•ˆçš„ç·¨è™Ÿ
 		AUDIO_DING,				// 0
 		AUDIO_LAKE,				// 1
 		AUDIO_NTUT				// 2
 	};
 
+
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªº¹CÀ¸¶}ÀYµe­±ª«¥ó
-	// ¨C­ÓMember functionªºImplementation³£­n§ËÀ´
+	// é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²é–‹é ­ç•«é¢ç‰©ä»¶
+	// æ¯å€‹Member functionçš„Implementationéƒ½è¦å¼„æ‡‚
 	/////////////////////////////////////////////////////////////////////////////
 
 	class CGameStateInit : public CGameState {
 	public:
 		CGameStateInit(CGame *g);
-		void OnInit();  								                // ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
-		void OnBeginState();							             	 // ³]©w¨C¦¸­«ª±©Ò»İªºÅÜ¼Æ
-		void OnKeyUp(UINT, UINT, UINT); 				        		// ³B²zÁä½LUpªº°Ê§@
-		void OnLButtonDown(UINT nFlags, CPoint point);  				// ³B²z·Æ¹«ªº°Ê§@
+		void OnInit();  								                // éŠæˆ²çš„åˆå€¼åŠåœ–å½¢è¨­å®š
+		void OnBeginState();							             	 // è¨­å®šæ¯æ¬¡é‡ç©æ‰€éœ€çš„è®Šæ•¸
+		void OnKeyUp(UINT, UINT, UINT); 				        		// è™•ç†éµç›¤Upçš„å‹•ä½œ
+		void OnLButtonDown(UINT nFlags, CPoint point);  				// è™•ç†æ»‘é¼ çš„å‹•ä½œ
 		//TODO:
-		void OnMouseMove(UINT nFlags, CPoint point);	  				// ³B²z·Æ¹«ªº°Ê§@
-		void LoadAudio();								                // Åª¨ú©Ò»İªº­µ®ÄÀÉ
+		void OnMouseMove(UINT nFlags, CPoint point);	  				// è™•ç†æ»‘é¼ çš„å‹•ä½œ
+		void LoadAudio();								                // è®€å–æ‰€éœ€çš„éŸ³æ•ˆæª”
 		//
 
 	protected:
-		void OnShow();									// Åã¥Ü³o­Óª¬ºAªº¹CÀ¸µe­±
+		void OnShow();									// é¡¯ç¤ºé€™å€‹ç‹€æ…‹çš„éŠæˆ²ç•«é¢
 	private:
-		CMovingBitmap logo;								// «_ÀI¼Ò¦¡µe­±
-		CMovingBitmap	adventure_block;				// «_ÀI¼Ò¦¡ 
+		CMovingBitmap logo;								// å†’éšªæ¨¡å¼ç•«é¢
+		CMovingBitmap	adventure_block;				// å†’éšªæ¨¡å¼ 
 		// TODO:
 		// Selector menu;
-		// bool conditionA;								// ÀË¬d´å¼Ğ¬O§_¦³¸I¨ì¶}©l¹CÀ¸ªº«ö¶s
-		// bool conditionB;								// ÀË¬d´å¼Ğ¬O§_¦³¸I¨ì¶}©l¹CÀ¸ªº«ö¶s
-		// bool play_Audio;								// Àx¦s¬O§_¤w¸g¶}©l¼·©ñ­I´º­µ¼Öªºflag
-		// bool load_Audio;								// Àx¦s¬O§_¤w¸gÅª¨ú­µ®ÄÀÉªºflag
-		// CMovingBitmap	help;							// helpªº¹ÏÀÉ
+		// bool conditionA;								// æª¢æŸ¥æ¸¸æ¨™æ˜¯å¦æœ‰ç¢°åˆ°é–‹å§‹éŠæˆ²çš„æŒ‰éˆ•
+		// bool conditionB;								// æª¢æŸ¥æ¸¸æ¨™æ˜¯å¦æœ‰ç¢°åˆ°é–‹å§‹éŠæˆ²çš„æŒ‰éˆ•
+		// bool play_Audio;								// å„²å­˜æ˜¯å¦å·²ç¶“é–‹å§‹æ’¥æ”¾èƒŒæ™¯éŸ³æ¨‚çš„flag
+		// bool load_Audio;								// å„²å­˜æ˜¯å¦å·²ç¶“è®€å–éŸ³æ•ˆæª”çš„flag
+		// CMovingBitmap	help;							// helpçš„åœ–æª”
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªº¹CÀ¸°õ¦æª«¥ó¡A¥D­nªº¹CÀ¸µ{¦¡³£¦b³o¸Ì
-	// ¨C­ÓMember functionªºImplementation³£­n§ËÀ´
+	// é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²åŸ·è¡Œç‰©ä»¶ï¼Œä¸»è¦çš„éŠæˆ²ç¨‹å¼éƒ½åœ¨é€™è£¡
+	// æ¯å€‹Member functionçš„Implementationéƒ½è¦å¼„æ‡‚
 	/////////////////////////////////////////////////////////////////////////////
 
 
@@ -65,68 +66,67 @@ namespace game_framework {
 	public:
 		CGameStateRun(CGame *g);
 		~CGameStateRun();
-		void OnBeginState();							// ³]©w¨C¦¸­«ª±©Ò»İªºÅÜ¼Æ
-		void OnInit();  								// ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
+		void OnBeginState();							// è¨­å®šæ¯æ¬¡é‡ç©æ‰€éœ€çš„è®Šæ•¸
+		void OnInit();  								// éŠæˆ²çš„åˆå€¼åŠåœ–å½¢è¨­å®š
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
-		void OnLButtonDown(UINT nFlags, CPoint point);  // ³B²z·Æ¹«ªº°Ê§@
-		void OnLButtonUp(UINT nFlags, CPoint point);	// ³B²z·Æ¹«ªº°Ê§@
-		void OnMouseMove(UINT nFlags, CPoint point);	// ³B²z·Æ¹«ªº°Ê§@ 
-		void OnRButtonDown(UINT nFlags, CPoint point);  // ³B²z·Æ¹«ªº°Ê§@
-		void OnRButtonUp(UINT nFlags, CPoint point);	// ³B²z·Æ¹«ªº°Ê§@
+		void OnLButtonDown(UINT nFlags, CPoint point);  // è™•ç†æ»‘é¼ çš„å‹•ä½œ
+		void OnLButtonUp(UINT nFlags, CPoint point);	// è™•ç†æ»‘é¼ çš„å‹•ä½œ
+		void OnMouseMove(UINT nFlags, CPoint point);	// è™•ç†æ»‘é¼ çš„å‹•ä½œ 
+		void OnRButtonDown(UINT nFlags, CPoint point);  // è™•ç†æ»‘é¼ çš„å‹•ä½œ
+		void OnRButtonUp(UINT nFlags, CPoint point);	// è™•ç†æ»‘é¼ çš„å‹•ä½œ
 		void GameOver();
 	protected:
-		void OnMove();									// ²¾°Ê¹CÀ¸¤¸¯À
-		void OnShow();									// Åã¥Ü³o­Óª¬ºAªº¹CÀ¸µe­±
+		void OnMove();									// ç§»å‹•éŠæˆ²å…ƒç´ 
+		void OnShow();									// é¡¯ç¤ºé€™å€‹ç‹€æ…‹çš„éŠæˆ²ç•«é¢
 	private:
 		// finish
-		CMovingBitmap background;	// ­I´º¹Ï
-		CMovingBitmap zombiesone[5];	// íL«Í
+		CMovingBitmap background;	// èƒŒæ™¯åœ–
+		CMovingBitmap zombiesone[5];	// æ®­å±
 		CMovingBitmap sunback;
 		// TODO:
-		// Maps			        map;					            	  	// ­I´º¹Ï
-		Seed		      	    seed;					             	  	// µøµ¡¤W¤èºŞ²z¥d¤ùªºª«¥ó
-		Mouse		    	mouse;						            	// ¥Î¨ÓÅã¥Ü¥Ø«e¿ï¨úªºªF¦è
-		Shovel		    	shovel;						            	// Ãê¤l
-		LawnCleaner	     	LawnCleaner[5];			         	  		// °£¯ó¾÷
-		std::vector< shared_ptr<Zombies> >	monster;			    	      			// Àx¦s©Ò¦³íL«Íªºvector
+		// Maps			        map;					            	  	// èƒŒæ™¯åœ–
+		Seed		      	    seed;					             	  	// è¦–çª—ä¸Šæ–¹ç®¡ç†å¡ç‰‡çš„ç‰©ä»¶
+		Mouse		    	mouse;						            	// ç”¨ä¾†é¡¯ç¤ºç›®å‰é¸å–çš„æ±è¥¿
+		Shovel		    	shovel;						            	// éŸå­
+		LawnCleaner	     	LawnCleaner[5];			         	  		// é™¤è‰æ©Ÿ
+		std::vector< shared_ptr<Zombies> >	monster;			    	      			// å„²å­˜æ‰€æœ‰æ®­å±çš„vector
 
 		Plants PlantClass[5][9] ;
-		vector<Pea>		  	peas;						              	// Àx¦s©Ò¦³¨§¤lªºvector
-		vector<Sun>	  		suns;						              	// Àx¦s©Ò¦³¤Ó¶§ªºvector
-		bool		      	selected;						            // §PÂ_¥Ø«e¬O§_¦³¿ï¨úªF¦è
-		int			      	ChoosedCard;					          	// ¥Ø«e¿ï¨úªº¥d¤ù
-		int			      	ChoosedPlant;					          	// ¥Ø«e¿ï¨úªº´Óª«
-		int			      	SunCounter;						          	// ±qªÅ¤¤±¼¸¨¤Ó¶§ªº­p®É¾¹
-		int			      	PlantManager[5][9] = { 0 };	  				// Àx¦s³õ¤W´Óª«ªº¦ì¸m
+		vector<Pea>		  	peas;						              	// å„²å­˜æ‰€æœ‰è±†å­çš„vector
+		vector<Sun>	  		suns;						              	// å„²å­˜æ‰€æœ‰å¤ªé™½çš„vector
+		bool		      	selected;						            // åˆ¤æ–·ç›®å‰æ˜¯å¦æœ‰é¸å–æ±è¥¿
+		int			      	ChoosedCard;					          	// ç›®å‰é¸å–çš„å¡ç‰‡
+		int			      	ChoosedPlant;					          	// ç›®å‰é¸å–çš„æ¤ç‰©
+		int			      	SunCounter;						          	// å¾ç©ºä¸­æ‰è½å¤ªé™½çš„è¨ˆæ™‚å™¨
+		int			      	PlantManager[5][9] = { 0 };	  				// å„²å­˜å ´ä¸Šæ¤ç‰©çš„ä½ç½®
 		int flow;
-		int			      	ZombieCounter;				        		// ²£¥ÍíL«Íªº­p®É¾¹
-		int			      	wave;						                // ¥Ø«eªºªi¼Æ
-		//void		      		GameOver();			        	      		// Åı¹CÀ¸¶i¤JCGameStateOver
-		bool		      		isGameOver;				              		// ÀË¬d¹CÀ¸¨Ï§_µ²§ô
-		bool		      		awooga;					                	// ²Ä¤@§åíL«Í¥X²{®É¼·©ñ­µ¼Öªºflag
+		int			      	ZombieCounter;				        		// ç”¢ç”Ÿæ®­å±çš„è¨ˆæ™‚å™¨
+		int			      	wave;						                // ç›®å‰çš„æ³¢æ•¸
+		//bool		      		isGameOver;				              		// æª¢æŸ¥éŠæˆ²ä½¿å¦çµæŸ
+		bool		      		awooga;					                	// ç¬¬ä¸€æ‰¹æ®­å±å‡ºç¾æ™‚æ’¥æ”¾éŸ³æ¨‚çš„flag
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªºµ²§ôª¬ºA(Game Over)
-	// ¨C­ÓMember functionªºImplementation³£­n§ËÀ´
+	// é€™å€‹classç‚ºéŠæˆ²çš„çµæŸç‹€æ…‹(Game Over)
+	// æ¯å€‹Member functionçš„Implementationéƒ½è¦å¼„æ‡‚
 	/////////////////////////////////////////////////////////////////////////////
 
 	class CGameStateOver : public CGameState {
 	public:
 		CGameStateOver(CGame *g);
 
-		void OnBeginState();							// ³]©w¨C¦¸­«ª±©Ò»İªºÅÜ¼Æ
+		void OnBeginState();							// è¨­å®šæ¯æ¬¡é‡ç©æ‰€éœ€çš„è®Šæ•¸
 		void OnInit();
 		// TODO:
 		void LoadBitmap();
-		void LoadAudio();							  	// Åª¨ú©Ò»İªº­µ®ÄÀÉ
+		void LoadAudio();							  	// è®€å–æ‰€éœ€çš„éŸ³æ•ˆæª”
 	protected:
-		void OnMove();								  	// ²¾°Ê¹CÀ¸¤¸¯À
-		void OnShow();								  	// Åã¥Ü³o­Óª¬ºAªº¹CÀ¸µe­±
+		void OnMove();								  	// ç§»å‹•éŠæˆ²å…ƒç´ 
+		void OnShow();								  	// é¡¯ç¤ºé€™å€‹ç‹€æ…‹çš„éŠæˆ²ç•«é¢
 	private:
-		int counter;	                    // ­Ë¼Æ¤§­p¼Æ¾¹
-		CMovingBitmap ZombiesWon;					// ¹CÀ¸¥¢±Ñªºµe­±
-		CMovingBitmap ZombieNote;					// ¹CÀ¸³Ó§Qªºµe­±
+		int counter;	                    // å€’æ•¸ä¹‹è¨ˆæ•¸å™¨
+		CMovingBitmap ZombiesWon;					// éŠæˆ²å¤±æ•—çš„ç•«é¢
+		CMovingBitmap ZombieNote;					// éŠæˆ²å‹åˆ©çš„ç•«é¢
 	};
 }

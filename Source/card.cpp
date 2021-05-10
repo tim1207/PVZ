@@ -15,16 +15,15 @@ namespace game_framework
 	// 卡片的初始化
 	Card::Card(int a) {
 		ID = a;
-		availible = true;
-		// 設定卡片的等待時間和價錢
+		availible = true;							// 設定卡片的等待時間和價錢
 		switch (ID) {
 		case 1:delay = 33 * 5;	price = 50;	 break; // SunFlower
 		case 2:delay = 33 * 5;	price = 100; break; // PeaShoot
 		case 3:delay = 33 * 10;	price = 50;	 break; // WallNut
-		//case 4:delay = 33 * 30;	price = 50;	 break;
-		//case 5:delay = 33 * 30;	price = 150; break;
-		//case 6:delay = 33 * 5;	price = 175; break;
-		//case 7:delay = 33 * 5;	price = 200; break;
+		case 4:delay = 33 * 30;	price = 50;	 break; // Squash
+		case 5:delay = 33 * 30;	price = 150; break; //	Cherry boom
+		case 6:delay = 33 * 5;	price = 175; break; // Snow
+		case 7:delay = 33 * 5;	price = 200; break; // Repeater
 		}
 		counting = false;
 		counter = delay;
@@ -37,8 +36,6 @@ namespace game_framework
 	}
 	// 讀取卡片所需的所有圖片
 	void Card::LoadBitmap() {
-		//bmp.LoadBitmap("./RES/interface/SeedPacket_Larger.bmp");
-		//bmp2.LoadBitmap("./RES/interface/SeedPacketCantSelect.bmp",RGB(255,255,255));
 		LoadPlant();
 		LoadPrice();
 	}
@@ -54,24 +51,24 @@ namespace game_framework
 	}
 	void Card::LoadPlant() {
 		switch (ID) {
-		case 1:	plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\SunFlower.bmp", RGB(0, 0, 0));  	break;
+		case 1:	plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\SunFlower.bmp", RGB(0, 0, 0));   break;
 		case 2: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\Peashooter.bmp", RGB(0, 0, 0));  break;
-		case 3: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\WallNut.bmp", RGB(0, 0, 0));	    	break;
-			//case 4: plant.LoadBitmap("./RES/Plants/Squash/Squash_00.bmp", RGB(0, 0, 0));	      	break;
-			//case 5: plant.LoadBitmap("./RES/Plants/CherryBomb/CherryBomb_00.bmp", RGB(0, 0, 0));  break;
-			//case 6: plant.LoadBitmap("./RES/Plants/SnowPea/SnowPea_00.bmp", RGB(0, 0, 0));	    	break;
-			//case 7: plant.LoadBitmap("./RES/Plants/Repeater/Repeater_00.bmp", RGB(0, 0, 0));    	break;
+		case 3: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\WallNut.bmp", RGB(0, 0, 0));	   break;
+		case 4: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\Squash.bmp", RGB(0, 0, 0));	   break;
+		case 5: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\CherryBomb.bmp", RGB(0, 0, 0));  break;
+		case 6: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\SnowPea.bmp", RGB(0, 0, 0));	   break;
+		case 7: plant.LoadBitmap(".\\BMP_RES\\image\\interface\\menu\\handbook\\Card\\plants\\Repeater.bmp", RGB(0, 0, 0));    break;
 		}
 	}
 	int Card::GetPrice() {
 		return price;
 	}
-	int Card::GetWidth() {
-		return bmp.Width();
-	}
-	int Card::GetHeight() {
-		return bmp.Height();
-	}
+	// int Card::GetWidth() {
+	// 	return bmp.Width();
+	// }
+	// int Card::GetHeight() {
+	// 	return bmp.Height();
+	// }
 	int Card::GetX() {
 		return x;
 	}
@@ -115,13 +112,7 @@ namespace game_framework
 	}
 	void Card::OnShow() {
 		int modx = 0, mody = 0;
-		if (GetID() == 4) {
-			modx = -8;
-			mody = -75;
-		}
-		else if (GetID() == 5) {
-			modx = -11;
-		}
+
 		if (!CounterFinished()) {
 			//bmp.SetTopLeft(x, y);
 			//bmp.ShowBitmap(0.5);
