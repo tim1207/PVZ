@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -10,36 +10,36 @@ namespace game_framework {
 		x = 100;
 		move = false;
 	}
-	//­«³]°£¯ó¾÷ªº¦ì¸m
+	//é‡è¨­é™¤è‰æ©Ÿçš„ä½ç½®
 	void LawnCleaner::Reset() {
 		x = 100;
 		move = false;
 	}
-	//³]©w°£¯ó¾÷ªº¦ì¸m
+	//è¨­å®šé™¤è‰æ©Ÿçš„ä½ç½®
 	void LawnCleaner::SetY(int a) {
 		y = a * 98 + 80;
 	}
-	//¨ú±o°£¯ó¾÷ªº¦ì¸m
+	//å–å¾—é™¤è‰æ©Ÿçš„ä½ç½®
 	int LawnCleaner::GetX() {
 		return x;
 	}
-	//Åª¨ú°£¯ó¾÷ªº¹Ï¤ù
+	//è®€å–é™¤è‰æ©Ÿçš„åœ–ç‰‡
 	void LawnCleaner::LoadBitmap() {
 		bmp.LoadBitmap(".\\BMP_RES\\image\\interface\\LawnCleaner.bmp", RGB(0, 0, 0));
 	}
-	//²¾°Ê°£¯ó¾÷
+	//ç§»å‹•é™¤è‰æ©Ÿ
 	void LawnCleaner::OnMove() {
 		if (move == true) {
 			x += 10;
 		}
 	}
-	//Åã¥Ü°£¯ó¾÷
+	//é¡¯ç¤ºé™¤è‰æ©Ÿ
 	void LawnCleaner::OnShow() {
-		bmp.SetTopLeft(x, y);
+		bmp_LawnCleaner.SetTopLeft(x, y);
 		bmp.ShowBitmap();
 	}
-	//Åı°£¯ó¾÷°Ê°_¨Ó
+	//è®“é™¤è‰æ©Ÿå‹•èµ·ä¾†
 	void LawnCleaner::StartMove() {
-		move = true;
+		bmp_LawnCleaner = true;
 	}
 }

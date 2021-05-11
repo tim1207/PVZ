@@ -1,14 +1,14 @@
-#pragma once
+ï»¿#pragma once
 
 namespace game_framework {
 	class Maps {
 	public:
 		Maps();
-		void LoadBitmap();		// ¸ü¤J¹Ï§Î
-		void LoadBitmap(std::string path);		// ¸ü¤J¹Ï§Î
-		void OnShow(int, int);			  // ±N¹Ï§Î¶K¨ìµe­±
+		void LoadBitmap();						// è¼‰å…¥åœ–å½¢
+		void LoadBitmap(std::string path);		// è¼‰å…¥åœ–å½¢
+		void OnShow(int, int);			  		// å°‡åœ–å½¢è²¼åˆ°ç•«é¢
 	private:
-		int x, y;				      // ¹Ï§Î®y¼Ğ
+		int x, y;				      			// åœ–å½¢åº§æ¨™
 		CMovingBitmap bmp;
 	};
 }

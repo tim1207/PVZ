@@ -120,7 +120,6 @@ namespace game_framework {
 		ZombieNote.SetTopLeft(0, 0);
 	}
 
-	// is finished
 	void CGameStateOver::OnMove()
 	{
 		counter--;

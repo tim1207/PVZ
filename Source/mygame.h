@@ -17,9 +17,34 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	enum AUDIO_ID {				// 定義各種音效的編號
-		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
+		AUDIO_AWOOGA,
+		AUDIO_CHERRY_BOMB,
+		AUDIO_CHOMP_1,
+		AUDIO_CHOMP_2,
+		AUDIO_CHOMP_3,
+		AUDIO_EVIL_LAUGH,
+		AUDIO_FINALWAVE,
+		AUDIO_GROAN_1,
+		AUDIO_GROAN_2,
+		AUDIO_GROAN_3,
+		AUDIO_GROAN_4,
+		AUDIO_GROAN_5,
+		AUDIO_GROAN_6,
+		AUDIO_LAWN_MOWER,
+		AUDIO_LOSE_MUSIC,
+		AUDIO_MAIN_MUSIC,
+		AUDIO_MENU,
+		AUDIO_PLANT,
+		AUDIO_COLLECT_SUN,
+		AUDIO_CHOOSE_CARD,
+		AUDIO_HIT_BUCKET_1,
+		AUDIO_HIT_BUCKET_2,
+		AUDIO_SHOVEL,
+		AUDIO_SPLAT_1,
+		AUDIO_SPLAT_2,
+		AUDIO_SPLAT_3,
+		AUDIO_SHOOT,
+		AUDIO_WIN_MUSIC
 	};
 
 
@@ -32,13 +57,13 @@ namespace game_framework {
 	public:
 		CGameStateInit(CGame *g);
 		void OnInit();  								                // 遊戲的初值及圖形設定
-		void OnBeginState();							             	 // 設定每次重玩所需的變數
+		void OnBeginState();							             	// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				        		// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  				// 處理滑鼠的動作
 		//TODO:
 		void OnMouseMove(UINT nFlags, CPoint point);	  				// 處理滑鼠的動作
 		void LoadAudio();								                // 讀取所需的音效檔
-		//
+		
 
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -81,16 +106,16 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		// finish
-		CMovingBitmap background;	// 背景圖
-		CMovingBitmap zombiesone[5];	// 殭屍
+		CMovingBitmap background;		// 背景圖
+		CMovingBitmap zombiesone[5];	// 殭屍 右圖
 		CMovingBitmap sunback;
 		// TODO:
-		// Maps			        map;					            	  	// 背景圖
-		Seed		      	    seed;					             	  	// 視窗上方管理卡片的物件
+		// Maps			        map;					            	// 背景圖
+		Seed		      	    seed;					             	// 視窗上方管理卡片的物件
 		Mouse		    	mouse;						            	// 用來顯示目前選取的東西
 		Shovel		    	shovel;						            	// 鏟子
 		LawnCleaner	     	LawnCleaner[5];			         	  		// 除草機
-		std::vector< shared_ptr<Zombies> >	monster;			    	      			// 儲存所有殭屍的vector
+		std::vector< shared_ptr<Zombies> >	monster;			    	// 儲存所有殭屍的vector
 
 		Plants PlantClass[5][9] ;
 		vector<Pea>		  	peas;						              	// 儲存所有豆子的vector
@@ -103,8 +128,7 @@ namespace game_framework {
 		int flow;
 		int			      	ZombieCounter;				        		// 產生殭屍的計時器
 		int			      	wave;						                // 目前的波數
-		//bool		      		isGameOver;				              		// 檢查遊戲使否結束
-		bool		      		awooga;					                	// 第一批殭屍出現時撥放音樂的flag
+		bool		      		awooga;					                // 第一批殭屍出現時撥放音樂的flag
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -116,16 +140,16 @@ namespace game_framework {
 	public:
 		CGameStateOver(CGame *g);
 
-		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnBeginState();						// 設定每次重玩所需的變數
 		void OnInit();
 		// TODO:
 		void LoadBitmap();
-		void LoadAudio();							  	// 讀取所需的音效檔
+		void LoadAudio();							// 讀取所需的音效檔
 	protected:
-		void OnMove();								  	// 移動遊戲元素
-		void OnShow();								  	// 顯示這個狀態的遊戲畫面
+		void OnMove();								// 移動遊戲元素
+		void OnShow();								// 顯示這個狀態的遊戲畫面
 	private:
-		int counter;	                    // 倒數之計數器
+		int counter;	                    		// 倒數之計數器
 		CMovingBitmap ZombiesWon;					// 遊戲失敗的畫面
 		CMovingBitmap ZombieNote;					// 遊戲勝利的畫面
 	};

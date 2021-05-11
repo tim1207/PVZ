@@ -1,19 +1,19 @@
-#pragma once
+ï»¿#pragma once
 #pragma once
 namespace game_framework {
 	class LawnCleaner {
 	public:
 		LawnCleaner();
-		void SetY(int);       //³]©w°£¯ó¾÷ªº¦ì¸m
-		int GetX();           //¨ú±o°£¯ó¾÷ªº¦ì¸m
-		void OnMove();        //³B²z°£¯ó¾÷ªº²¾°Ê
-		void OnShow();        //Åã¥Ü°£¯ó¾÷
-		void LoadBitmap();    //Åª¨ú°£¯ó¾÷ªº¹Ï¤ù
-		void StartMove();     //Åı°£¯ó¾÷¶}©l²¾°Ê
-		void Reset();         //Åı°£¯ó¾÷¦^´_ªì©lª¬ºA
+		void SetY(int);       //è¨­å®šé™¤è‰æ©Ÿçš„ä½ç½®
+		int GetX();           //å–å¾—é™¤è‰æ©Ÿçš„ä½ç½®
+		void OnMove();        //è™•ç†é™¤è‰æ©Ÿçš„ç§»å‹•
+		void OnShow();        //é¡¯ç¤ºé™¤è‰æ©Ÿ
+		void LoadBitmap();    //è®€å–é™¤è‰æ©Ÿçš„åœ–ç‰‡
+		void StartMove();     //è®“é™¤è‰æ©Ÿé–‹å§‹ç§»å‹•
+		void Reset();         //è®“é™¤è‰æ©Ÿå›å¾©åˆå§‹ç‹€æ…‹
 	private:
 		int x, y;
-		bool move;            //Àx¦s°£¯ó¾÷¥Ø«eªºª¬ºA
-		CMovingBitmap	bmp;
+		bool move;            //å„²å­˜é™¤è‰æ©Ÿç›®å‰çš„ç‹€æ…‹
+		CMovingBitmap		bmp_LawnCleaner;
 	};
 }

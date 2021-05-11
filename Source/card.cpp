@@ -21,7 +21,7 @@ namespace game_framework
 		case 2:delay = 33 * 5;	price = 100; break; // PeaShoot
 		case 3:delay = 33 * 10;	price = 50;	 break; // WallNut
 		case 4:delay = 33 * 30;	price = 50;	 break; // Squash
-		case 5:delay = 33 * 30;	price = 150; break; //	Cherry boom
+		case 5:delay = 33 * 30;	price = 150; break; // Cherry boom
 		case 6:delay = 33 * 5;	price = 175; break; // Snow
 		case 7:delay = 33 * 5;	price = 200; break; // Repeater
 		}
@@ -114,25 +114,16 @@ namespace game_framework
 		int modx = 0, mody = 0;
 
 		if (!CounterFinished()) {
-			//bmp.SetTopLeft(x, y);
-			//bmp.ShowBitmap(0.5);
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
 			plant.ShowBitmap(1);
 			int y3 = int(y2);
-			//bmp2.SetTopLeft(x, y3);
-			//bmp2.ShowBitmap();
 		}
 		else if (!availible) {
-			//bmp.SetTopLeft(x, y);
-			//bmp.ShowBitmap(0.5);
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
 			plant.ShowBitmap(1);
-			//bmp2.SetTopLeft(x, y);
-			//bmp2.ShowBitmap();
 		}
 		else if (availible) {
-			//bmp.SetTopLeft(x, y);
-			//bmp.ShowBitmap(0.5);
+
 			plant.SetTopLeft(x + 8 + modx, y + 12 + mody);
 			plant.ShowBitmap(1);
 		}
