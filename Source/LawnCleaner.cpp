@@ -25,7 +25,7 @@ namespace game_framework {
 	}
 	//讀取除草機的圖片
 	void LawnCleaner::LoadBitmap() {
-		bmp.LoadBitmap(".\\BMP_RES\\image\\interface\\LawnCleaner.bmp", RGB(0, 0, 0));
+		bmp_LawnCleaner.LoadBitmap(".\\BMP_RES\\image\\interface\\LawnCleaner.bmp", RGB(0, 0, 0));
 	}
 	//移動除草機
 	void LawnCleaner::OnMove() {
@@ -36,10 +36,10 @@ namespace game_framework {
 	//顯示除草機
 	void LawnCleaner::OnShow() {
 		bmp_LawnCleaner.SetTopLeft(x, y);
-		bmp.ShowBitmap();
+		bmp_LawnCleaner.ShowBitmap();
 	}
 	//讓除草機動起來
 	void LawnCleaner::StartMove() {
-		bmp_LawnCleaner = true;
+		move = true;
 	}
 }

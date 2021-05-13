@@ -305,7 +305,7 @@ namespace game_framework {
 
 
 		ZombieCounter++;
-		if (wave < 1 && wave >= 0) {
+		if (wave < gamelevel*1 && wave >= 0) {
 			///每隔10秒產生1~3隻隨機種類的殭屍
 			if (ZombieCounter == 200) {
 				wave++;
@@ -322,23 +322,33 @@ namespace game_framework {
 				}
 			}
 		}
-		else if (wave == 1 && ZombieCounter >= 200) {
-			if (ZombieCounter == 450) {
-				//CAudio::Instance()->Play(AUDIO_FINALWAVE, false);
-			}
-			if (ZombieCounter >= 450 && ZombieCounter <= 500) {
-				if ((ZombieCounter - 450) % 10 == 0) {
-					for (int i = 0; i < 5; i++) {
-						//int id = (rand() % 3) + 1;
-						monster.push_back(make_shared<Zombies>(1, 3, 800));
-					}
-				}
-			}
-		}
+		// else if (wave == gamelevel*5 && ZombieCounter >= 200) {
+		// 	if (ZombieCounter == 450) {
+		// 		//CAudio::Instance()->Play(AUDIO_FINALWAVE, false);
+		// 	}
+		// 	if (ZombieCounter >= 450 && ZombieCounter <= 500) {
+		// 		if ((ZombieCounter - 450) % 10 == 0) {
+		// 			for (int i = 0; i < 1; i++) {
+		// 				//int id = (rand() % 3) + 1;
+		// 				monster.push_back(make_shared<Zombies>(1, 3, 800));
+		// 			}
+		// 		}
+		// 	}
+		// }
 		// TODO:
-		if (monster.size() >=1 && ZombieCounter > 200) {
-			YouWin = true;
-			isGameOver = true;
+		if(monster.size() ==gamelevel*1){
+			int checkwin=1;
+			for(auto &itz:monster){
+				if(itz->GetX()!=1000){
+					checkwin = 0;
+					break;
+				}
+				
+			}
+			if(checkwin==1){
+				YouWin = true;
+				isGameOver = true;
+			}
 		}
 
 		
@@ -352,7 +362,7 @@ namespace game_framework {
 			}
 			//尋找殭屍可攻擊的第一隻植物
 			int closest = 10;
-			for (int i = (itz->GetX() + 80) / 75; i >= 0; i--) {
+			for (int i = (itz->GetX() - 80) / 75; i >= 0; i--) {
 				if (PlantManager[itz->GetRow()][i] > 0) {
 					closest = i;
 					break;
@@ -455,8 +465,6 @@ namespace game_framework {
 			}
 			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++) {
 				itpea->OnMove();
-				//vector<Zombies>::auto itzz;
-				//vector< shared_ptr<Zombies> >::iterator itzz;
 				bool HitZombie = false;
 				int mi = 1000;
 				for (auto &itz : monster) {
@@ -579,9 +587,9 @@ namespace game_framework {
 				}
 			}
 			//處理選擇卡片的動作
-			if (point.x >= 0 && point.x <= 95 && point.y >= 50 && point.y <= 230 && GotSun == false) {
+			if (point.x >= 0 && point.x <= 95 && point.y >= 50 && point.y <= 470 && GotSun == false) {
 				ChoosedCard = (point.y - 50) / 60;
-				if(ChoosedCard<=gamelevel+1){
+				if(ChoosedCard < gamelevel+6){
 					ChoosedPlant = seed.GetCardID(ChoosedCard);
 					if (seed.isCardAvailible(ChoosedCard)) {
 						//CAudio::Instance()->Play(AUDIO_CHOOSE_CARD, false);
