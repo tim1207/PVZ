@@ -106,7 +106,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		// finish
-		CMovingBitmap background[4];		// 背景圖
+		CMovingBitmap background[11];		// 背景圖
 		CMovingBitmap zombiesone[5];	// 殭屍 右圖
 		CMovingBitmap sunback;
 		// TODO:

@@ -31,6 +31,7 @@ namespace game_framework {
 		anime.SetDelayCount(3);
 		anime2.SetDelayCount(3);
 		anime3.SetDelayCount(3);
+		Boom.SetDelayCount(1);
 		Action = false;
 		CounterOn = false;
 		TargetX = 1000;

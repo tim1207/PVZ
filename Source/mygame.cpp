@@ -182,7 +182,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		background[0].SetTopLeft(-500, 0);    				// 設定背景的起始座標
+		background[gamelevel-1].SetTopLeft(-500, 0);    				// 設定背景的起始座標
 		//help.SetTopLeft(0, SIZE_Y - help.Height());   // 設定說明圖的起始座標
 
 		sunback.SetTopLeft(-400, 10);
@@ -247,7 +247,14 @@ namespace game_framework {
 			background[0].LoadBitmap(Background1row);     // 載入背景的圖形
 			background[1].LoadBitmap("BMP_RES\\image\\interface\\background1unsodded2.bmp");
 			background[2].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
-			background[3].LoadBitmap("BMP_RES\\image\\interface\\night1.bmp");
+			background[3].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[4].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[5].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[6].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[7].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[8].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[9].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[10].LoadBitmap("BMP_RES\\image\\interface\\night1.bmp");
 
 			
 			int temp[] = {1,2,3,4,5,6,7};
@@ -280,10 +287,10 @@ namespace game_framework {
 	void CGameStateRun::OnMove()       // 移動遊戲元素
 	{
 		//  開始的移動畫面
-		for(int i=0;i<3;i++){
-			if (background[i].Left() < -80)
-			background[i].SetTopLeft(background[0].Left() + 10, 0);
-		}
+
+		if (background[gamelevel-1].Left() < -80)
+			background[gamelevel-1].SetTopLeft(background[gamelevel-1].Left() + 10, 0);
+
 		
 		// TODO:
 		// if (background.Left() >= -80){
@@ -767,14 +774,9 @@ namespace game_framework {
 		//
 		//
 		//
-		if(gamelevel==1)
-			background[0].ShowBitmap();   // 貼上背景圖
-		if(gamelevel==2)
-			background[1].ShowBitmap();   // 貼上背景圖
-		if(gamelevel>=3)
-			background[2].ShowBitmap();   // 貼上背景圖
-		if(wave == gamelevel*1)
-			background[3].ShowBitmap();
+		background[gamelevel-1].ShowBitmap();   // 貼上背景圖
+		if(wave == gamelevel*1 && gamelevel>=3)// 第三關後才有黑夜
+			background[10].ShowBitmap();
 
 		seed.OnShow(gamelevel+1);
 		
