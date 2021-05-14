@@ -112,7 +112,7 @@ namespace game_framework {
 	}
 	//讀取結果的圖檔
 	void CGameStateOver::LoadBitmap() {
-		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon.bmp");
+		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon1.bmp");
 
 		ZombiesWon.SetTopLeft(0, 0);
 		ZombieNote.LoadBitmap(".\\BMP_RES\\image\\interface\\trophy.bmp");
@@ -182,7 +182,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		background.SetTopLeft(-500, 0);    				// 設定背景的起始座標
+		background[0].SetTopLeft(-500, 0);    				// 設定背景的起始座標
 		//help.SetTopLeft(0, SIZE_Y - help.Height());   // 設定說明圖的起始座標
 
 		sunback.SetTopLeft(-400, 10);
@@ -244,7 +244,12 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		if(gamelevel==1){
-			background.LoadBitmap(Background1row);     // 載入背景的圖形
+			background[0].LoadBitmap(Background1row);     // 載入背景的圖形
+			background[1].LoadBitmap("BMP_RES\\image\\interface\\background1unsodded2.bmp");
+			background[2].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
+			background[3].LoadBitmap("BMP_RES\\image\\interface\\night1.bmp");
+
+			
 			int temp[] = {1,2,3,4,5,6,7};
 			seed.Load(7, temp);
 
@@ -275,8 +280,11 @@ namespace game_framework {
 	void CGameStateRun::OnMove()       // 移動遊戲元素
 	{
 		//  開始的移動畫面
-		if (background.Left() < -80)
-			background.SetTopLeft(background.Left() + 10, 0);
+		for(int i=0;i<3;i++){
+			if (background[i].Left() < -80)
+			background[i].SetTopLeft(background[0].Left() + 10, 0);
+		}
+		
 		// TODO:
 		// if (background.Left() >= -80){
 		// 	for (int i = 0; i < 5; i++) {
@@ -467,19 +475,18 @@ namespace game_framework {
 				//處理ID 4 的動作	
 
 				if (PlantClass[i][j].GetID() == 4) {
-					//f (PlantClass[i][j].WhichAction() == 2) {
-						for (auto &itz : monster) {
-							if (itz->GetRow() == PlantClass[i][j].GetRow() && (itz->GetX()-80)/75 == j || (itz->GetX()-80)/75 == j+1){
-								PlantClass[i][j].StartAction();
+					for (auto &itz : monster) {
+						if (itz->GetRow() == PlantClass[i][j].GetRow() && (itz->GetX()-80)/75 == j || (itz->GetX()-80)/75 == j+1){
+							PlantClass[i][j].StartAction();
 
-								if (PlantClass[i][j].WhichAction() == 3){
-									PlantClass[i][j]= Plants(0,i,j);
-									itz->GoToDie();     
-								}                               //如果葫蘆的攻擊動畫結束，在葫蘆下面的殭屍立刻死亡									
-							}
+							if (PlantClass[i][j].isFinished()){
+								
+								itz->GoToDie();     
+							}                               									
 						}
-					//}
-					
+					}
+					if (PlantClass[i][j].WhichAction() == 3)
+						PlantClass[i][j]= Plants(0,i,j);
 				}	
 
 				// 	
@@ -760,8 +767,14 @@ namespace game_framework {
 		//
 		//
 		//
-
-		background.ShowBitmap();   // 貼上背景圖
+		if(gamelevel==1)
+			background[0].ShowBitmap();   // 貼上背景圖
+		if(gamelevel==2)
+			background[1].ShowBitmap();   // 貼上背景圖
+		if(gamelevel>=3)
+			background[2].ShowBitmap();   // 貼上背景圖
+		if(wave == gamelevel*1)
+			background[3].ShowBitmap();
 
 		seed.OnShow(gamelevel+1);
 		

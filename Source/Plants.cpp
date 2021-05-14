@@ -266,10 +266,12 @@ namespace game_framework {
 		if (ID == 4) {
 			if (WhichAction() == 1) {
 				anime.SetTopLeft(x, y);
+				anime.OnMove();
 				anime.OnShow();
 			}
 			else if (WhichAction() == 2) {
 				anime2.SetTopLeft(x+velocity, y);
+				anime2.OnMove();
 				anime2.OnShow();
 			}
 		}
