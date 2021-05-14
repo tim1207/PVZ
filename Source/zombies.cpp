@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -11,7 +11,7 @@
 namespace game_framework {
 	Zombies::Zombies() {
 	}
-	// íL«Íªºªì©l¤Æ
+	// æ®­å±çš„åˆå§‹åŒ–
 	Zombies::Zombies(int a, int b, int c) :status(1) {
 		ID = a;
 		x = c;
@@ -36,15 +36,15 @@ namespace game_framework {
 		GiveLife();
 		LoadBitmap(a);
 	}
-	//	³]©wíL«ÍªººØÃş
+	//	è¨­å®šæ®­å±çš„ç¨®é¡
 	void Zombies::SetID(int a) {
 		ID = a;
 	}
-	//	¦^¶ÇíL«ÍªººØÃş
+	//	å›å‚³æ®­å±çš„ç¨®é¡
 	int Zombies::GetID() {
 		return ID;
 	}
-	//	³]©wíL«Íªº¥Í©R
+	//	è¨­å®šæ®­å±çš„ç”Ÿå‘½
 	void Zombies::GiveLife() {
 		switch (ID) {
 		case 1:life = 50; break;
@@ -53,33 +53,34 @@ namespace game_framework {
 		default:	        break;
 		}
 	}
-	//	¦^¶Ç¥Ø«e³Ñ¤Uªº¥Í©R
+	//	å›å‚³ç›®å‰å‰©ä¸‹çš„ç”Ÿå‘½
 	int Zombies::GetLife() {
 		return life;
 	}
-	//	¦^¶Ç¬O§_¤w¸g¦º¤`
+	//	å›å‚³æ˜¯å¦å·²ç¶“æ­»äº¡
 	bool Zombies::isAlive() {
 		if (GetLife() > 0)	return true;
 		return false;
 	}
-	//	ÅıíL«ÍÀş¶¡¦º¤`
+	//	è®“æ®­å±ç¬é–“æ­»äº¡
 	void Zombies::GoToDie() {
 		life = 0;
+		x=1000;
 	}
-	//	ÅıíL«Í³Q¬µ¦º
+	//	è®“æ®­å±è¢«ç‚¸æ­»
 	void Zombies::BoomToDie() {
 		Boom = true;
 		life = 0;
 	}
-	// ³]©wíL«Íªºª¬ºA
+	// è¨­å®šæ®­å±çš„ç‹€æ…‹
 	void Zombies::SetStatus(int now) {
 		status = now;
 	}
-	//	¦^¶Ç¥Ø«eªºª¬ºA
+	//	å›å‚³ç›®å‰çš„ç‹€æ…‹
 	int Zombies::GetStatus() {
 		return status;
 	}
-	//	®Ú¾ÚíL«ÍªººØÃş¨M©w¹Ï¤ùªº¼Æ¶q
+	//	æ ¹æ“šæ®­å±çš„ç¨®é¡æ±ºå®šåœ–ç‰‡çš„æ•¸é‡
 	void Zombies::SetFrames()
 	{
 		switch (ID) {
@@ -89,7 +90,7 @@ namespace game_framework {
 		default:	                                      break;
 		}
 	}
-	//	Åª¨ú©Ò»İªº¹ÏÀÉ
+	//	è®€å–æ‰€éœ€çš„åœ–æª”
 	void Zombies::LoadBitmap(int ID) {
 		SetStatus(1);
 		SetFrames();
@@ -128,7 +129,7 @@ namespace game_framework {
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
-		// ¥i¯à¨S¦³ÀYÄ~Äò¨«
+		// å¯èƒ½æ²’æœ‰é ­ç¹¼çºŒèµ°
 		for (int i = 0; i <= 11; i++) {
 			char FILENAME[100];
 			sprintf(FILENAME, "%s%d.bmp" ,".\\BMP_RES\\image\\zombies\\Normal Zombie\\Head_",i);
@@ -142,7 +143,7 @@ namespace game_framework {
 		}
 			
 	}
-		//	²£¥Í¹ÏÀÉ¸ô®|
+		//	ç”¢ç”Ÿåœ–æª”è·¯å¾‘
 	string Zombies::GetPath() {
 		stringstream ss;
 		switch (ID) {
@@ -153,16 +154,16 @@ namespace game_framework {
 		}
 		return ss.str();
 	}
-	//	¦^¶ÇíL«Í©Ò¦bªº¦C¼Æ
+	//	å›å‚³æ®­å±æ‰€åœ¨çš„åˆ—æ•¸
 	int Zombies::GetRow()
 	{
 		return row;
 	}
-	//	¦^¶ÇX®y¼Ğ
+	//	å›å‚³Xåº§æ¨™
 	int Zombies::GetX() {
 		return x;
 	}
-	//	ÀË¬díL«Í¬O§_­n§ğÀ»
+	//	æª¢æŸ¥æ®­å±æ˜¯å¦è¦æ”»æ“Š
 	bool Zombies::Attack() {
 		if (AttackCounter == AttackClock) {
 			AttackCounter = 0;
@@ -170,18 +171,18 @@ namespace game_framework {
 		}
 		return false;
 	}
-	//	ÅıíL«Í¥[³t(±K§Ş¥Î)
+	//	è®“æ®­å±åŠ é€Ÿ(å¯†æŠ€ç”¨)
 	void Zombies::Faster() {
 		velocity++;
 	}
-	// ÅıíL«Í¦V«e²¾°Ê
+	// è®“æ®­å±å‘å‰ç§»å‹•
 	void Zombies::MoveX() {
 		if (SnowCounter == 0) {
 			x -= 5;
 			// x-=1;
 		}
 		else if (SnowCounter != 0) {
-			//	¦pªGíL«Í³B©ó§N­áª¬ºA«h²¾°Ê³t«×´î¥b
+			//	å¦‚æœæ®­å±è™•æ–¼å†·å‡ç‹€æ…‹å‰‡ç§»å‹•é€Ÿåº¦æ¸›åŠ
 			SnowCounter--;
 			if (LastMove == 0) {
 				x -= velocity;
@@ -192,10 +193,7 @@ namespace game_framework {
 			}
 		}
 	}
-	void Zombies::Die() {
-		x = 1000;
-	}
-	//	³B²zíL«Íªº°Ê§@
+	//	è™•ç†æ®­å±çš„å‹•ä½œ
 	void Zombies::OnMove() {
 		
 		if (SnowCounter == 1) {
@@ -220,7 +218,7 @@ namespace game_framework {
 		}
 		
 	}
-	// ³B²zíL«Íªº°Êµe
+	// è™•ç†æ®­å±çš„å‹•ç•«
 	void Zombies::OnShow() {
 		
 		if (isAlive() == false) {
@@ -273,7 +271,7 @@ namespace game_framework {
 			//}
 		}
 	}
-	//	²£¥Í¹ÏÀÉ¸ô®|
+	//	ç”¢ç”Ÿåœ–æª”è·¯å¾‘
 	
 	string Zombies::GetPathWithStatus() {
 		
@@ -283,11 +281,11 @@ namespace game_framework {
 	}
 	
 
-	//	³]©wíL«Í¶i¤J§N­áª¬ºA
+	//	è¨­å®šæ®­å±é€²å…¥å†·å‡ç‹€æ…‹
 	void Zombies::SetSnowCounter() {
 		SnowCounter = 150;
 	}
-	//	íL«Í³QÀ»¤¤
+	//	æ®­å±è¢«æ“Šä¸­
 	void Zombies::Hitted(int type)
 	{
 		life--;
@@ -300,7 +298,7 @@ namespace game_framework {
 			NormalWalking.SetDelayCount(10);
 		}
 	}
-	//	ÀË¬d¦º¤`ªº°Êµe¬O§_¤w¸gµ²§ô
+	//	æª¢æŸ¥æ­»äº¡çš„å‹•ç•«æ˜¯å¦å·²ç¶“çµæŸ
 	bool Zombies::isFinished() {
 		//if (DieFinished == true && HeadFinished == true || BoomFinished == true) {
 		if (DieFinished == true && HeadFinished == true || BoomFinished == true) {

@@ -1,29 +1,29 @@
-#pragma once
+ï»¿#pragma once
 namespace game_framework {
 	class Sun {
 	public:
 		Sun();
-		Sun(int, int, bool);		        // ¤Ó¶§ªºªì©l¤Æ
-		void LoadBitmap();		        // Åª¨ú©Ò»İ¹ÏÀÉ
-		void OnMove();			          // ³B²z¤Ó¶§ªº²¾°Ê
-		void MoveAnime();		          // ³B²z¤Ó¶§ªº°Êµe
-		void OnShow();			          // Åã¥Ü¦bµe­±¤¤
-		void drop();			            // Åı¤Ó¶§±qªÅ¤¤±¼¤U¨Ó
-		void fly();				            // Åı¤Ó¶§¥H©ßª«½uªº¤è¦¡²¾°Ê
-		int GetX();				            // ¦^¶ÇX®y¼Ğ
-		int GetY();				            // ¦^¶ÇY®y¼Ğ
-		int GetHeight();		          // ¦^¶Ç¹Ïªº°ª«×
-		int GetWidth();			          // ¦^¶Ç¹Ïªº¼e«×
-		void PickUp();			          // Åı¤Ó¶§³Q¾ß°_
-		bool isFinished();		        // ÀË¬d²¾°Ê¬O§_¤wµ²§ô
+		Sun(int, int, bool);		    // å¤ªé™½çš„åˆå§‹åŒ–
+		void LoadBitmap();		        // è®€å–æ‰€éœ€åœ–æª”
+		void OnMove();			        // è™•ç†å¤ªé™½çš„ç§»å‹•
+		void MoveAnime();		        // è™•ç†å¤ªé™½çš„å‹•ç•«
+		void OnShow();			        // é¡¯ç¤ºåœ¨ç•«é¢ä¸­
+		void drop();			        // è®“å¤ªé™½å¾ç©ºä¸­æ‰ä¸‹ä¾†
+		void fly();				        // è®“å¤ªé™½ä»¥æ‹‹ç‰©ç·šçš„æ–¹å¼ç§»å‹•
+		int GetX();				        // å›å‚³Xåº§æ¨™
+		int GetY();				        // å›å‚³Yåº§æ¨™
+		int GetHeight();		        // å›å‚³åœ–çš„é«˜åº¦
+		int GetWidth();			        // å›å‚³åœ–çš„å¯¬åº¦
+		void PickUp();			        // è®“å¤ªé™½è¢«æ’¿èµ·
+		bool isFinished();		        // æª¢æŸ¥ç§»å‹•æ˜¯å¦å·²çµæŸ
 	private:
-		int x, y;				              // X, Y®y¼Ğ
-		int desy;				              // ¤Ó¶§³Ì²×ªºY®y¼Ğ
-		int vx, vy;				            // X¤è¦Vªº³t«×©MY¤è¦Vªº³t«×
-		bool picked;			            // ¬O§_¤w³Q¿ï¨ú
-		int MoveCounter;		          // ²¾°Êªº­p®É¾¹
-		int stepX, stepY;		          // ²¾°Ê¹Lµ{¤¤¨C¤@¦¸²¾°Êªº¶ZÂ÷
-		bool finished;			          // ²¾°Ê¬O§_¤wµ²§ô
-		bool CallFromSunFlower;	      // ¬O§_¬O±q¦V¤é¸ª¤¤²£¥Í
+		int x, y;				        // X, Yåº§æ¨™
+		int desy;				        // å¤ªé™½æœ€çµ‚çš„Yåº§æ¨™
+		int vx, vy;				        // Xæ–¹å‘çš„é€Ÿåº¦å’ŒYæ–¹å‘çš„é€Ÿåº¦
+		bool picked;			        // æ˜¯å¦å·²è¢«é¸å–
+		int MoveCounter;		        // ç§»å‹•çš„è¨ˆæ™‚å™¨
+		int stepX, stepY;		        // ç§»å‹•éç¨‹ä¸­æ¯ä¸€æ¬¡ç§»å‹•çš„è·é›¢
+		bool finished;			        // ç§»å‹•æ˜¯å¦å·²çµæŸ
+		bool CallFromSunFlower;	      	// æ˜¯å¦æ˜¯å¾å‘æ—¥è‘µä¸­ç”¢ç”Ÿ
 	};
 }

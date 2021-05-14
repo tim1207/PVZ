@@ -167,7 +167,11 @@ namespace game_framework {
 			SetID(4);
 		}
 		else if (ID == 5) {
-			Boom.LoadBitmap(".\\BMP_RES\\image\\plants\\CherryBomb\\ExplosionCloud.bmp", (0, 0, 0));
+			for (int i = 0; i <= 12; i++) {
+				char FILENAME[100];
+				sprintf(FILENAME, "%s%d.bmp", ".\\BMP_RES\\image\\plants\\CherryBomb\\Boom",i);
+				Boom.AddBitmap(FILENAME, RGB(0, 0, 0));
+			}
 		}
 		
 	}
@@ -215,21 +219,31 @@ namespace game_framework {
 		else if (ID == 5 && status == 2) {
 			anime2Counter++;
 		}
-		if (ID == 4 && TargetX != 1000) {
-			if (MovingCounter != 10) {
-				x = x + velocity;
-				y -= 15;
-				MovingCounter++;
-			}
-			else {
-				y += 160;
-				StartAction();
-				TargetX = 1000;
-			}
+		// if (ID == 4 && anime.IsFinalBitmap() == true) {
+		// 	StartAction();
+		// }
+		if (ID == 4 && anime2.IsFinalBitmap() == true) {
+			status=3;
 		}
+		// if (ID == 4 && TargetX != 1000) {
+		// 	if (MovingCounter != 10) {
+		// 		x = x + velocity;
+		// 		y -= 15;
+		// 		MovingCounter++;
+		// 	}
+		// 	else {
+		// 		y += 160;
+		// 		StartAction();
+		// 		TargetX = 1000;
+		// 	}
+		// }
 		if (ID == 5 && anime.IsFinalBitmap() == true) {
 			StartAction();
 		}
+		if (ID == 5 && Boom.IsFinalBitmap() == true) {
+			status=3;
+		}
+		
 		if (CounterOn == true) {
 			Counter++;
 			if (Counter % ActionCounter == 0) {
@@ -255,7 +269,7 @@ namespace game_framework {
 				anime.OnShow();
 			}
 			else if (WhichAction() == 2) {
-				anime2.SetTopLeft(x, y);
+				anime2.SetTopLeft(x+velocity, y);
 				anime2.OnShow();
 			}
 		}
@@ -276,8 +290,10 @@ namespace game_framework {
 			}
 		}
 		else if (ID == 5 && anime2Counter != 5 && status == 2) {
-			Boom.SetTopLeft(x-10*anime2Counter, y-10*anime2Counter);
-			Boom.ShowBitmap(anime2Counter*0.3+1);
+			Boom.SetTopLeft(x-40, y-40);
+			Boom.OnMove();
+			Boom.OnShow();
+
 		}
 		else {
 			anime.SetTopLeft(x, y);
@@ -298,8 +314,8 @@ namespace game_framework {
 		case 4: ss << ".\\BMP_RES\\image\\plants\\Squash\\Squash_";			    break;
 		case 41:ss << ".\\BMP_RES\\image\\plants\\Squash\\SquashAttack_";	  	break;
 		case 5: ss << ".\\BMP_RES\\image\\plants\\CherryBomb\\CherryBomb_";  	break;
-		case 6: ss << ".\\BMP_RES\\image\\plants\\SnowPea_";			    	break;
-		case 7: ss << ".\\BMP_RES\\image\\plants\\Repeater_";	    			break;
+		case 6: ss << ".\\BMP_RES\\image\\plants\\SnowPea\\SnowPea_";			    	break;
+		case 7: ss << ".\\BMP_RES\\image\\plants\\Repeater\\Repeater_";	    			break;
 		default:ss << "";                                           			break;
 		}
 		return ss.str();

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -7,12 +7,12 @@
 #include "Sun.h"
 #include <ctime>
 #include <cstdlib>
-bool LoadSunAlready = false;	              // ¤Ó¶§¹ÏÀÉ¬O§_¤w¸gÅª¨ú
+bool LoadSunAlready = false;	              // å¤ªé™½åœ–æª”æ˜¯å¦å·²ç¶“è®€å–
 namespace game_framework {
 	CAnimation	anime;
 	Sun::Sun() {
 	}
-	Sun::Sun(int a, int b, bool c) {             // a¬OX®y¼Ğ, b¬OY®y¼Ğ ,c¥Nªí«ç»ò³Q²£¥Íªº
+	Sun::Sun(int a, int b, bool c) {          // aæ˜¯Xåº§æ¨™, bæ˜¯Yåº§æ¨™ ,cä»£è¡¨æ€éº¼è¢«ç”¢ç”Ÿçš„
 		x = a;
 		y = (c ? b : -100);
 		desy = b;
@@ -20,62 +20,62 @@ namespace game_framework {
 		MoveCounter = 0;
 		finished = false;
 		CallFromSunFlower = c;
-		if (c) {					                      //	¦pªG¬O±q¦V¤é¸ª²£¥Íªº«h¥H©ßª«½uªº¤è¦¡¥X²{
+		if (c) {					                      //å¦‚æœæ˜¯å¾å‘æ—¥è‘µç”¢ç”Ÿçš„å‰‡ä»¥æ‹‹ç‰©ç·šçš„æ–¹å¼å‡ºç¾
 			srand((unsigned)time(NULL));
 			vy = -8;
 			vx = (rand() % 5) - 2;
 		}
-		if (LoadSunAlready == false) {	        //	¦pªG¤w¸gÅª¨ú¹L¹ÏÀÉ«h¤£¥ÎÅª¨ú
+		if (LoadSunAlready == false) {	        //	å¦‚æœå·²ç¶“è®€å–éåœ–æª”å‰‡ä¸ç”¨è®€å–
 			LoadBitmap();
 			LoadSunAlready = true;
 		}
 	}
-	void Sun::LoadBitmap() {			            // Åª¨ú¹ÏÀÉ
+	void Sun::LoadBitmap() {			            // è®€å–åœ–æª”
 		for (int i = 0; i <= 21; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "BMP_RES/image/interface/Sun.bmp");
-			anime.AddBitmap(FILENAME, RGB(255, 255, 255));
+			sprintf(FILENAME,"%s%d.bmp", "BMP_RES/image/Sun/Sun_",i);
+			anime.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		anime.SetDelayCount(2);
 	}
-	int Sun::GetX() {					                // ¦^¶ÇX®y¼Ğ
+	int Sun::GetX() {					                // å›å‚³Xåº§æ¨™
 		return x;
 	}
-	int Sun::GetY() {					                // ¦^¶ÇY®y¼Ğ
+	int Sun::GetY() {					                // å›å‚³Yåº§æ¨™
 		return y;
 	}
-	int Sun::GetHeight() {				            // ¦^¶Ç¹Ïªº°ª«×
+	int Sun::GetHeight() {				            // å›å‚³åœ–çš„é«˜åº¦
 		return anime.Height();
 	}
-	int Sun::GetWidth() {				              // ¦^¶Ç¹Ïªº¼e«×
+	int Sun::GetWidth() {				              // å›å‚³åœ–çš„å¯¬åº¦
 		return anime.Width();
 	}
 
-	void Sun::PickUp() {				              // ³]©w¤Ó¶§³Q¾ß°_«áªº²¾°Ê
+	void Sun::PickUp() {				              // è¨­å®šå¤ªé™½è¢«æ’¿èµ·å¾Œçš„ç§»å‹•
 		picked = true;
 		stepX = (x - 25) / 20;
 		stepY = (y - 25) / 20;
 
 	}
-	bool Sun::isFinished() {			            // ÀË¬d²¾°Ê¬O§_µ²§ô
+	bool Sun::isFinished() {			            // æª¢æŸ¥ç§»å‹•æ˜¯å¦çµæŸ
 		return finished;
 	}
-	void Sun::drop() {					              // Åı¤Ó¶§±qªÅ¤¤¸¨¤U
+	void Sun::drop() {					              // è®“å¤ªé™½å¾ç©ºä¸­è½ä¸‹
 		if (y <= desy) {
 			y += 2;
 		}
 	}
-	void Sun::fly() {					                // Åı¤Ó¶§¥H©ßª«½u­¸¥X¨Ó
+	void Sun::fly() {					                // è®“å¤ªé™½ä»¥æ‹‹ç‰©ç·šé£›å‡ºä¾†
 		if (y <= desy) {
 			y += vy;
 			vy++;
 			x += vx;
 		}
 	}
-	void Sun::MoveAnime() {				            // ³B²z¤Ó¶§ªº°Êµe
+	void Sun::MoveAnime() {				            // è™•ç†å¤ªé™½çš„å‹•ç•«
 		anime.OnMove();
 	}
-	void Sun::OnMove() {				              // ³B²z¤Ó¶§ªº²¾°Ê
+	void Sun::OnMove() {				              // è™•ç†å¤ªé™½çš„ç§»å‹•
 		if (picked == false && CallFromSunFlower == false) {
 			drop();
 		}
@@ -91,7 +91,7 @@ namespace game_framework {
 			finished = true;
 		}
 	}
-	void Sun::OnShow() {				              //	Åı¤Ó¶§Åã¥Ü¦bµe­±¤¤
+	void Sun::OnShow() {				              //	è®“å¤ªé™½é¡¯ç¤ºåœ¨ç•«é¢ä¸­
 		anime.SetTopLeft(x, y);
 		anime.OnShow();
 	}

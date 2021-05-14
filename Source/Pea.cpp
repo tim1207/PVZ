@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -7,7 +7,7 @@
 #include "Plants.h"
 #include "zombies.h"
 #include "Pea.h"
-bool LoadPeaAlready = false; //ÀË¬d¬O§_¤w¸gÅª¨ú¹L¹ÏÀÉ
+bool LoadPeaAlready = false; 
 namespace game_framework {
 	CMovingBitmap	anime;
 	CMovingBitmap	snow;
@@ -29,7 +29,7 @@ namespace game_framework {
 	}
 	void Pea::LoadBitmap() {
 		anime.LoadBitmap(".\\BMP_RES\\image\\plants\\PeaBullet.bmp",RGB(0,0,0));
-		//snow.LoadBitmap(".\\RES\\Plants\\PeaBullet\\SnowPeaBullet.bmp", RGB(0, 0, 0));
+		snow.LoadBitmap(".\\BMP_RES\\image\\plants\\SnowPeaBullet.bmp", RGB(0, 0, 0));
 		hit.LoadBitmap(".\\BMP_RES\\image\\plants\\PeaBulletHit.bmp",RGB(0,0,0));
 	}
 	void Pea::OnMove() {

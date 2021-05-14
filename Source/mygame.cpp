@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -14,7 +14,7 @@ namespace game_framework {
 	int gamelevel=1;
 	bool isGameOver;
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªº¹CÀ¸¶}ÀYµe­±ª«¥ó
+	// é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²é–‹é ­ç•«é¢ç‰©ä»¶
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateInit::CGameStateInit(CGame *g)
@@ -22,7 +22,7 @@ namespace game_framework {
 	{
 	}
 
-	//Åª¨ú­µ®ÄÀÉ
+	//è®€å–éŸ³æ•ˆæª”
 	void CGameStateInit::LoadAudio() {
 
 	}
@@ -31,18 +31,18 @@ namespace game_framework {
 	void CGameStateInit::OnInit()
 	{
 		//
-		// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
-		//     µ¥ªº¤£­@·Ğ¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+		// ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…ç©éŠæˆ²çš„äºº
+		//     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
 		//
-		ShowInitProgress(0); // ¤@¶}©lªºloading¶i«×¬°0%
+		ShowInitProgress(0); // ä¸€é–‹å§‹çš„loadingé€²åº¦ç‚º0%
 		//
-		// ¶}©l¸ü¤J¸ê®Æ
+		// é–‹å§‹è¼‰å…¥è³‡æ–™
 		//
 		logo.LoadBitmap(Background);
 		adventure_block.LoadBitmap(Adventure, RGB(255, 255, 255));
-		//Sleep(300);    // ©ñºC¡A¥H«K¬İ²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ğ§R°£¦¹Sleep
+		//Sleep(300);    // æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
 		//
-		// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterRun::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+		// æ­¤OnInitå‹•ä½œæœƒæ¥åˆ°CGameStaterRun::OnInit()ï¼Œæ‰€ä»¥é€²åº¦é‚„æ²’åˆ°100%
 		//
 	}
 
@@ -56,20 +56,20 @@ namespace game_framework {
 		const char KEY_ESC = 27;
 		const char KEY_SPACE = ' ';
 		if (nChar == KEY_SPACE)
-			GotoGameState(GAME_STATE_RUN);      // ¤Á´«¦ÜGAME_STATE_RUN
-		else if (nChar == KEY_ESC)        // Demo Ãö³¬¹CÀ¸ªº¤èªk
-			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0); // Ãö³¬¹CÀ¸
+			GotoGameState(GAME_STATE_RUN);      // åˆ‡æ›è‡³GAME_STATE_RUN
+		else if (nChar == KEY_ESC)        // Demo é—œé–‰éŠæˆ²çš„æ–¹æ³•
+			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0); // é—œé–‰éŠæˆ²
 	}
 
 
-	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)	// ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)	// è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
-		// ³B²z·Æ¹«©M¿ï³æªº¤¬°Ê
+		// è™•ç†æ»‘é¼ å’Œé¸å–®çš„äº’å‹•
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-		GotoGameState(GAME_STATE_RUN);  // ¤Á´«¦ÜGAME_STATE_RUN
+		GotoGameState(GAME_STATE_RUN);  // åˆ‡æ›è‡³GAME_STATE_RUN
 	}
 
 	// is finish
@@ -80,12 +80,12 @@ namespace game_framework {
 		adventure_block.ShowBitmap();
 
 		//   //
-		//   // Demo¿Ã¹õ¦r«¬ªº¨Ï¥Î¡A¤£¹L¶}µo®É½ĞºÉ¶qÁ×§Kª½±µ¨Ï¥Î¦r«¬¡A§ï¥ÎCMovingBitmap¤ñ¸û¦n
+		//   // Demoè¢å¹•å­—å‹çš„ä½¿ç”¨ï¼Œä¸éé–‹ç™¼æ™‚è«‹ç›¡é‡é¿å…ç›´æ¥ä½¿ç”¨å­—å‹ï¼Œæ”¹ç”¨CMovingBitmapæ¯”è¼ƒå¥½
 		//   //
-		//   CDC *pDC = CDDraw::GetBackCDC();   // ¨ú±o Back Plain ªº CDC 
+		//   CDC *pDC = CDDraw::GetBackCDC();   // å–å¾— Back Plain çš„ CDC 
 		//   CFont f, *fp;
-		//   f.CreatePointFont(160, "Times New Roman"); // ²£¥Í font f; 160ªí¥Ü16 pointªº¦r
-		//   fp = pDC->SelectObject(&f);     // ¿ï¥Î font f
+		//   f.CreatePointFont(160, "Times New Roman"); // ç”¢ç”Ÿ font f; 160è¡¨ç¤º16 pointçš„å­—
+		//   fp = pDC->SelectObject(&f);     // é¸ç”¨ font f
 		//   pDC->SetBkColor(RGB(0, 0, 0));
 		//   pDC->SetTextColor(RGB(255, 255, 0));
 		//   pDC->TextOut(120, 220, "Please click mouse or press SPACE to begin.");
@@ -93,8 +93,8 @@ namespace game_framework {
 		//   if (ENABLE_GAME_PAUSE)
 		//    pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
 		//   pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
-		//   pDC->SelectObject(fp);      // ©ñ±¼ font f (¤d¸U¤£­nº|¤F©ñ±¼)
-		//   CDDraw::ReleaseBackCDC();     // ©ñ±¼ Back Plain ªº CDC
+		//   pDC->SelectObject(fp);      // æ”¾æ‰ font f (åƒè¬ä¸è¦æ¼äº†æ”¾æ‰)
+		//   CDDraw::ReleaseBackCDC();     // æ”¾æ‰ Back Plain çš„ CDC
 	}
 
 
@@ -102,7 +102,7 @@ namespace game_framework {
 
 
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªºµ²§ôª¬ºA(Game Over)
+	// é€™å€‹classç‚ºéŠæˆ²çš„çµæŸç‹€æ…‹(Game Over)
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateOver::CGameStateOver(CGame *g)
@@ -110,7 +110,7 @@ namespace game_framework {
 	{
 		
 	}
-	//Åª¨úµ²ªGªº¹ÏÀÉ
+	//è®€å–çµæœçš„åœ–æª”
 	void CGameStateOver::LoadBitmap() {
 		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon.bmp");
 
@@ -129,9 +129,6 @@ namespace game_framework {
 
 	void CGameStateOver::OnBeginState()
 	{	
-		if(gamelevel==1){
-			LoadBitmap();
-		}
 			
 		counter = 30 * 5; // 5 seconds
 		if(YouWin==true)
@@ -141,18 +138,20 @@ namespace game_framework {
 	void CGameStateOver::OnInit()
 	{
 		//
-		// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
-		//     µ¥ªº¤£­@·Ğ¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+		// ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…ç©éŠæˆ²çš„äºº
+		//     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
 		//
-		ShowInitProgress(66); // ±µ­Ó«e¤@­Óª¬ºAªº¶i«×¡A¦¹³B¶i«×µø¬°66%
+		ShowInitProgress(66); // æ¥å€‹å‰ä¸€å€‹ç‹€æ…‹çš„é€²åº¦ï¼Œæ­¤è™•é€²åº¦è¦–ç‚º66%
 		//
-		// ¶}©l¸ü¤J¸ê®Æ
+		// é–‹å§‹è¼‰å…¥è³‡æ–™
 		//
-		Sleep(300);    // ©ñºC¡A¥H«K¬İ²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ğ§R°£¦¹Sleep
+		Sleep(300);    // æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
 		//
-		// ³Ì²×¶i«×¬°100%
+		// æœ€çµ‚é€²åº¦ç‚º100%
 		//
 		ShowInitProgress(100);
+
+		LoadBitmap();
 	}
 
 	void CGameStateOver::OnShow()
@@ -167,7 +166,7 @@ namespace game_framework {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
-	// ³o­Óclass¬°¹CÀ¸ªº¹CÀ¸°õ¦æª«¥ó¡A¥D­nªº¹CÀ¸µ{¦¡³£¦b³o¸Ì
+	// é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²åŸ·è¡Œç‰©ä»¶ï¼Œä¸»è¦çš„éŠæˆ²ç¨‹å¼éƒ½åœ¨é€™è£¡
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
@@ -183,8 +182,8 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		background.SetTopLeft(-500, 0);    				// ³]©w­I´ºªº°_©l®y¼Ğ
-		//help.SetTopLeft(0, SIZE_Y - help.Height());   // ³]©w»¡©ú¹Ïªº°_©l®y¼Ğ
+		background.SetTopLeft(-500, 0);    				// è¨­å®šèƒŒæ™¯çš„èµ·å§‹åº§æ¨™
+		//help.SetTopLeft(0, SIZE_Y - help.Height());   // è¨­å®šèªªæ˜åœ–çš„èµ·å§‹åº§æ¨™
 
 		sunback.SetTopLeft(-400, 10);
 		zombiesone[0].SetTopLeft(640, 150);
@@ -193,15 +192,15 @@ namespace game_framework {
 		zombiesone[3].SetTopLeft(660, 300);
 		zombiesone[4].SetTopLeft(640, 350);
 
-		//³]©w©M·Æ¹«¬ÛÃöªºÅÜ¼Æ
-		SunCounter = 0;                                   //±qªÅ¤¤±¼¸¨¤Ó¶§ªº­p®É¾¹
+		//è¨­å®šå’Œæ»‘é¼ ç›¸é—œçš„è®Šæ•¸
+		SunCounter = 0;                                   //å¾ç©ºä¸­æ‰è½å¤ªé™½çš„è¨ˆæ™‚å™¨
 		ZombieCounter = 0;
 		selected = false;
 		ChoosedCard = -1;
 		ChoosedPlant = -1;
 		isGameOver=false;
 		YouWin=false;
-		//½T«O©Ò¦³ªºvector²MªÅ
+		//ç¢ºä¿æ‰€æœ‰çš„vectoræ¸…ç©º
 
 		monster.clear();
 		// plants.clear();
@@ -215,42 +214,42 @@ namespace game_framework {
 		suns.clear();
 		seed.Reset();
 
-		//­«³]°£¯ó¾÷
+		//é‡è¨­é™¤è‰æ©Ÿ
 		//for (int i = 0; i < 5; i++) {
 		 //	LawnCleaner[i].Reset();
 		//}
 		wave = 0;
 
-		//CAudio::Instance()->Play(AUDIO_LAKE, true);   // ¼·©ñ WAVE
-		//CAudio::Instance()->Play(AUDIO_DING, false);  // ¼·©ñ WAVE
-		//CAudio::Instance()->Play(AUDIO_NTUT, true);   // ¼·©ñ MIDI
+		//CAudio::Instance()->Play(AUDIO_LAKE, true);   // æ’¥æ”¾ WAVE
+		//CAudio::Instance()->Play(AUDIO_DING, false);  // æ’¥æ”¾ WAVE
+		//CAudio::Instance()->Play(AUDIO_NTUT, true);   // æ’¥æ”¾ MIDI
 	}
 
-	void CGameStateRun::OnInit()          // ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
+	void CGameStateRun::OnInit()          // éŠæˆ²çš„åˆå€¼åŠåœ–å½¢è¨­å®š
 	{
 		//TODO:
 		
 
-		//­«³]³õ¤Wªº´Óª«
+		//é‡è¨­å ´ä¸Šçš„æ¤ç‰©
 		
 		//
-		// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
-		//     µ¥ªº¤£­@·Ğ¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+		// ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…ç©éŠæˆ²çš„äºº
+		//     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
 		//
-		ShowInitProgress(33); // ±µ­Ó«e¤@­Óª¬ºAªº¶i«×¡A¦¹³B¶i«×µø¬°33%
+		ShowInitProgress(33); // æ¥å€‹å‰ä¸€å€‹ç‹€æ…‹çš„é€²åº¦ï¼Œæ­¤è™•é€²åº¦è¦–ç‚º33%
 		
 		//
-		// §¹¦¨³¡¤ÀLoading°Ê§@¡A´£°ª¶i«×
+		// å®Œæˆéƒ¨åˆ†Loadingå‹•ä½œï¼Œæé«˜é€²åº¦
 		//
 		ShowInitProgress(50);
-		Sleep(300); // ©ñºC¡A¥H«K¬İ²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ğ§R°£¦¹Sleep
+		Sleep(300); // æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
 		if(gamelevel==1){
-			background.LoadBitmap(Background1row);     // ¸ü¤J­I´ºªº¹Ï§Î
+			background.LoadBitmap(Background1row);     // è¼‰å…¥èƒŒæ™¯çš„åœ–å½¢
 			int temp[] = {1,2,3,4,5,6,7};
 			seed.Load(7, temp);
 
-			for (int i = 0; i < 5; i++) {					//¸ü¤JíL«Í
-				zombiesone[i].LoadBitmap(".\\BMP_RES\\image\\zombies\\cutscene1_11.bmp", RGB(0, 0, 0));
+			for (int i = 0; i < 5; i++) {					//è¼‰å…¥æ®­å±
+				zombiesone[i].LoadBitmap(".\\BMP_RES\\image\\zombies\\Normal Zombie\\Zombie_0.bmp", RGB(0, 0, 0));
 				LawnCleaner[i].LoadBitmap();
 			}
 
@@ -262,20 +261,20 @@ namespace game_framework {
 		}
 		
 
-		// Ä~Äò¸ü¤J¨ä¥L¸ê®Æ
+		// ç¹¼çºŒè¼‰å…¥å…¶ä»–è³‡æ–™
 
-		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav"); // ¸ü¤J½s¸¹0ªºÁn­µding.wav
-		//CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3"); // ¸ü¤J½s¸¹1ªºÁn­µlake.mp3
-		//CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid"); // ¸ü¤J½s¸¹2ªºÁn­µntut.mid
+		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav"); // è¼‰å…¥ç·¨è™Ÿ0çš„è²éŸ³ding.wav
+		//CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3"); // è¼‰å…¥ç·¨è™Ÿ1çš„è²éŸ³lake.mp3
+		//CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid"); // è¼‰å…¥ç·¨è™Ÿ2çš„è²éŸ³ntut.mid
 		//
-		// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterOver::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+		// æ­¤OnInitå‹•ä½œæœƒæ¥åˆ°CGameStaterOver::OnInit()ï¼Œæ‰€ä»¥é€²åº¦é‚„æ²’åˆ°100%
 		//
 
 	}
 
-	void CGameStateRun::OnMove()       // ²¾°Ê¹CÀ¸¤¸¯À
+	void CGameStateRun::OnMove()       // ç§»å‹•éŠæˆ²å…ƒç´ 
 	{
-		//  ¶}©lªº²¾°Êµe­±
+		//  é–‹å§‹çš„ç§»å‹•ç•«é¢
 		if (background.Left() < -80)
 			background.SetTopLeft(background.Left() + 10, 0);
 		// TODO:
@@ -290,13 +289,13 @@ namespace game_framework {
 		if (sunback.Left() < 100)
 			sunback.SetTopLeft(sunback.Left() + 10, 10);
 		
-		// ©ñ¸míL«Í (right)
+		// æ”¾ç½®æ®­å± (right)
 		for (int i = 0; i < 5; i++) {
 			if (zombiesone[i].Left() < 1040)
 				zombiesone[i].SetTopLeft(zombiesone[i].Left() + 10, 150 + i * 50);
 		}
 
-		//¨C¹j7¬í±qªÅ¤¤²£¥Í¤@­Ó¤Ó¶§
+		//æ¯éš”7ç§’å¾ç©ºä¸­ç”¢ç”Ÿä¸€å€‹å¤ªé™½
 		SunCounter++;
 		if (SunCounter == 300) {
 			SunCounter = 0;
@@ -306,7 +305,7 @@ namespace game_framework {
 
 		ZombieCounter++;
 		if (wave < gamelevel*1 && wave >= 0) {
-			///¨C¹j10¬í²£¥Í1~3°¦ÀH¾÷ºØÃşªºíL«Í
+			///æ¯éš”10ç§’ç”¢ç”Ÿ1~3éš»éš¨æ©Ÿç¨®é¡çš„æ®­å±
 			if (ZombieCounter == 200) {
 				wave++;
 				if (awooga == false) {
@@ -354,13 +353,13 @@ namespace game_framework {
 		
 
 		for (auto &itz : monster) {
-			//³B²z©Ò¦³íL«Íªº°Ê§@			
+			//è™•ç†æ‰€æœ‰æ®­å±çš„å‹•ä½œ			
 			itz->OnMove();
 			if (itz->GetX() < 100) {
 				YouWin = false;
-				isGameOver = true;                                         //¦pªGíL«Í¶]¶i®a¸Ì¡A¹CÀ¸µ²§ô
+				isGameOver = true;                                         //å¦‚æœæ®­å±è·‘é€²å®¶è£¡ï¼ŒéŠæˆ²çµæŸ
 			}
-			//´M§äíL«Í¥i§ğÀ»ªº²Ä¤@°¦´Óª«
+			//å°‹æ‰¾æ®­å±å¯æ”»æ“Šçš„ç¬¬ä¸€éš»æ¤ç‰©
 			int closest = 10;
 			for (int i = (itz->GetX() - 80) / 75; i >= 0; i--) {
 				if (PlantManager[itz->GetRow()][i] > 0) {
@@ -369,7 +368,7 @@ namespace game_framework {
 				}
 			}
 			if (itz->isAlive() == true) {
-				//¦pªGíL«Í³Q°£¯ó¾÷¼²¨ì´N°¨¤W¦º¤`
+				//å¦‚æœæ®­å±è¢«é™¤è‰æ©Ÿæ’åˆ°å°±é¦¬ä¸Šæ­»äº¡
 				
 				// if (LawnCleaner[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnCleaner[itz->GetRow()].GetX() < itz->GetX() + 100) {
 				// 	LawnCleaner[itz->GetRow()].StartMove();
@@ -382,13 +381,13 @@ namespace game_framework {
 					for (int j = 0; j < 9; j++) {
 						if (PlantClass[i][j].GetRow() == itz->GetRow() && PlantClass[i][j].GetColumn() == closest) {
 							if (PlantClass[i][j].GetX() <= itz->GetX()+80 && PlantClass[i][j].GetX() >= itz->GetX() + 30) {
-								itz->SetStatus(2);                                   //¦pªGÂ÷íL«Í³Ìªñªº´Óª«¶i¤J§ğÀ»½d³ò´N¶i¤J§ğÀ»ª¬ºA
+								itz->SetStatus(2);                                   //å¦‚æœé›¢æ®­å±æœ€è¿‘çš„æ¤ç‰©é€²å…¥æ”»æ“Šç¯„åœå°±é€²å…¥æ”»æ“Šç‹€æ…‹
 								found = true;
 							}
 							else {
 								itz->SetStatus(1);
 							}
-							//¦pªGíL«Í¥¿¦b§ğÀ»ª¬ºA¥B§ğÀ»§N«o®É¶¡µ²§ô¡A´Óª«´N¨ü¨ì§ğÀ»
+							//å¦‚æœæ®­å±æ­£åœ¨æ”»æ“Šç‹€æ…‹ä¸”æ”»æ“Šå†·å»æ™‚é–“çµæŸï¼Œæ¤ç‰©å°±å—åˆ°æ”»æ“Š
 							if (itz->GetStatus() == 2 && itz->Attack() == true) {
 								int chomp = rand() % 3;
 								//CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
@@ -396,7 +395,7 @@ namespace game_framework {
 								if (PlantClass[i][j].isAlive() == false) {
 									PlantClass[i][j] = Plants(0, i,j);
 									PlantManager[i][j] = 0;
-									itz->SetStatus(1);                                 //¦pªG´Óª«³QíL«Í¦Y±¼¤F¡AíL«Í°¨¤W«ì´_´¶³qª¬ºA
+									itz->SetStatus(1);                                 //å¦‚æœæ¤ç‰©è¢«æ®­å±åƒæ‰äº†ï¼Œæ®­å±é¦¬ä¸Šæ¢å¾©æ™®é€šç‹€æ…‹
 								}
 							}
 
@@ -409,43 +408,43 @@ namespace game_framework {
 				}
 			}
 
-			//íL«Í¦º¤`
-			// TODO::
+			//æ®­å±æ­»äº¡
+			// TODO:
 			if (itz->isFinished() == true) {
-				itz->Die();
+				itz->GoToDie();
 			}
 
 
 		}
-		//³B²z©Ò¦³´Óª«ªº°Ê§@
+		//è™•ç†æ‰€æœ‰æ¤ç‰©çš„å‹•ä½œ
 		bool ErasePlant = false;
 		if(isGameOver==true)
 			GameOver();
 
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
-				if (PlantClass[i][j].isAlive() == false) {                               //¦pªG´Óª«ªº¥Í©R¬°¹s¡A³]©w´Óª«ªº¦º¤`
+				if (PlantClass[i][j].isAlive() == false) {                               //å¦‚æœæ¤ç‰©çš„ç”Ÿå‘½ç‚ºé›¶ï¼Œè¨­å®šæ¤ç‰©çš„æ­»äº¡
 					ErasePlant = true;
 					PlantManager[i][j] = 0;
 					continue;
 				}
 				PlantClass[i][j].OnMove();
-				//³B²z¦V¤é¸ªªº°Ê§@
+				//è™•ç†å‘æ—¥è‘µçš„å‹•ä½œ
 				if (PlantClass[i][j].GetID() == 1) {
 					PlantClass[i][j].SetCounterOn(true);
-					if (PlantClass[i][j].isAction() == true) {                             //®É¶¡¨ì¤F´N²£¥Í¤@­Ó¤Ó¶§
+					if (PlantClass[i][j].isAction() == true) {                             //æ™‚é–“åˆ°äº†å°±ç”¢ç”Ÿä¸€å€‹å¤ªé™½
 						suns.push_back(Sun(PlantClass[i][j].GetX(), PlantClass[i][j].GetY(), true));
 					}
 					continue;
 				}
-				//³B²z¤@¯ë½Ü¨§ªº°Ê§@
+				//è™•ç†ä¸€èˆ¬è±Œè±†çš„å‹•ä½œ
 				if (PlantClass[i][j].GetID() == 2) {
 					bool FoundZombie = false;
 					for (auto &itz : monster) {
 						if (PlantClass[i][j].GetRow() == PlantClass[i][j].GetRow() && PlantClass[i][j].GetX() + 50 >= PlantClass[i][j].GetX()) {
 							FoundZombie = true;
 							if (PlantClass[i][j].GetX() + 50 > PlantClass[i][j].GetX()) {
-								PlantClass[i][j].SetCounterOn(true);                             //¦pªG§ä¨ì¥i§ğÀ»ªºíL«Í´N¶i¤J§ğÀ»ª¬ºA
+								PlantClass[i][j].SetCounterOn(true);                             //å¦‚æœæ‰¾åˆ°å¯æ”»æ“Šçš„æ®­å±å°±é€²å…¥æ”»æ“Šç‹€æ…‹
 							}
 							else {
 								PlantClass[i][j].SetCounterOn(false);
@@ -454,15 +453,102 @@ namespace game_framework {
 
 						if (PlantClass[i][j].isAction() == true) {
 							//CAudio::Instance()->Play(AUDIO_SHOOT, false);
-							peas.push_back(Pea(PlantClass[i][j].GetX() + 50, PlantClass[i][j].GetRow(), 0)); //¦pªG§ğÀ»§N«o®É¶¡¨ì¤F´N®g¥X¤@Áû¨§¤l
+							peas.push_back(Pea(PlantClass[i][j].GetX() + 50, PlantClass[i][j].GetRow(), 0)); //å¦‚æœæ”»æ“Šå†·å»æ™‚é–“åˆ°äº†å°±å°„å‡ºä¸€é¡†è±†å­
 						}
 						if (FoundZombie == false) {
 							PlantClass[i][j].SetCounterOn(false);
 						}
 					}
 				}
+				
+				
+				
+				// TODO:
+				//è™•ç†ID 4 çš„å‹•ä½œ	
 
+				if (PlantClass[i][j].GetID() == 4) {
+					//f (PlantClass[i][j].WhichAction() == 2) {
+						for (auto &itz : monster) {
+							if (itz->GetRow() == PlantClass[i][j].GetRow() && (itz->GetX()-80)/75 == j || (itz->GetX()-80)/75 == j+1){
+								PlantClass[i][j].StartAction();
+
+								if (PlantClass[i][j].WhichAction() == 3){
+									PlantClass[i][j]= Plants(0,i,j);
+									itz->GoToDie();     
+								}                               //å¦‚æœè‘«è˜†çš„æ”»æ“Šå‹•ç•«çµæŸï¼Œåœ¨è‘«è˜†ä¸‹é¢çš„æ®­å±ç«‹åˆ»æ­»äº¡									
+							}
+						}
+					//}
+					
+				}	
+
+				// 	
+				
+				//è™•ç†æ«»æ¡ƒçš„å‹•ä½œ
+				if (PlantClass[i][j].GetID() == 5) {
+					if (PlantClass[i][j].WhichAction() == 2) {
+						//CAudio::Instance()->Play(AUDIO_CHERRY_BOMB, false);
+						for (auto &itz : monster) { 
+							if (abs(itz->GetRow() - PlantClass[i][j].GetRow()) <= 1 && itz->GetX() + 50 < PlantClass[i][j].GetX() + 100 && itz->GetX() + 50 > PlantClass[i][j].GetX() - 100) {
+								itz->BoomToDie();                                    //å¦‚æœæ®­å±åœ¨æ«»æ¡ƒçš„çˆ†ç‚¸ç¯„åœå…§å°±æœƒç¬é–“è¢«ç‚¸æ­»
+							}
+						}
+					}
+					if (PlantClass[i][j].WhichAction() == 3)
+						PlantClass[i][j]= Plants(0,i,j);
+					
+				}
+				//è™•ç†å†·å‡è±Œè±†çš„å‹•ä½œ
+				if (PlantClass[i][j].GetID() == 6) {
+					bool FoundZombie = false;
+					for (auto &itz : monster) {
+						if (itz->GetRow() == PlantClass[i][j].GetRow() && itz->GetX() + 50 >= PlantClass[i][j].GetX()) {
+							FoundZombie = true;
+							if (itz->GetX() + 50 > PlantClass[i][j].GetX()) {
+								PlantClass[i][j].SetCounterOn(true);                             //å¦‚æœæœ‰æ®­å±åœ¨æ”»æ“Šç¯„åœå…§å°±é€²å…¥æ”»æ“Šæ¨¡å¼
+							}
+							else {
+								PlantClass[i][j].SetCounterOn(false);
+							}
+						}
+					}
+					if (PlantClass[i][j].isAction() == true) {
+						//CAudio::Instance()->Play(AUDIO_SHOOT, false);
+						peas.push_back(Pea(PlantClass[i][j].GetX() + 50, PlantClass[i][j].GetRow(), 1)); //å¦‚æœæ”»æ“Šå†·å»æ™‚é–“åˆ°äº†å°±å°„å‡ºä¸€é¡†è±†å­
+					}
+					if (FoundZombie == false) {
+						PlantClass[i][j].SetCounterOn(false);
+					}
+				}
+				//è™•ç†é€£å°„è±Œè±†çš„å‹•ä½œ
+				if (PlantClass[i][j].GetID() == 7) {
+					bool FoundZombie = false;
+					for (auto &itz :monster) {
+						if (itz->GetRow() == PlantClass[i][j].GetRow() && itz->GetX() + 50 >= PlantClass[i][j].GetX()) {
+							FoundZombie = true;
+							if (itz->GetX() + 50 > PlantClass[i][j].GetX()) {
+								PlantClass[i][j].SetCounterOn(true);                             //å¦‚æœæœ‰æ®­å±åœ¨æ”»æ“Šç¯„åœå…§å°±é€²å…¥æ”»æ“Šæ¨¡å¼
+							}
+							else {
+								PlantClass[i][j].SetCounterOn(false);
+							}
+						}
+					}
+					if (PlantClass[i][j].isAction() == true) {
+						//CAudio::Instance()->Play(AUDIO_SHOOT, false);
+						peas.push_back(Pea(PlantClass[i][j].GetX() + 50, PlantClass[i][j].GetRow(), 0)); //å¦‚æœæ”»æ“Šå†·å»æ™‚é–“åˆ°äº†å°±å°„å‡ºä¸€é¡†è±†å­
+					}
+					if (FoundZombie == false) {
+						PlantClass[i][j].SetCounterOn(false);
+					}
+				}
+
+				// if (ErasePlant == true) {
+				// 	plants.erase(itpp);                                          //å¾vectorè£¡åˆªæ‰æ­»äº¡çš„æ®­å±
+				// 	ErasePlant = false;
+				// }
 			}
+			// è™•ç†æ‰€æœ‰è±†å­
 			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++) {
 				itpea->OnMove();
 				bool HitZombie = false;
@@ -475,7 +561,7 @@ namespace game_framework {
 							//itzz = itz;
 							HitZombie = true;
 							itpea->SetHitZombie(true);
-							//³B²zÀ»¤¤íL«Í«áªº°Ê§@
+							//è™•ç†æ“Šä¸­æ®­å±å¾Œçš„å‹•ä½œ
 							if (itz->GetID() == 3 && itz->GetLife() > 10) {
 								int sound = rand() % 2;
 								//CAudio::Instance()->Play(AUDIO_HIT_BUCKET_1 + sound, false);
@@ -492,10 +578,10 @@ namespace game_framework {
 					}
 				}
 			}
+			
+			//è™•ç†æ‰€æœ‰å¤ªé™½çš„å‹•ä½œ
 			vector<Sun>::iterator itss;
-			bool EraseSun = false;
-
-			//³B²z©Ò¦³¤Ó¶§ªº°Ê§@
+			bool EraseSun = false;			
 			for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
 				if (its == suns.begin()) {
 					its->MoveAnime();
@@ -511,13 +597,12 @@ namespace game_framework {
 				EraseSun = false;
 			}
 			seed.OnMove();
-
 		}
 	}
 
 
 
-	//¶i¤JGameStateOver¡A¨Ã±Nvector²MªÅ¡A§_«h²Ä¤G¦¸§¹·|²£¥Í¿ù»~
+	//é€²å…¥GameStateOverï¼Œä¸¦å°‡vectoræ¸…ç©ºï¼Œå¦å‰‡ç¬¬äºŒæ¬¡å®Œæœƒç”¢ç”ŸéŒ¯èª¤
 	void CGameStateRun::GameOver()
 	{
 		monster.clear();
@@ -527,21 +612,16 @@ namespace game_framework {
 		GotoGameState(GAME_STATE_OVER);
 	}
 
-
-	//±K§Ş
+	//å¯†æŠ€
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_LEFT = 0x25; // keyboard¥ª½bÀY
-		const char KEY_UP = 0x26; // keyboard¤W½bÀY
-		const char KEY_RIGHT = 0x27; // keyboard¥k½bÀY
-		const char KEY_DOWN = 0x28; // keyboard¤U½bÀY
+		const char KEY_LEFT = 0x25; // keyboardå·¦ç®­é ­
+		const char KEY_UP = 0x26; // keyboardä¸Šç®­é ­
+		const char KEY_RIGHT = 0x27; // keyboardå³ç®­é ­
+		const char KEY_DOWN = 0x28; // keyboardä¸‹ç®­é ­
 
 		if (nChar == KEY_UP) {
-			/*
-			for (vector<Zombies>::iterator itz = zombies.begin(); itz != zombies.end(); itz++) {
-				itz->GoToDie();
-			}
-			*/
+			for(auto &it:monster);
 		}
 		else if (nChar == KEY_DOWN) {
 			for (int i = 0; i < 40; i++) {
@@ -555,10 +635,10 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		// const char KEY_LEFT = 0x25; // keyboard¥ª½bÀY
-		// const char KEY_UP = 0x26; // keyboard¤W½bÀY
-		// const char KEY_RIGHT = 0x27; // keyboard¥k½bÀY
-		// const char KEY_DOWN = 0x28; // keyboard¤U½bÀY
+		// const char KEY_LEFT = 0x25; // keyboardå·¦ç®­é ­
+		// const char KEY_UP = 0x26; // keyboardä¸Šç®­é ­
+		// const char KEY_RIGHT = 0x27; // keyboardå³ç®­é ­
+		// const char KEY_DOWN = 0x28; // keyboardä¸‹ç®­é ­
 
 		// if (nChar == KEY_LEFT)
 		// 	eraser.SetMovingLeft(false);
@@ -572,10 +652,10 @@ namespace game_framework {
 		// gamemap.OnKeyDown(nChar);
 	}
 
-	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
 		if (!selected) {
-			//³B²zÂIÀ»¤Ó¶§ªº°Ê§@
+			//è™•ç†é»æ“Šå¤ªé™½çš„å‹•ä½œ
 			bool GotSun = false;
 			for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
 				if (point.x >= its->GetX() && point.x <= its->GetX() + its->GetWidth() && point.y >= its->GetY() && point.y <= its->GetY() + its->GetHeight()) {
@@ -586,7 +666,7 @@ namespace game_framework {
 					break;
 				}
 			}
-			//³B²z¿ï¾Ü¥d¤ùªº°Ê§@
+			//è™•ç†é¸æ“‡å¡ç‰‡çš„å‹•ä½œ
 			if (point.x >= 0 && point.x <= 95 && point.y >= 50 && point.y <= 470 && GotSun == false) {
 				ChoosedCard = (point.y - 50) / 60;
 				if(ChoosedCard < gamelevel+6){
@@ -595,27 +675,27 @@ namespace game_framework {
 						//CAudio::Instance()->Play(AUDIO_CHOOSE_CARD, false);
 						selected = true;
 						mouse.SetXY(point.x, point.y);
-						mouse.SetWhich(ChoosedPlant); //Åı´å¼Ğªº¼Ë¤lÅÜ¦¨·Ç³ÆºØ´Óªº´Óª«
+						mouse.SetWhich(ChoosedPlant); //è®“æ¸¸æ¨™çš„æ¨£å­è®Šæˆæº–å‚™ç¨®æ¤çš„æ¤ç‰©
 
 					}
 				}
 				
 			}
-			//³B²zÂIÀ»²£¤lªº°Ê§@
+			//è™•ç†é»æ“Šç”¢å­çš„å‹•ä½œ
 			if (point.x >= 135 && point.x <= 211 && point.y >= 10 && point.y <= 44 && GotSun == false) {
 				if (shovel.isChoosed() == false) {
 					//CAudio::Instance()->Play(AUDIO_SHOVEL, false);
 					shovel.SetChoosed(true);
 					selected = true;
 					mouse.SetXY(point.x, point.y);
-					mouse.SetWhich(8); //Åı´å¼Ğªº¼Ë¤lÅÜ¦¨Ãê¤l
+					mouse.SetWhich(8); //è®“æ¸¸æ¨™çš„æ¨£å­è®ŠæˆéŸå­
 				}
 			}
 
 		}
 		else if (selected) {
 			if (point.x >= 172 && point.x <= 900 && point.y >= 80 && point.y <= 580) {
-				//¹ê²{¥ÎÃê¤l²¾°£´Óª«ªº¥\¯à
+				//å¯¦ç¾ç”¨éŸå­ç§»é™¤æ¤ç‰©çš„åŠŸèƒ½
 
 				if (shovel.isChoosed() == true) {
 					PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] = 0;
@@ -625,13 +705,13 @@ namespace game_framework {
 				}
 
 				else if (shovel.isChoosed() == false) {
-					//´Óª«¥\¯à
+					//æ¤ç‰©åŠŸèƒ½
 					if (PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] == 0) {
 						PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] = ChoosedPlant;
 						PlantClass[(point.y - 80) / 98][(point.x - 172) / 80] = Plants(ChoosedPlant, (point.x - 172) / 80, (point.y - 80) / 98);
 						//CAudio::Instance()->Play(AUDIO_PLANT, false);
 						// TODO:
-						//seed.ResetCardCounter(ChoosedCard);//§N«o
+						//seed.ResetCardCounter(ChoosedCard);//å†·å»
 						seed.Buy(ChoosedCard);
 
 					}
@@ -645,24 +725,24 @@ namespace game_framework {
 
 	}
 
-	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point) // ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point) // è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
 
 	}
 
-	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point) // ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point) // è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
 		if (selected) {
 			mouse.SetXY(point.x, point.y);
 		}
 	}
 
-	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
 
 	}
 
-	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point) // ³B²z·Æ¹«ªº°Ê§@
+	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point) // è™•ç†æ»‘é¼ çš„å‹•ä½œ
 	{
 
 		for (auto &itz : monster) {
@@ -674,14 +754,14 @@ namespace game_framework {
 	void CGameStateRun::OnShow()
 	{
 		//
-		//  ª`·N¡GShow¸Ì­±¤d¸U¤£­n²¾°Ê¥ô¦óª«¥óªº®y¼Ğ¡A²¾°Ê®y¼Ğªº¤u§@À³¥ÑMove°µ¤~¹ï¡A
-		//        §_«h·íµøµ¡­«·sÃ¸¹Ï®É(OnDraw)¡Aª«¥ó´N·|²¾°Ê¡A¬İ°_¨Ó·|«Ü©Ç¡C´«­Ó³N»y
-		//        »¡¡AMove­t³dMVC¤¤ªºModel¡AShow­t³dView¡A¦ÓView¤£À³§ó°ÊModel¡C
+		//  æ³¨æ„ï¼šShowè£¡é¢åƒè¬ä¸è¦ç§»å‹•ä»»ä½•ç‰©ä»¶çš„åº§æ¨™ï¼Œç§»å‹•åº§æ¨™çš„å·¥ä½œæ‡‰ç”±Moveåšæ‰å°ï¼Œ
+		//        å¦å‰‡ç•¶è¦–çª—é‡æ–°ç¹ªåœ–æ™‚(OnDraw)ï¼Œç‰©ä»¶å°±æœƒç§»å‹•ï¼Œçœ‹èµ·ä¾†æœƒå¾ˆæ€ªã€‚æ›å€‹è¡“èª
+		//        èªªï¼ŒMoveè² è²¬MVCä¸­çš„Modelï¼ŒShowè² è²¬Viewï¼Œè€ŒViewä¸æ‡‰æ›´å‹•Modelã€‚
 		//
 		//
 		//
 
-		background.ShowBitmap();   // ¶K¤W­I´º¹Ï
+		background.ShowBitmap();   // è²¼ä¸ŠèƒŒæ™¯åœ–
 
 		seed.OnShow(gamelevel+1);
 		
@@ -693,7 +773,7 @@ namespace game_framework {
 			vector<Pea>::iterator itpea;
 			bool ErasePea = false;
 			for (vector<Pea>::iterator it = peas.begin(); it != peas.end(); it++) {
-				if (it->isFinished() == true) {             //Åı¨§¤l¦bÀ»¤¤íL«Íªº°Êµeµ²§ô«á¤~·|³Q¸Ñºc
+				if (it->isFinished() == true) {             //è®“è±†å­åœ¨æ“Šä¸­æ®­å±çš„å‹•ç•«çµæŸå¾Œæ‰æœƒè¢«è§£æ§‹
 					itpea = it;
 					ErasePea = true;
 					continue;
@@ -710,7 +790,7 @@ namespace game_framework {
 					bool ErasePlant = false;
 					if (PlantClass[i][j].GetRow() == i){
 						PlantClass[i][j].OnShow();
-						if (PlantClass[i][j].isFinished() == true) {             //Åı´Óª«¦b¦º¤`«á©Î¬O°Ê§@µ²§ô«á(¸¬Äª©MÄå®ç)³Q¸Ñºc
+						if (PlantClass[i][j].isFinished() == true) {             //è®“æ¤ç‰©åœ¨æ­»äº¡å¾Œæˆ–æ˜¯å‹•ä½œçµæŸå¾Œ(è‘«è˜†å’Œæ«»æ¡ƒ)è¢«è§£æ§‹
 								ErasePlant = true;
 								PlantManager[PlantClass[i][j].GetRow()][PlantClass[i][j].GetColumn()] = 0;
 								continue;
@@ -733,16 +813,16 @@ namespace game_framework {
 		// map.OnShow();
 		shovel.OnShow();
 		/*
-		CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC
+		CDC *pDC = CDDraw::GetBackCDC();			// å–å¾— Back Plain çš„ CDC
 		CFont f, *fp;
-		f.CreatePointFont(100, "Times New Roman");	// ²£¥Í font f; 160ªí¥Ü16 pointªº¦r
-		fp = pDC->SelectObject(&f);					// ¿ï¥Î font f
+		f.CreatePointFont(100, "Times New Roman");	// ç”¢ç”Ÿ font f; 160è¡¨ç¤º16 pointçš„å­—
+		fp = pDC->SelectObject(&f);					// é¸ç”¨ font f
 		pDC->SetBkColor(RGB(238, 230, 170));
 		pDC->SetTextColor(RGB(0, 0, 0));
 
 		pDC->TextOut(165, 18, "50");
-		pDC->SelectObject(fp);						// ©ñ±¼ font f (¤d¸U¤£­nº|¤F©ñ±¼)
-		CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
+		pDC->SelectObject(fp);						// æ”¾æ‰ font f (åƒè¬ä¸è¦æ¼äº†æ”¾æ‰)
+		CDDraw::ReleaseBackCDC();					// æ”¾æ‰ Back Plain çš„ CDC
 		*/
 		///sun drop
 
