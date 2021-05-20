@@ -69,13 +69,14 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo;								// 冒險模式畫面
-		CMovingBitmap	adventure_block;				// 冒險模式 
+		CMovingBitmap	adventure_block;				// 冒險模式
+		CMovingBitmap	adventure_block2;				// 冒險模式
 		// TODO:
 		// Selector menu;
-		// bool conditionA;								// 檢查游標是否有碰到開始遊戲的按鈕
-		// bool conditionB;								// 檢查游標是否有碰到開始遊戲的按鈕
-		// bool play_Audio;								// 儲存是否已經開始撥放背景音樂的flag
-		// bool load_Audio;								// 儲存是否已經讀取音效檔的flag
+		 bool conditionA;								// 檢查游標是否有碰到開始遊戲的按鈕
+		 bool conditionB;								// 檢查游標是否有碰到開始遊戲的按鈕
+		 bool play_Audio;								// 儲存是否已經開始撥放背景音樂的flag
+		 bool load_Audio;								// 儲存是否已經讀取音效檔的flag
 		// CMovingBitmap	help;							// help的圖檔
 	};
 

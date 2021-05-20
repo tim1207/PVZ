@@ -67,6 +67,9 @@ namespace game_framework {
 		life = 0;
 		x=1000;
 	}
+	void Zombies::SetX(int newx) {
+		x = newx;
+	}
 	//	讓殭屍被炸死
 	void Zombies::BoomToDie() {
 		Boom = true;

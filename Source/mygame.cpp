@@ -24,7 +24,8 @@ namespace game_framework {
 
 	//讀取音效檔
 	void CGameStateInit::LoadAudio() {
-
+		CAudio::Instance()->Load(AUDIO_MENU, ".\\Sounds\\ZombiesOnYourLawn.wav");
+		CAudio::Instance()->Load(AUDIO_EVIL_LAUGH, ".\\Sounds\\evillaugh.wav");
 	}
 
 	// is finished 
@@ -38,8 +39,12 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
+		conditionA = false;
+		conditionB = false;
+		LoadAudio();
 		logo.LoadBitmap(Background);
 		adventure_block.LoadBitmap(Adventure, RGB(255, 255, 255));
+		adventure_block2.LoadBitmap(".\\BMP_RES\\image\\interface\\adventure2.bmp", RGB(255, 255, 255));
 		//Sleep(300);    // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -48,6 +53,8 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
+		play_Audio = false;
+		
 	}
 
 	// is finsihed
@@ -65,20 +72,55 @@ namespace game_framework {
 	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
 		// 處理滑鼠和選單的互動
+		bool conditionA1 = (point.y - 125 <= 35 * (point.x - 350) / 250);
+		bool conditionA2 = (point.y - 68 >= -57 * (point.x - 351));
+		bool conditionA3 = (point.y - 68 >= 17 * (point.x - 351) / 261);
+		bool conditionA4 = (point.y - 160 <= -75 * (point.x - 600) / 12);
+		bool conditionB1 = (point.y - 70 >= -20 * (point.x - 400) / 25);
+		bool conditionB2 = (point.y >= 50);
+		bool conditionB3 = (point.y - 50 >= 31 * (point.x - 520) / 26);
+		bool conditionB4 = (point.y - 70 <= 11 * (point.x - 400) / 146);
+		
+		if (point.y < 240 && point.y > 100 && point.x < 780 && point.x > 490) {
+
+			CAudio::Instance()->Stop(AUDIO_MENU);
+			CAudio::Instance()->Play(AUDIO_EVIL_LAUGH, false);
+		}
+		
+		conditionA = (point.y < 245 && point.y > 100 && point.x <780 && point.x > 490);
+		//conditionB = (conditionB1 && conditionB2 && conditionB3 && conditionB4);
+		//menu.SetHighLight(conditionA || conditionB);
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
-	{
-		GotoGameState(GAME_STATE_RUN);  // 切換至GAME_STATE_RUN
+	{	
+		if (conditionA) {
+			//menu.Shine();
+			//CAudio::Instance()->Stop(AUDIO_MENU);
+			//CAudio::Instance()->Play(AUDIO_EVIL_LAUGH, false);
+			GotoGameState(GAME_STATE_RUN);  // 切換至GAME_STATE_RUN
+		}
+		
+		
 	}
 
 	// is finish
 	void CGameStateInit::OnShow()
 	{
 		logo.ShowBitmap();
-		adventure_block.SetTopLeft(480, 100);
-		adventure_block.ShowBitmap();
+		if (conditionA) {
+			adventure_block2.SetTopLeft(480, 100);
+			adventure_block2.ShowBitmap();
+		}else {
+			adventure_block.SetTopLeft(480, 100);
+			adventure_block.ShowBitmap();
+		}
+		
 
+		if (play_Audio == false) {
+			play_Audio = true;
+			CAudio::Instance()->Play(AUDIO_MENU, true);
+		}
 		//   //
 		//   // Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//   //
@@ -357,7 +399,14 @@ namespace game_framework {
 					checkwin = 0;
 					break;
 				}
-				
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 9; j++) {
+						if (PlantClass[i][j].isFinished() == false && PlantClass[i][j].GetID()==4 && PlantClass[i][j].WhichAction() == 2) {
+							checkwin = 0;
+							break;
+						}
+					}
+				}
 			}
 			if(checkwin==1){
 				YouWin = true;
@@ -483,13 +532,15 @@ namespace game_framework {
 
 				if (PlantClass[i][j].GetID() == 4) {
 					for (auto &itz : monster) {
-						if (itz->GetRow() == PlantClass[i][j].GetRow() && (itz->GetX()-80)/75 == j || (itz->GetX()-80)/75 == j+1){
-							PlantClass[i][j].StartAction();
-
-							if (PlantClass[i][j].isFinished()){
-								
-								itz->GoToDie();     
-							}                               									
+						if (itz->GetRow() == PlantClass[i][j].GetRow() && (itz->GetX()-80)/75 == j+1 || (itz->GetX()-80)/75 == j+2){
+							PlantClass[i][j].SetTargetX(10);
+							if ((itz->GetX() )  < PlantClass[i][j].GetX()+10) {
+								itz->SetSnowCounter();
+							}
+							
+							if (PlantClass[i][j].WhichAction() == 2) {
+								itz->GoToDie();
+							}
 						}
 					}
 					if (PlantClass[i][j].WhichAction() == 3)

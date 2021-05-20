@@ -23,7 +23,7 @@ namespace game_framework {
 		// else if (ID == 5) {
 		// 	x -= 20;
 		// }
-		
+		velocity = 25;
 		row = roww;
 		column = col;
 		SetLife();
@@ -165,6 +165,11 @@ namespace game_framework {
 				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(),i);
 				anime2.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
+			for (int i = 0; i <= 2; i++) {
+				char FILENAME[100];
+				sprintf(FILENAME, "%s%d.bmp", GetPath().c_str(), 3);
+				anime2.AddBitmap(FILENAME, RGB(0, 0, 0));
+			}
 			SetID(4);
 		}
 		else if (ID == 5) {
@@ -215,6 +220,7 @@ namespace game_framework {
 			anime.OnMove();
 		}
 		else if (ID == 4 && status == 2) {
+			anime2.SetDelayCount(6);
 			anime2.OnMove();
 		}
 		else if (ID == 5 && status == 2) {
@@ -226,18 +232,18 @@ namespace game_framework {
 		if (ID == 4 && anime2.IsFinalBitmap() == true) {
 			status=3;
 		}
-		// if (ID == 4 && TargetX != 1000) {
-		// 	if (MovingCounter != 10) {
-		// 		x = x + velocity;
-		// 		y -= 15;
-		// 		MovingCounter++;
-		// 	}
-		// 	else {
-		// 		y += 160;
-		// 		StartAction();
-		// 		TargetX = 1000;
-		// 	}
-		// }
+		 if (ID == 4 && TargetX != 1000) {
+		 	if (MovingCounter != 10) {
+				x = x + 6;
+		 		y -= 12;
+		 		MovingCounter++;
+		 	}
+		 	else {
+		 		//y += 160;
+		 		StartAction();
+		 		TargetX = 1000;
+		 	}
+		 }
 		if (ID == 5 && anime.IsFinalBitmap() == true) {
 			StartAction();
 		}
@@ -271,7 +277,7 @@ namespace game_framework {
 				anime.OnShow();
 			}
 			else if (WhichAction() == 2) {
-				anime2.SetTopLeft(x+velocity, y);
+				anime2.SetTopLeft(x+20, y);
 				anime2.OnMove();
 				anime2.OnShow();
 			}
@@ -293,7 +299,7 @@ namespace game_framework {
 			}
 		}
 		else if (ID == 5 && anime2Counter != 5 && status == 2) {
-			Boom.SetTopLeft(x-40, y-40);
+			Boom.SetTopLeft(x, y);
 			Boom.OnMove();
 			Boom.OnShow();
 
