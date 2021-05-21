@@ -257,9 +257,11 @@ namespace game_framework {
 		seed.Reset();
 
 		//重設除草機
-		//for (int i = 0; i < 5; i++) {
-		 //	LawnCleaner[i].Reset();
-		//}
+		if(gamelevel>=3){
+			for(int i=0;i<5;i++)
+			LawnCleaner[i].Reset();
+		}
+
 		wave = 0;
 
 		//CAudio::Instance()->Play(AUDIO_LAKE, true);   // 撥放 WAVE
@@ -307,8 +309,6 @@ namespace game_framework {
 				LawnCleaner[i].LoadBitmap();
 			}
 
-			//plants.push_back(Plants(1, 3, 2));
-			//PlantClass[0]= Plants(1, 3, 1);
 			mouse.LoadBitmap();
 			sunback.LoadBitmap("BMP_RES/image/interface/SunBack.bmp", RGB(0, 0, 0));
 			shovel.LoadBitmap();
@@ -330,17 +330,21 @@ namespace game_framework {
 	{
 		//  開始的移動畫面
 
-		if (background[gamelevel-1].Left() < -80)
+		if (background[gamelevel-1].Left() < -80){
 			background[gamelevel-1].SetTopLeft(background[gamelevel-1].Left() + 10, 0);
-
+			// TODO:
+			//for
+			
+		}
+		if(gamelevel>=3){
+			for(int i=0;i<5;i++){
+				LawnCleaner[i].SetY(i);
+				LawnCleaner[i].OnMove();
+			}
+		}	
 		
-		// TODO:
-		// if (background.Left() >= -80){
-		// 	for (int i = 0; i < 5; i++) {
-		// 		LawnCleaner[i].Reset();
-		// 		LawnCleaner[i].SetY(i);
-		// 	}
-		// }
+		
+	
 			
 
 		if (sunback.Left() < 100)
@@ -363,7 +367,7 @@ namespace game_framework {
 		ZombieCounter++;
 		if (wave < gamelevel*1 && wave >= 0) {
 			///每隔10秒產生1~3隻隨機種類的殭屍
-			if (ZombieCounter == 200) {
+			if (ZombieCounter == 200-gamelevel*5) {
 				wave++;
 				if (awooga == false) {
 					//CAudio::Instance()->Play(AUDIO_AWOOGA, false);
@@ -372,27 +376,25 @@ namespace game_framework {
 				ZombieCounter = 0;
 				//int groan = rand() % 6;
 				//CAudio::Instance()->Play(AUDIO_GROAN_1 + groan, false);
-				for (int i = 0; i < 1; i++) {
-					//int r = (rand() % 5);
-					monster.push_back(make_shared<Zombies>(1, 3, 800));
+
+				if(gamelevel==1){
+						monster.push_back(make_shared<Zombies>(1, 3, 800));	
 				}
+				if(gamelevel==2){ // 3row
+					for (int i = 0; i < 2; i++) {
+						monster.push_back(make_shared<Zombies>(rand()%3+1,rand()%3+2, 800));// for demo
+					}
+				}
+				if(gamelevel>=3){ // 5 row
+					for (int i = 0; i < 3; i++) {
+						monster.push_back(make_shared<Zombies>(rand()%3+1,rand()%5+1, 800));// for demo
+					}
+				}
+				
 			}
 		}
-		// else if (wave == gamelevel*5 && ZombieCounter >= 200) {
-		// 	if (ZombieCounter == 450) {
-		// 		//CAudio::Instance()->Play(AUDIO_FINALWAVE, false);
-		// 	}
-		// 	if (ZombieCounter >= 450 && ZombieCounter <= 500) {
-		// 		if ((ZombieCounter - 450) % 10 == 0) {
-		// 			for (int i = 0; i < 1; i++) {
-		// 				//int id = (rand() % 3) + 1;
-		// 				monster.push_back(make_shared<Zombies>(1, 3, 800));
-		// 			}
-		// 		}
-		// 	}
-		// }
 		// TODO:
-		if(monster.size() ==gamelevel*1){
+		if(wave == gamelevel*1){
 			int checkwin=1;
 			for(auto &itz:monster){
 				if(itz->GetX()!=1000){
@@ -417,9 +419,9 @@ namespace game_framework {
 		
 
 		for (auto &itz : monster) {
-			//處理所有殭屍的動作			
+			//處理所有殭屍的動作	
 			itz->OnMove();
-			if (itz->GetX() < 100) {
+			if (itz->GetX() < 50) {
 				YouWin = false;
 				isGameOver = true;                                         //如果殭屍跑進家裡，遊戲結束
 			}
@@ -433,12 +435,12 @@ namespace game_framework {
 			}
 			if (itz->isAlive() == true) {
 				//如果殭屍被除草機撞到就馬上死亡
-				
-				// if (LawnCleaner[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnCleaner[itz->GetRow()].GetX() < itz->GetX() + 100) {
-				// 	LawnCleaner[itz->GetRow()].StartMove();
-				// 	//CAudio::Instance()->Play(AUDIO_LAWN_MOWER, false);
-				// 	itz->GoToDie();
-				// }
+				if(gamelevel>=3)
+					if (LawnCleaner[itz->GetRow()].GetX() > itz->GetX() + 30 && LawnCleaner[itz->GetRow()].GetX() < itz->GetX() + 100) {
+						LawnCleaner[itz->GetRow()].StartMove();
+						//CAudio::Instance()->Play(AUDIO_LAWN_MOWER, false);
+						itz->GoToDie();
+					}
 				
 				bool found = false;
 				for (int i = 0; i < 5; i++) {
@@ -525,9 +527,6 @@ namespace game_framework {
 					}
 				}
 				
-				
-				
-				// TODO:
 				//處理ID 4 的動作	
 
 				if (PlantClass[i][j].GetID() == 4) {
@@ -543,8 +542,11 @@ namespace game_framework {
 							}
 						}
 					}
-					if (PlantClass[i][j].WhichAction() == 3)
+					if (PlantClass[i][j].WhichAction() == 3){
 						PlantClass[i][j]= Plants(0,i,j);
+						PlantManager[i][j]= 0;
+					}
+						
 				}	
 
 				// 	
@@ -559,8 +561,10 @@ namespace game_framework {
 							}
 						}
 					}
-					if (PlantClass[i][j].WhichAction() == 3)
+					if (PlantClass[i][j].WhichAction() == 3){
 						PlantClass[i][j]= Plants(0,i,j);
+						PlantManager[i][j]= 0;
+					}
 					
 				}
 				//處理冷凍豌豆的動作
@@ -607,11 +611,6 @@ namespace game_framework {
 						PlantClass[i][j].SetCounterOn(false);
 					}
 				}
-
-				// if (ErasePlant == true) {
-				// 	plants.erase(itpp);                                          //從vector裡刪掉死亡的殭屍
-				// 	ErasePlant = false;
-				// }
 			}
 			// 處理所有豆子
 			for (vector<Pea>::iterator itpea = peas.begin(); itpea != peas.end(); itpea++) {
@@ -686,7 +685,8 @@ namespace game_framework {
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
 		if (nChar == KEY_UP) {
-			for(auto &it:monster);
+			for(auto &it:monster)
+				it->GoToDie();
 		}
 		else if (nChar == KEY_DOWN) {
 			for (int i = 0; i < 40; i++) {
@@ -829,27 +829,17 @@ namespace game_framework {
 		if(wave == gamelevel*1 && gamelevel>=3)// 第三關後才有黑夜
 			background[10].ShowBitmap();
 
+
 		seed.OnShow(gamelevel+1);
 		
 		for (int  i = 0; i < 5; i++)
 		{
+			if(background[gamelevel-1].Left()>=-80 && gamelevel>=3)
 			LawnCleaner[i].OnShow();
 		}
-		for (int i = 0; i < 5; i++) {
-			vector<Pea>::iterator itpea;
-			bool ErasePea = false;
-			for (vector<Pea>::iterator it = peas.begin(); it != peas.end(); it++) {
-				if (it->isFinished() == true) {             //讓豆子在擊中殭屍的動畫結束後才會被解構
-					itpea = it;
-					ErasePea = true;
-					continue;
-				}
-				it->OnShow();
-			}
-			if (ErasePea == true) {
-				peas.erase(itpea);
-				ErasePea = false;
-			}
+
+		
+		for (int i = 0; i < 5; i++){
 			// Show plants
 			if(isGameOver==false){
 				for (int j = 0; j < 9; j++) {
@@ -867,13 +857,38 @@ namespace game_framework {
 						}
 				}
 			}
-			
-			
 		}
+
+
 		// Show zombies
 		for (auto &itz : monster) {
 			itz->OnShow();
 		}
+
+
+		for (int i = 0; i < 5; i++) {
+			vector<Pea>::iterator itpea;
+			bool ErasePea = false;
+			for (vector<Pea>::iterator it = peas.begin(); it != peas.end(); it++) {
+				if (it->isFinished() == true) {             //讓豆子在擊中殭屍的動畫結束後才會被解構
+					itpea = it;
+					ErasePea = true;
+					continue;
+				}
+				it->OnShow();
+			}
+			if (ErasePea == true) {
+				peas.erase(itpea);
+				ErasePea = false;
+			}
+		}
+
+
+		
+
+
+
+
 		for (int i = 0; i < 5; i++)
 			zombiesone[i].ShowBitmap();
 		// map.OnShow();

@@ -14,15 +14,6 @@ namespace game_framework {
 		ID = id;
 		x = 172 + col* 80;
 		y = 80 + roww * 98;
-		
-		
-		// if (ID == 4) {
-		// 	x -= 15;
-		// 	y -= 150;
-		// }
-		// else if (ID == 5) {
-		// 	x -= 20;
-		// }
 		velocity = 25;
 		row = roww;
 		column = col;
@@ -299,7 +290,7 @@ namespace game_framework {
 			}
 		}
 		else if (ID == 5 && anime2Counter != 5 && status == 2) {
-			Boom.SetTopLeft(x, y);
+			Boom.SetTopLeft(x-60, y-80);
 			Boom.OnMove();
 			Boom.OnShow();
 

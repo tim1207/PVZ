@@ -29,7 +29,7 @@ namespace game_framework {
 	}
 	//移動除草機
 	void LawnCleaner::OnMove() {
-		if (move == true) {
+		if (move == true && x < 1000) {
 			x += 10;
 		}
 	}
