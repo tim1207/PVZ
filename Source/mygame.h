@@ -12,6 +12,7 @@
 // #include "Selector.h"
 
 namespace game_framework {
+	
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
@@ -68,9 +69,11 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		CMovingBitmap logo;								// 冒險模式畫面
+		CMovingBitmap   logo;								// 冒險模式畫面
 		CMovingBitmap	adventure_block;				// 冒險模式
-		CMovingBitmap	adventure_block2;				// 冒險模式
+		CMovingBitmap	adventure_block2;
+		//CMovingBitmap   loading_picture;				// 冒險模式
+		
 		// TODO:
 		// Selector menu;
 		 bool conditionA;								// 檢查游標是否有碰到開始遊戲的按鈕
@@ -101,6 +104,7 @@ namespace game_framework {
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
 		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+		void LoadAudio();							// 讀取所需的音效檔
 		void GameOver();
 	protected:
 		void OnMove();									// 移動遊戲元素
@@ -110,9 +114,12 @@ namespace game_framework {
 		CMovingBitmap background[11];		// 背景圖
 		CMovingBitmap zombiesone[5];	// 殭屍 右圖
 		CMovingBitmap sunback;
+		CMovingBitmap run_meau;
+		CMovingBitmap run_con;		//繼續
+		CMovingBitmap run_return;  // 回選單
+		//CMovingBitmap   loading_picture;
 		// TODO:
-		// Maps			        map;					            	// 背景圖
-		Seed		      	    seed;					             	// 視窗上方管理卡片的物件
+		Seed		      	seed;					             	// 視窗上方管理卡片的物件
 		Mouse		    	mouse;						            	// 用來顯示目前選取的東西
 		Shovel		    	shovel;						            	// 鏟子
 		LawnCleaner	     	LawnCleaner[5];			         	  		// 除草機
@@ -129,7 +136,8 @@ namespace game_framework {
 		int flow;
 		int			      	ZombieCounter;				        		// 產生殭屍的計時器
 		int			      	wave;						                // 目前的波數
-		bool		      		awooga;					                // 第一批殭屍出現時撥放音樂的flag
+		bool		      	awooga;					                // 第一批殭屍出現時撥放音樂的flag
+		bool 				myrunning;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -146,6 +154,7 @@ namespace game_framework {
 		// TODO:
 		void LoadBitmap();
 		void LoadAudio();							// 讀取所需的音效檔
+		void OnKeyDown(UINT, UINT, UINT);  // 處理滑鼠的動作
 	protected:
 		void OnMove();								// 移動遊戲元素
 		void OnShow();								// 顯示這個狀態的遊戲畫面
