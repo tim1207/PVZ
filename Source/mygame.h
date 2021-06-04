@@ -114,9 +114,10 @@ namespace game_framework {
 		CMovingBitmap background[11];		// 背景圖
 		CMovingBitmap zombiesone[5];	// 殭屍 右圖
 		CMovingBitmap sunback;
-		CMovingBitmap run_meau;
-		CMovingBitmap run_con;		//繼續
-		CMovingBitmap run_return;  // 回選單
+		CMovingBitmap menu;
+		CMovingBitmap run_menu;
+		CMovingBitmap run_con[2];		//繼續
+		CMovingBitmap run_return[2];  // 回選單
 		//CMovingBitmap   loading_picture;
 		// TODO:
 		Seed		      	seed;					             	// 視窗上方管理卡片的物件
@@ -138,6 +139,9 @@ namespace game_framework {
 		int			      	wave;						                // 目前的波數
 		bool		      	awooga;					                // 第一批殭屍出現時撥放音樂的flag
 		bool 				myrunning;
+		bool 				show_menu;
+		int show_back;
+		int show_con;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

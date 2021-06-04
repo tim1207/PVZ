@@ -166,10 +166,10 @@ namespace game_framework {
 	}
 	//讀取結果的圖檔
 	void CGameStateOver::LoadBitmap() {
-		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon1.bmp");
+		ZombiesWon.LoadBitmap(".\\BMP_RES\\image\\interface\\ZombiesWon0.bmp");
 
 		ZombiesWon.SetTopLeft(0, 0);
-		ZombieNote.LoadBitmap(".\\BMP_RES\\image\\interface\\trophy.bmp");
+		ZombieNote.LoadBitmap(".\\BMP_RES\\image\\interface\\win0.bmp");
 
 		ZombieNote.SetTopLeft(0, 0);
 	}
@@ -250,7 +250,7 @@ namespace game_framework {
 	{
 		
 		
-		
+		show_menu = false;
 		background[gamelevel-1].SetTopLeft(-500, 0);    				// 設定背景的起始座標
 		//help.SetTopLeft(0, SIZE_Y - help.Height());   // 設定說明圖的起始座標
 		CAudio::Instance()->Play(AUDIO_MAIN_MUSIC, true); //撥放遊戲背景音樂
@@ -261,6 +261,11 @@ namespace game_framework {
 		zombiesone[3].SetTopLeft(660, 300);
 		zombiesone[4].SetTopLeft(640, 350);
 
+		run_menu.SetTopLeft(280, 50);
+		run_con[0].SetTopLeft(365, 180);
+		run_con[1].SetTopLeft(365, 180);
+		run_return[0].SetTopLeft(365, 250);
+		run_return[1].SetTopLeft(365, 250);
 		//設定和滑鼠相關的變數
 		SunCounter = 0;                                   //從空中掉落太陽的計時器
 		ZombieCounter = 0;
@@ -269,6 +274,8 @@ namespace game_framework {
 		ChoosedPlant = -1;
 		isGameOver=false;
 		YouWin=false;
+		show_back = 0;
+		show_con = 0;
 		//確保所有的vector清空
 
 		monster.clear();
@@ -300,10 +307,11 @@ namespace game_framework {
 	{
 		//TODO:
 		LoadAudio();
-		// ShowInitProgress(33);
-		// ShowInitProgress(50);
+		 ShowInitProgress(33);
+		 Sleep(500); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		 ShowInitProgress(50);
 		
-		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		
 		myrunning = true;
 		if(gamelevel==1){
 			background[0].LoadBitmap(Background1row);     // 載入背景的圖形
@@ -317,8 +325,18 @@ namespace game_framework {
 			background[8].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
 			background[9].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
 			background[10].LoadBitmap("BMP_RES\\image\\interface\\night1.bmp");
-
+			menu.LoadBitmap("BMP_RES\\image\\interface\\menu\\mainmenu\\menu0.bmp", RGB(0, 0, 0));
+			run_menu.LoadBitmap("BMP_RES\\image\\interface\\choicemenu\\OptionsMenuback8.bmp", RGB(0, 0, 0));
+			for (int i = 0; i < 2; i++) {
+				char FILENAME[100];
+				sprintf(FILENAME, "BMP_RES\\image\\interface\\menu\\mainmenu\\back%d.bmp", i);
+				run_con[i].LoadBitmap(FILENAME, RGB(0, 0, 0));		//繼續
+				sprintf(FILENAME, "BMP_RES\\image\\interface\\menu\\mainmenu\\menu%d.bmp", i);
+				run_return[i].LoadBitmap(FILENAME, RGB(0, 0, 0)); // 回選單
+			}
 			
+			
+
 			int temp[] = {1,2,3,4,5,6,7};
 			seed.Load(7, temp);
 
@@ -331,21 +349,11 @@ namespace game_framework {
 			sunback.LoadBitmap("BMP_RES/image/interface/SunBack.bmp", RGB(0, 0, 0));
 			shovel.LoadBitmap();
 		}
-		
-
-		// 繼續載入其他資料
-
-		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav"); // 載入編號0的聲音ding.wav
-		//CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3"); // 載入編號1的聲音lake.mp3
-		//CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid"); // 載入編號2的聲音ntut.mid
-		//
-		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
-		//
-
 	}
 
 	void CGameStateRun::OnMove()       // 移動遊戲元素
-	{
+	{	
+
 		if(myrunning)
 		{
 			//  開始的移動畫面
@@ -771,6 +779,12 @@ namespace game_framework {
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
 		if (!selected) {
+			//處理menu的動作
+			if (point.x >= 795 && point.x <= 900 && point.y >= 0 && point.y <= 40 ) {
+				myrunning = false;
+				show_menu = true;
+				selected = true;
+			}
 			//處理點擊太陽的動作
 			bool GotSun = false;
 			for (vector<Sun>::iterator its = suns.begin(); its != suns.end(); its++) {
@@ -808,6 +822,28 @@ namespace game_framework {
 				}
 			}
 
+
+		}
+		else if (selected == true &&  myrunning == false) {
+			//實現back to game的功能
+			if (point.x >= 365 && point.x <= 600 && point.y >= 180 && point.y <= 230 && show_menu == true && myrunning == false) {
+				myrunning = true;
+				selected = false;
+				show_menu = false;
+			}
+			//實現back to menu的功能
+			if (point.x >= 365 && point.x <= 600 && point.y >= 250 && point.y <= 300 && show_menu == true && myrunning == false) {
+				monster.clear();
+				suns.swap(vector<Sun>());
+				peas.swap(vector<Pea>());
+				CAudio::Instance()->Stop(AUDIO_MAIN_MUSIC);
+				myrunning = !myrunning;
+				selected = false;
+				show_menu = false;
+				GotoGameState(GAME_STATE_INIT);
+
+			}
+
 		}
 		else if (selected) {
 			if (point.x >= 172 && point.x <= 900 && point.y >= 80 && point.y <= 580) {
@@ -827,7 +863,7 @@ namespace game_framework {
 						PlantClass[(point.y - 80) / 98][(point.x - 172) / 80] = Plants(ChoosedPlant, (point.x - 172) / 80, (point.y - 80) / 98);
 						CAudio::Instance()->Play(AUDIO_PLANT, false);
 						// TODO:
-						//seed.ResetCardCounter(ChoosedCard);//冷卻
+						seed.ResetCardCounter(ChoosedCard);//冷卻
 						seed.Buy(ChoosedCard);
 
 					}
@@ -854,6 +890,21 @@ namespace game_framework {
 	{
 		if (selected) {
 			mouse.SetXY(point.x, point.y);
+		}
+		if (show_menu) {
+			if (point.x >= 365 && point.x <= 600 && point.y >= 180 && point.y <= 230) {
+				show_con = 1;
+			}
+			else {
+				show_con = 0;
+			}
+			//實現back to menu的功能
+			if (point.x >= 365 && point.x <= 600 && point.y >= 250 && point.y <= 300) {
+				show_back = 1;
+			}
+			else {
+				show_back = 0;
+			}
 		}
 	}
 
@@ -886,8 +937,13 @@ namespace game_framework {
 		for (int  i = 0; i < 5; i++)
 		{
 			if(background[gamelevel-1].Left()>=-80 && gamelevel>=3)
-			LawnCleaner[i].OnShow();
+				LawnCleaner[i].OnShow();
 		}
+		if (background[gamelevel - 1].Left() >= -80) {
+			menu.SetTopLeft(795,0);
+			menu.ShowBitmap(0.3);
+		}
+			
 
 		
 		for (int i = 0; i < 5; i++){
@@ -945,6 +1001,14 @@ namespace game_framework {
 
 			mouse.OnShow();
 		}
+		//show menu
+		if (show_menu) {
+			run_menu.ShowBitmap();
+			run_con[show_con].ShowBitmap(0.7);
+			run_return[show_back].ShowBitmap(0.7);
+
+		}
+
 	}
 
 }

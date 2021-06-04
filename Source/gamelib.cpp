@@ -442,8 +442,8 @@ void CGameState::ShowInitProgress(int percent)
 
 	CDDraw::BltBackColor(DEFAULT_BG_COLOR);		// 將 Back Plain 塗上預設的顏色
 	CMovingBitmap loading;						// 貼上loading圖示
-	loading.LoadBitmap(IDB_LOADING, RGB(0,0,0));
-	loading.SetTopLeft((SIZE_X - loading.Width())/2, y1 - 2 * loading.Height());
+	loading.LoadBitmap("BMP_RES\\image\\interface\\loadback.bmp");
+	//loading.SetTopLeft((SIZE_X - loading.Width())/2, y1 - 2 * loading.Height());
 	loading.ShowBitmap();
 	//
 	// 以下為CDC的用法
@@ -452,7 +452,7 @@ void CGameState::ShowInitProgress(int percent)
 	CPen *pp, p(PS_NULL, 0, RGB(0,0,0));		// 清除pen
 	pp = pDC->SelectObject(&p);
 
-	CBrush *pb, b(RGB(0,255,0));				// 畫綠色 progress框
+	/*CBrush *pb, b(RGB(0,255,0));				// 畫綠色 progress框
 	pb = pDC->SelectObject(&b);
 	pDC->Rectangle(x1,y1,x2,y2);				
 
@@ -466,6 +466,7 @@ void CGameState::ShowInitProgress(int percent)
 
 	pDC->SelectObject(pp);						// 釋放 pen
 	pDC->SelectObject(pb);						// 釋放 brush
+	*/
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	//
 	// 如果是別的地方用到CDC的話，不要抄以下這行，否則螢幕會閃爍
