@@ -1,0 +1,20 @@
+﻿  StdAfx.cpp
+  audio.cpp
+  card.cpp
+  mouse.cpp
+  game.cpp
+  gameDoc.cpp
+  gameView.cpp
+  LawnCleaner.cpp
+  MainFrm.cpp
+  maps.cpp
+  Pea.cpp
+  Plants.cpp
+  Seed.cpp
+  Shovel.cpp
+  gamelib.cpp
+  mygame.cpp
+  Sun.cpp
+  zombies.cpp
+  正在產生程式碼...
+  game.vcxproj -> C:\Users\zx521\OneDrive\桌面\OB實習\pvz\PVZ\.\Release\game.exe
