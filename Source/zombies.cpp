@@ -186,19 +186,18 @@ namespace game_framework {
 	}
 	//	讓殭屍加速(密技用)
 	void Zombies::Faster() {
-		velocity++;
+		velocity+=5;
 	}
 	// 讓殭屍向前移動
 	void Zombies::MoveX() {
 		if (SnowCounter == 0) {
-			x -= 3;
-			// x-=1;
+			 x-= velocity;
 		}
 		else if (SnowCounter != 0) {
 			//	如果殭屍處於冷凍狀態則移動速度減半
 			SnowCounter--;
 			if (LastMove == 0) {
-				x -= velocity;
+				x -= 1;
 				LastMove = 1;
 			}
 			else if (LastMove == 1) {

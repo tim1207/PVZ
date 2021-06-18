@@ -8,12 +8,10 @@
 #include "card.h"
 namespace game_framework {
 	Seed::Seed() {
-		//money = 50;
-		money =1000;
+		money =100;
 	}
 	void Seed::Reset() {		                        // 重設初始狀態
-		//money = 50;
-		money = 1000;
+		money = 100;
 		for (vector<Card>::iterator it = cards.begin(); it != cards.end(); it++) {
 			it->Reset();
 		}

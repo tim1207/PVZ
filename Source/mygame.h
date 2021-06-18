@@ -165,6 +165,7 @@ namespace game_framework {
 	private:
 		int counter;	                    		// 倒數之計數器
 		CMovingBitmap ZombiesWon;					// 遊戲失敗的畫面
-		CMovingBitmap ZombieNote;					// 遊戲勝利的畫面
+		CMovingBitmap ZombieLose;					// 遊戲勝利的畫面
+		CMovingBitmap FinalWin;					// 最後遊戲勝利的畫面
 	};
 }
