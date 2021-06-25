@@ -11,6 +11,7 @@
 
 namespace game_framework {
 	bool YouWin = false;
+	//TODO:
 	int gamelevel=1;
 	bool isGameOver;
 	//bool myrunning＝true;
@@ -304,7 +305,7 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
 				PlantManager[i][j] = 0;
-				PlantClass[i][j] = Plants(0, j, i);
+				PlantClass[i][j] = Plants(0, i, j);
 			}
 		}
 		peas.clear();
@@ -683,7 +684,7 @@ namespace game_framework {
 								itz->Hitted(itpea->MyType());
 							}
 						}
-						if (itpea->GetX() > 880) {
+						if (itpea->GetX() > 780) {
 							itpea->SetHitZombie(true);
 						}
 					}
@@ -748,6 +749,15 @@ namespace game_framework {
 		monster.clear();
 		suns.swap(vector<Sun>());
 		peas.swap(vector<Pea>());
+
+		// plants.clear();
+		// for (int i = 0; i < 5; i++) {
+		// 	for (int j = 0; j < 9; j++) {
+		// 		PlantManager[i][j] = 0;
+		// 		PlantClass[i][j] = Plants(0, j, i);
+		// 	}
+		// }
+
 		CAudio::Instance()->Stop(AUDIO_MAIN_MUSIC);
 		GotoGameState(GAME_STATE_OVER);
 	}
@@ -761,8 +771,11 @@ namespace game_framework {
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
 		if (nChar == KEY_UP) {
-			for(auto &it:monster)
-				it->GoToDie();
+			// for(auto &it:monster)
+			// 	it->GoToDie();
+			YouWin = true;
+			isGameOver = true;
+			GameOver();
 		}
 		else if (nChar == KEY_DOWN) {
 			for (int i = 0; i < 40; i++) {
@@ -973,7 +986,7 @@ namespace game_framework {
 			if(isGameOver==false){
 				for (int j = 0; j < 9; j++) {
 					bool ErasePlant = false;
-					if (PlantClass[i][j].GetRow() == i){
+					if (PlantClass[i][j].GetRow() == i /*&& PlantManager[i][j]!=0*/){
 						PlantClass[i][j].OnShow();
 						if (PlantClass[i][j].isFinished() == true) {             //讓植物在死亡後或是動作結束後(葫蘆和櫻桃)被解構
 								ErasePlant = true;

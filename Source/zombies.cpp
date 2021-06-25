@@ -102,56 +102,56 @@ namespace game_framework {
 		// SetStatus(2);
 		for (int i = 0; i <= 17; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\Normal Zombie\\Zombie_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/Normal Zombie/Zombie_%d.bmp",i);
 			NormalWalking1.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 20; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\Normal Zombie\\ZombieAttack_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/Normal Zombie/ZombieAttack_%d.bmp",i);
 			NormalAttacking1.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 
 		for (int i = 0; i <= 20; i++) {
 			char FILENAME[100];
 
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\ConeHeadZombie\\Zombie_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/ConeHeadZombie/Zombie_%d.bmp",i);
 			NormalWalking2.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 10; i++) {
 			char FILENAME[100];
 
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\ConeHeadZombie\\ZombieAttack_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/ConeHeadZombie/ZombieAttack_%d.bmp",i);
 			NormalAttacking2.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 
 		for (int i = 0; i <= 14; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\BucketHeadZombie\\Zombie_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/BucketHeadZombie/Zombie_%d.bmp",i);
 			NormalWalking3.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		for (int i = 0; i <= 10; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,".\\BMP_RES\\image\\zombies\\BucketHeadZombie\\ZombieAttack_%d.bmp",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/BucketHeadZombie/ZombieAttack_%d.bmp",i);
 			NormalAttacking3.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
 		// SetStatus(1);
 		for (int i = 0; i <= 9; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME,"%s%d.bmp",".\\BMP_RES\\image\\zombies\\Normal Zombie\\ZombieDie_",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/Normal Zombie/ZombieDie_%d.bmp",i);
 			AnimeDie.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
 		// 可能沒有頭繼續走
 		for (int i = 0; i <= 11; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%d.bmp" ,".\\BMP_RES\\image\\zombies\\Normal Zombie\\Head_",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/Normal Zombie/Head_%d.bmp",i);
 			Head.AddBitmap(FILENAME, RGB(0, 0, 0));
 		}
 		
 		for (int i = 0; i <= 19; i++) {
 			char FILENAME[100];
-			sprintf(FILENAME, "%s%d.bmp", ".\\BMP_RES\\image\\zombies\\BoomDie\\BoomDie_",i);
+			sprintf(FILENAME,"./BMP_RES/image/zombies/BoomDie/BoomDie_%d.bmp",i);
 			BoomDie.AddBitmap(FILENAME, RGB(0, 0, 255));
 		}
 			
@@ -264,7 +264,7 @@ namespace game_framework {
 				}
 			}
 		}
-		else if (GetStatus() == 1) {
+		else if (isAlive() == true && GetStatus() == 1) {
 			if(life<=50){
 				NormalWalking1.SetTopLeft(x, y);
 				NormalWalking1.OnShow();
@@ -278,7 +278,7 @@ namespace game_framework {
 				NormalWalking3.OnShow();
 			}
 		}
-		else if (GetStatus() == 2) {
+		else if (isAlive() == true && GetStatus() == 2) {
 			if(life<=50){
 				NormalAttacking1.SetTopLeft(x, y);
 				NormalAttacking1.OnShow();

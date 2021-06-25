@@ -1,3 +1,2 @@
-﻿cl : 命令列 warning D9035: 選項 'Gm' 已被取代，在未來的發行版本中將會移除
-  zombies.cpp
-  game.vcxproj -> C:\Users\zx521\OneDrive\桌面\OB實習\pvz\PVZ\.\Debug\game.exe
+﻿audio.obj : warning LNK4075: 忽略 '/EDITANDCONTINUE'，由於 '/SAFESEH' 規格
+  game.vcxproj -> \\Mac\AllFiles\Users\tim\workspace\OOP\PVZ\.\Debug\game.exe
