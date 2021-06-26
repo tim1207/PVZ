@@ -12,7 +12,7 @@
 namespace game_framework {
 	bool YouWin = false;
 	//TODO:
-	int gamelevel=1;
+	int gamelevel=9;
 	bool isGameOver;
 	//bool myrunning＝true;
 	bool frist_load = true;
@@ -178,14 +178,6 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-		if (gamelevel == 11) {
-			//Sleep(3000);
-			
-			//GotoGameState(GAME_STATE_INIT);
-		}
-		// counter--;
-		// if (counter < 0)
-			// GotoGameState(GAME_STATE_RUN);
 	}
 
 	void CGameStateOver:: OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
@@ -302,10 +294,11 @@ namespace game_framework {
 
 		monster.clear();
 		// plants.clear();
+		
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
 				PlantManager[i][j] = 0;
-				PlantClass[i][j] = Plants(0, i, j);
+				PlantClass[i][j] = zero[i][j];
 			}
 		}
 		peas.clear();
@@ -335,7 +328,7 @@ namespace game_framework {
 		
 		
 		myrunning = true;
-		if(gamelevel==1 && frist_load == true){
+		if( frist_load == true){
 			background[0].LoadBitmap(Background1row);     // 載入背景的圖形
 			background[1].LoadBitmap("BMP_RES\\image\\interface\\background1unsodded2.bmp");
 			background[2].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
@@ -347,6 +340,12 @@ namespace game_framework {
 			background[8].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
 			background[9].LoadBitmap("BMP_RES\\image\\interface\\background1.bmp");
 			background[10].LoadBitmap("BMP_RES\\image\\interface\\night1.bmp");
+
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 9; j++) {
+					zero[i][j] = Plants(0, i, j);
+				}
+			}
 			menu.LoadBitmap("BMP_RES\\image\\interface\\menu\\mainmenu\\menu0.bmp", RGB(0, 0, 0));
 			run_menu.LoadBitmap("BMP_RES\\image\\interface\\choicemenu\\OptionsMenuback8.bmp", RGB(0, 0, 0));
 			for (int i = 0; i < 2; i++) {
@@ -509,7 +508,7 @@ namespace game_framework {
 									CAudio::Instance()->Play(AUDIO_CHOMP_1 + chomp, false);
 									PlantClass[i][j].BeingAttacked();
 									if (PlantClass[i][j].isAlive() == false) {
-										PlantClass[i][j] = Plants(0, i,j);
+										PlantClass[i][j] = zero[i][j];
 										PlantManager[i][j] = 0;
 										itz->SetStatus(1);                                 //如果植物被殭屍吃掉了，殭屍馬上恢復普通狀態
 									}
@@ -593,7 +592,7 @@ namespace game_framework {
 							}
 						}
 						if (PlantClass[i][j].WhichAction() == 3){
-							PlantClass[i][j]= Plants(0,i,j);
+							PlantClass[i][j]= zero[i][j];
 							PlantManager[i][j]= 0;
 						}
 							
@@ -609,7 +608,7 @@ namespace game_framework {
 							}
 						}
 						if (PlantClass[i][j].WhichAction() == 3){
-							PlantClass[i][j]= Plants(0,i,j);
+							PlantClass[i][j]= zero[i][j];
 							PlantManager[i][j]= 0;
 						}
 						
@@ -887,7 +886,7 @@ namespace game_framework {
 				if (shovel.isChoosed() == true) {
 					PlantManager[(point.y - 80) / 98][(point.x - 172) / 80] = 0;
 					bool ErasePlant = false;
-					PlantClass[(point.y - 80) / 98][(point.x - 172) / 80] = Plants(0, (point.x - 172) / 80, (point.y - 80) / 98);
+					PlantClass[(point.y - 80) / 98][(point.x - 172) / 80] = zero[(point.x - 172) / 80][(point.y - 80) / 98];
 
 				}
 

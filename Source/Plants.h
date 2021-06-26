@@ -4,6 +4,7 @@ namespace game_framework {
 	public:
 		Plants();
 		Plants(int,int,int);
+		void resetTo0(int col, int roww);
 		void SetID(int);			  
 		void SetLife();				  
 		int GetLife();				  
@@ -59,7 +60,8 @@ namespace game_framework {
 			6 : SnowPea
 			7 : Repeater
 		*/
-		int frames;					      
+		int frames;	
+		
 		CAnimation anime;
 		CAnimation anime2;
 		CAnimation anime3;

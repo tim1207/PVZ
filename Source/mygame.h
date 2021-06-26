@@ -125,7 +125,7 @@ namespace game_framework {
 		Shovel		    	shovel;						            	// 鏟子
 		LawnCleaner	     	LawnCleaner[5];			         	  		// 除草機
 		std::vector< shared_ptr<Zombies> >	monster;			    	// 儲存所有殭屍的vector
-
+		Plants zero[5][9];
 		Plants PlantClass[5][9] ;
 		vector<Pea>		  	peas;						              	// 儲存所有豆子的vector
 		vector<Sun>	  		suns;						              	// 儲存所有太陽的vector

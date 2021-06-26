@@ -41,6 +41,37 @@ namespace game_framework {
 		}
 		anime2Counter = 0;
 	}
+	void Plants::resetTo0(int col, int roww) {
+		ID = 0;
+		x = 172 + col * 80;
+		y = 80 + roww * 98;
+		velocity = 25;
+		row = roww;
+		column = col;
+		SetLife();
+		LoadBitmap();
+		anime.SetDelayCount(3);
+		anime2.SetDelayCount(3);
+		anime3.SetDelayCount(3);
+		Boom.SetDelayCount(1);
+		Action = false;
+		CounterOn = false;
+		TargetX = 1000;
+		MovingCounter = 0;
+		status = 1;
+		switch (ID) {
+		case 1:	ActionCounter = 30 * 10;  break;
+		case 2: ActionCounter = 30 * 1;   break;
+		case 6: ActionCounter = 30 * 1;   break;
+		case 7: ActionCounter = 30 * 1;   break;
+		default:ActionCounter = -1;		    break;
+		}
+		Counter = ActionCounter - 1;
+		if (ID == 1 || ID == 4) {
+			Counter = 0;
+		}
+		anime2Counter = 0;
+	}
 	void Plants::SetID(int a) {
 		ID = a;
 	}
@@ -112,12 +143,12 @@ namespace game_framework {
 	void Plants::SetY(int a) {				    	
 		y = a;
 	}
-	void Plants::LoadBitmap() {					    
+	void Plants::LoadBitmap() {	
 		SetFrames();							            
 		if (ID == 0) {
 			for (int i = 0; i <= frames; i++) {		
 				char FILENAME[100];
-				sprintf(FILENAME, "%s.bmp", GetPath().c_str());
+				sprintf(FILENAME, ".\\BMP_RES\\image\\plants\\void.bmp");
 
 				anime.AddBitmap(FILENAME, RGB(0, 0, 0));
 			}
@@ -235,7 +266,7 @@ namespace game_framework {
 		 		TargetX = 1000;
 		 	}
 		 }
-		if (ID == 5 && anime.IsFinalBitmap() == true) {
+		if (ID == 5 && anime.IsFinalBitmap() == true && status ==1) {
 			StartAction();
 		}
 		if (ID == 5 && Boom.IsFinalBitmap() == true) {
