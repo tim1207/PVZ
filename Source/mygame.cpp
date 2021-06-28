@@ -12,7 +12,7 @@
 namespace game_framework {
 	bool YouWin = false;
 	//TODO:
-	int gamelevel=9;
+	int gamelevel=1;
 	bool isGameOver;
 	//bool myrunning＝true;
 	bool frist_load = true;
